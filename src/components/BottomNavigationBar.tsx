@@ -1,12 +1,13 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {Icon} from '../lib';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Icon } from '../lib';
 
 export const BottomNavigationBar = () => {
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.button} onPress={() => {}}>
         <View
-          style={[styles.buttonIconWrapper, styles.buttonIconWrapperActive]}>
+          style={[styles.buttonIconWrapper, styles.buttonIconWrapperActive]}
+        >
           <Icon
             style={[styles.buttonIcon, styles.buttonIconActive]}
             name="rocket-3-start"

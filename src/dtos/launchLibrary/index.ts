@@ -44,3 +44,4 @@ export * from "./spaceStationLl2DTO";
 export * from "./spaceStationDetailedLl2DTO";
 export * from "./spaceStationStatusLl2Enum";
 export * from "./spaceStationCommonForExpeditionLl2DTO";
+export * from "./paginatedListLl2DTO";

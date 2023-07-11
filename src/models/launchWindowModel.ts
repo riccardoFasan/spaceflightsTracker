@@ -1,4 +1,4 @@
 export interface LaunchWindow {
-  start: Date;
-  end: Date;
+  start: string;
+  end: string;
 }

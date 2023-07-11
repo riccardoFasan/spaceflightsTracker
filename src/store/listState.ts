@@ -1,6 +1,7 @@
 export interface ListState<T> {
-    items: T[];
-    totalCount: number;
-    loading: boolean;
-    error?: string;
+  items: T[];
+  currentBatch: number;
+  totalCount: number;
+  loading: boolean;
+  error?: string;
 }

@@ -1,15 +1,19 @@
 import React from 'react';
-import {SafeAreaView, ScrollView, StyleSheet, Text} from 'react-native';
-import {BottomNavigationBar} from './components/BottomNavigationBar';
+import { SafeAreaView, ScrollView, StyleSheet } from 'react-native';
+import { BottomNavigationBar, List } from './components';
+import { Provider } from 'react-redux';
+import { store } from './store';
 
 export const App = () => {
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView>
-        <Text>Hello world</Text>
-      </ScrollView>
-      <BottomNavigationBar />
-    </SafeAreaView>
+    <Provider store={store}>
+      <SafeAreaView style={styles.container}>
+        <ScrollView>
+          <List></List>
+        </ScrollView>
+        <BottomNavigationBar />
+      </SafeAreaView>
+    </Provider>
   );
 };
 

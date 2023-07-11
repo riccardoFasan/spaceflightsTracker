@@ -1,12 +1,9 @@
-import {LaunchWindow, Pad, Mission, Launcher} from '.';
+import { LaunchWindow, Pad } from ".";
 
 export interface UpcomingLaunch {
   id: string;
   name: string;
-  date: Date;
-  window: LaunchWindow;
-  pad: Pad;
-  mission: Mission;
-  launcher: Launcher;
+  pad?: Pad;
+  window?: LaunchWindow;
   image?: string;
 }

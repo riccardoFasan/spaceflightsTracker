@@ -1,4 +1,4 @@
-import {Text} from 'react-native';
+import { Text } from 'react-native';
 
 export const UpcomingsPage = () => {
   return <Text>Upcomings page</Text>;
