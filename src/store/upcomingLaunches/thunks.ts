@@ -9,3 +9,11 @@ export const fetchBatch = createAsyncThunk(
     return response;
   }
 );
+
+export const refreshBatch = createAsyncThunk(
+  "upcomingLaunches/refreshBatch",
+  async () => {
+    const response: UpcomingLaunch[] = await getUpcomingLaunchesBatch(1);
+    return response;
+  }
+);

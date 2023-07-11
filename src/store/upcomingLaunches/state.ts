@@ -8,4 +8,5 @@ export const INITIAL_UPCOMING_LAUNCHES_STATE: UpcomingLaunchesState = {
   currentBatch: 0,
   totalCount: 0,
   loading: false,
+  refreshing: false,
 };

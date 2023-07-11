@@ -1,3 +1,3 @@
 export * from "./BottomNavigationBar";
-export * from "./List";
+export * from "./ScrollableList";
 export * from "./UpcomingLaunchCard";

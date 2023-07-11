@@ -1,6 +1,6 @@
 import React from 'react';
-import { SafeAreaView, ScrollView, StyleSheet } from 'react-native';
-import { BottomNavigationBar, List } from './components';
+import { SafeAreaView, StyleSheet } from 'react-native';
+import { BottomNavigationBar, ScrollableList } from './components';
 import { Provider } from 'react-redux';
 import { store } from './store';
 
@@ -8,9 +8,7 @@ export const App = () => {
   return (
     <Provider store={store}>
       <SafeAreaView style={styles.container}>
-        <ScrollView>
-          <List></List>
-        </ScrollView>
+        <ScrollableList></ScrollableList>
         <BottomNavigationBar />
       </SafeAreaView>
     </Provider>

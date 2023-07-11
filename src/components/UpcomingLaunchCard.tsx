@@ -35,14 +35,14 @@ export const UpcomingLaunchCard = ({ launch }: Props) => {
 };
 
 const dimensions = Dimensions.get('window');
-const imageHeight = Math.round((dimensions.width * 9) / 16);
+const imageHeight = Math.round(dimensions.height / 3);
 
 const styles = StyleSheet.create({
   card: {
     position: 'relative',
     backgroundColor: '#181A1E',
     borderRadius: 16,
-    borderWidth: 1,
+    borderWidth: 2,
     borderColor: '#21242',
     width: '100%',
     marginBottom: 20,

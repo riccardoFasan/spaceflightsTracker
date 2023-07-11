@@ -3,5 +3,6 @@ export interface ListState<T> {
   currentBatch: number;
   totalCount: number;
   loading: boolean;
+  refreshing: boolean;
   error?: string;
 }
