@@ -1,5 +1,6 @@
 import { UpcomingLaunch } from '../models/upcomingLaunchModel';
 import { Dimensions, Image, StyleSheet, Text, View } from 'react-native';
+import { formatDateTime } from '../utilities';
 
 interface Props {
   launch: UpcomingLaunch;
@@ -19,7 +20,7 @@ export const UpcomingLaunchCard = ({ launch }: Props) => {
         <Text style={styles.cardTitle}>{launch.name}</Text>
         {launch.window && (
           <Text style={styles.cardText}>
-            {new Date(launch.window.start).toLocaleTimeString()}
+            {formatDateTime(launch.window.start)}
           </Text>
         )}
         {launch.pad && (
@@ -62,8 +63,8 @@ const styles = StyleSheet.create({
   cardText: {
     color: '#C5C6C7',
     fontSize: 16,
-    fontWeight: '500',
     paddingTop: 4,
+    fontWeight: '700',
   },
   cardTextSmall: {
     fontSize: 14,
