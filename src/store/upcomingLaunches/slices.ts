@@ -6,6 +6,7 @@ import {
   fetchNextBatch,
 } from ".";
 import { UpcomingLaunch } from "../../models";
+import { showErrorMessage } from "../../services";
 
 const upcomingLaunchesSlice = createSlice({
   name: "upcomingLaunches",
@@ -21,12 +22,15 @@ const upcomingLaunchesSlice = createSlice({
         state.loading = false;
         state.items = action.payload;
         state.currentBatch = 1;
-        state.totalCount = action.payload.length;
       }
     );
-    builder.addCase(fetchFirstBatch.rejected, (state) => {
-      state.loading = false;
-    });
+    builder.addCase(
+      fetchFirstBatch.rejected,
+      (state, _: PayloadAction<unknown>) => {
+        state.loading = false;
+        showErrorMessage("An error occurred fetching data");
+      }
+    );
     builder.addCase(fetchNextBatch.pending, (state) => {
       state.loading = true;
     });
@@ -37,12 +41,15 @@ const upcomingLaunchesSlice = createSlice({
         state.loading = false;
         state.currentBatch += 1;
         state.items = items;
-        state.totalCount = items.length;
       }
     );
-    builder.addCase(fetchNextBatch.rejected, (state) => {
-      state.loading = false;
-    });
+    builder.addCase(
+      fetchNextBatch.rejected,
+      (state, _: PayloadAction<unknown>) => {
+        state.loading = false;
+        showErrorMessage("An error occurred fetching data");
+      }
+    );
     builder.addCase(
       refreshFirstBatch.pending,
       (state) =>
@@ -54,12 +61,15 @@ const upcomingLaunchesSlice = createSlice({
         state.refreshing = false;
         state.items = action.payload;
         state.currentBatch = 1;
-        state.totalCount = action.payload.length;
       }
     );
-    builder.addCase(refreshFirstBatch.rejected, (state) => {
-      state.refreshing = false;
-    });
+    builder.addCase(
+      refreshFirstBatch.rejected,
+      (state, _: PayloadAction<unknown>) => {
+        state.loading = false;
+        showErrorMessage("An error occurred fetching data");
+      }
+    );
   },
 });
 

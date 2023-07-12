@@ -35,19 +35,19 @@ export const ScrollableList = () => {
   }, [store.dispatch]);
 
   return (
-    <>
-      <VirtualizedList
-        initialNumToRender={2}
-        getItemCount={(_) => items.length}
-        getItem={(data, i) => data[i]}
-        data={items}
-        renderItem={({ item }: { item: UpcomingLaunch }) => (
-          <UpcomingLaunchCard launch={item} />
-        )}
-        onRefresh={() => refresh()}
-        refreshing={refreshing}
-        style={styles.list}
-        ListFooterComponent={() => (
+    <VirtualizedList
+      initialNumToRender={2}
+      getItemCount={(_) => items.length}
+      getItem={(data, i) => data[i]}
+      data={items}
+      renderItem={({ item }: { item: UpcomingLaunch }) => (
+        <UpcomingLaunchCard launch={item} />
+      )}
+      onRefresh={() => refresh()}
+      refreshing={refreshing}
+      style={styles.list}
+      ListFooterComponent={() =>
+        loading && (
           <View
             style={[
               styles.spinnerContainer,
@@ -56,10 +56,10 @@ export const ScrollableList = () => {
           >
             <ActivityIndicator size="large" color="#00A3FF" />
           </View>
-        )}
-        onEndReached={() => nextBatch()}
-      ></VirtualizedList>
-    </>
+        )
+      }
+      onEndReached={() => nextBatch()}
+    ></VirtualizedList>
   );
 };
 
