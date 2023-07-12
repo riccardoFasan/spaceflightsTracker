@@ -6,7 +6,7 @@ import { PaginatedListLl2DTO } from "../dtos/launchLibrary/paginatedListLl2DTO";
 const BATCH_SIZE: number = 20;
 
 export async function getUpcomingLaunchesBatch(
-  batch: number = 1
+  batch: number
 ): Promise<UpcomingLaunch[]> {
   const { limit, offset } = getOffetAndLimit(batch);
   const response: PaginatedListLl2DTO<LaunchCommonLl2DTO> =

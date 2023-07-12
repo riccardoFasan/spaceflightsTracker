@@ -2,12 +2,20 @@ import { useEffect } from 'react';
 import {
   ActivityIndicator,
   StyleSheet,
-  ScrollView,
-  RefreshControl,
+  View,
+  Dimensions,
+  VirtualizedList,
 } from 'react-native';
-import { RootState, fetchBatch, refreshBatch, store } from '../store';
+import {
+  RootState,
+  fetchFirstBatch,
+  refreshFirstBatch,
+  fetchNextBatch,
+  store,
+} from '../store';
 import { UpcomingLaunchCard } from './UpcomingLaunchCard';
 import { useSelector } from 'react-redux';
+import { UpcomingLaunch } from '../models';
 
 export const ScrollableList = () => {
   const items = useSelector((state: RootState) => state.upcomingLaunches.items);
@@ -18,29 +26,61 @@ export const ScrollableList = () => {
     (state: RootState) => state.upcomingLaunches.refreshing
   );
 
-  const refresh = () => store.dispatch(refreshBatch());
+  const refresh = () => store.dispatch(refreshFirstBatch());
+
+  const nextBatch = () => store.dispatch(fetchNextBatch());
 
   useEffect(() => {
-    store.dispatch(fetchBatch(1));
+    store.dispatch(fetchFirstBatch());
   }, [store.dispatch]);
 
   return (
-    <ScrollView
-      refreshControl={
-        <RefreshControl refreshing={refreshing} onRefresh={() => refresh()} />
-      }
-      style={styles.list}
-    >
-      {!loading &&
-        items.map((item) => <UpcomingLaunchCard key={item.id} launch={item} />)}
-      {loading && <ActivityIndicator size="large" color="#00A3FF" />}
-    </ScrollView>
+    <>
+      <VirtualizedList
+        initialNumToRender={2}
+        getItemCount={(_) => items.length}
+        getItem={(data, i) => data[i]}
+        data={items}
+        renderItem={({ item }: { item: UpcomingLaunch }) => (
+          <UpcomingLaunchCard launch={item} />
+        )}
+        onRefresh={() => refresh()}
+        refreshing={refreshing}
+        style={styles.list}
+        ListFooterComponent={() => (
+          <View
+            style={[
+              styles.spinnerContainer,
+              items.length === 0 && styles.spinnerContainerCentered,
+            ]}
+          >
+            <ActivityIndicator size="large" color="#00A3FF" />
+          </View>
+        )}
+        onEndReached={() => nextBatch()}
+      ></VirtualizedList>
+    </>
   );
 };
 
+const dimensions = Dimensions.get('window');
+const windowheight = Math.round(dimensions.height);
+const bottomBarHeight = 100;
+
 const styles = StyleSheet.create({
   list: {
+    position: 'relative',
     paddingVertical: 18,
     paddingHorizontal: 20,
+  },
+  spinnerContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: bottomBarHeight / 3,
+  },
+  spinnerContainerCentered: {
+    height: windowheight - bottomBarHeight,
+    marginVertical: 0,
   },
 });

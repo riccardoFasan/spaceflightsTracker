@@ -1,5 +1,10 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { INITIAL_UPCOMING_LAUNCHES_STATE, fetchBatch, refreshBatch } from ".";
+import {
+  INITIAL_UPCOMING_LAUNCHES_STATE,
+  fetchFirstBatch,
+  refreshFirstBatch,
+  fetchNextBatch,
+} from ".";
 import { UpcomingLaunch } from "../../models";
 
 const upcomingLaunchesSlice = createSlice({
@@ -7,32 +12,52 @@ const upcomingLaunchesSlice = createSlice({
   initialState: INITIAL_UPCOMING_LAUNCHES_STATE,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchBatch.pending, (state) => {
+    builder.addCase(fetchFirstBatch.pending, (state) => {
       state.loading = true;
     });
     builder.addCase(
-      fetchBatch.fulfilled,
+      fetchFirstBatch.fulfilled,
       (state, action: PayloadAction<UpcomingLaunch[]>) => {
         state.loading = false;
         state.items = action.payload;
+        state.currentBatch = 1;
+        state.totalCount = action.payload.length;
       }
     );
-    builder.addCase(fetchBatch.rejected, (state) => {
+    builder.addCase(fetchFirstBatch.rejected, (state) => {
+      state.loading = false;
+    });
+    builder.addCase(fetchNextBatch.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(
+      fetchNextBatch.fulfilled,
+      (state, action: PayloadAction<UpcomingLaunch[]>) => {
+        const items = [...state.items, ...action.payload];
+        state.loading = false;
+        state.currentBatch += 1;
+        state.items = items;
+        state.totalCount = items.length;
+      }
+    );
+    builder.addCase(fetchNextBatch.rejected, (state) => {
       state.loading = false;
     });
     builder.addCase(
-      refreshBatch.pending,
+      refreshFirstBatch.pending,
       (state) =>
         (state = { ...INITIAL_UPCOMING_LAUNCHES_STATE, refreshing: true })
     );
     builder.addCase(
-      refreshBatch.fulfilled,
+      refreshFirstBatch.fulfilled,
       (state, action: PayloadAction<UpcomingLaunch[]>) => {
         state.refreshing = false;
         state.items = action.payload;
+        state.currentBatch = 1;
+        state.totalCount = action.payload.length;
       }
     );
-    builder.addCase(refreshBatch.rejected, (state) => {
+    builder.addCase(refreshFirstBatch.rejected, (state) => {
       state.refreshing = false;
     });
   },
