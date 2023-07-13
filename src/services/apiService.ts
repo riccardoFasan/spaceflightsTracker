@@ -1,23 +1,43 @@
-import { getUpcomingLaunches, mapLaunchLl2ToLaunch } from ".";
-import { LaunchCommonLl2DTO } from "../dtos";
-import { UpcomingLaunch } from "../models";
-import { PaginatedListLl2DTO } from "../dtos/launchLibrary/paginatedListLl2DTO";
-
-const BATCH_SIZE: number = 20;
-const MAX_BATCHES: number = 10;
+import {
+  getUpcomingLaunches,
+  mapArticleSnToArticle,
+  mapLaunchLl2ToLaunch,
+} from ".";
+import { ArticleSnDTO, LaunchCommonLl2DTO, PaginatedListLl2DTO } from "../dtos";
+import { Article, UpcomingLaunch } from "../models";
+import { getArticles } from "./spaceNewsService";
 
 export async function getUpcomingLaunchesBatch(
-  batch: number
+  batch: number,
+  bacthSize: number,
+  maxBatches: number
 ): Promise<UpcomingLaunch[]> {
-  if (batch > MAX_BATCHES) return [];
-  const { limit, offset } = getOffetAndLimit(batch);
+  if (batch > maxBatches) return [];
+  const { limit, offset } = getOffetAndLimit(batch, bacthSize);
   const response: PaginatedListLl2DTO<LaunchCommonLl2DTO> =
     await getUpcomingLaunches(limit, offset);
   return response.results.map((result) => mapLaunchLl2ToLaunch(result));
 }
 
-function getOffetAndLimit(batch: number): { limit: number; offset: number } {
-  const offset: number = (batch - 1) * BATCH_SIZE;
-  const limit: number = BATCH_SIZE;
+export async function getArticlesBatch(
+  batch: number,
+  bacthSize: number,
+  maxBatches: number
+): Promise<Article[]> {
+  if (batch > maxBatches) return [];
+  const { limit, offset } = getOffetAndLimit(batch, bacthSize);
+  const response: PaginatedListLl2DTO<ArticleSnDTO> = await getArticles(
+    limit,
+    offset
+  );
+  return response.results.map((result) => mapArticleSnToArticle(result));
+}
+
+function getOffetAndLimit(
+  batch: number,
+  bacthSize: number
+): { limit: number; offset: number } {
+  const offset: number = (batch - 1) * bacthSize;
+  const limit: number = bacthSize;
   return { limit, offset };
 }

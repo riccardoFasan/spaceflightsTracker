@@ -1,17 +1,15 @@
 import React from 'react';
 import { SafeAreaView, StyleSheet } from 'react-native';
-import { BottomNavigationBar, ScrollableList } from './components';
-import { Provider } from 'react-redux';
-import { store } from './store';
+import { BottomNavigationBar, UpcomingLaunchesList } from './components';
+import { ArticlesList } from './components/features/news/ArticlesList';
 
 export const App = () => {
   return (
-    <Provider store={store}>
-      <SafeAreaView style={styles.container}>
-        <ScrollableList></ScrollableList>
-        <BottomNavigationBar />
-      </SafeAreaView>
-    </Provider>
+    <SafeAreaView style={styles.container}>
+      {/* <UpcomingLaunchesList /> */}
+      <ArticlesList />
+      <BottomNavigationBar />
+    </SafeAreaView>
   );
 };
 

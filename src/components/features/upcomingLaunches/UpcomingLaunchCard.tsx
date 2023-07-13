@@ -1,6 +1,6 @@
-import { UpcomingLaunch } from '../models/upcomingLaunchModel';
+import { UpcomingLaunch } from '../../../models';
 import { Dimensions, Image, StyleSheet, Text, View } from 'react-native';
-import { formatDateTime } from '../utilities';
+import { formatDateTime } from '../../../utilities';
 
 interface Props {
   launch: UpcomingLaunch;
@@ -11,9 +11,12 @@ export const UpcomingLaunchCard = ({ launch }: Props) => {
     <View key={launch.id} style={styles.card}>
       {launch.image && (
         <Image
+          accessibilityLabel={launch.name}
+          alt={launch.name}
           style={styles.cardImage}
           resizeMode={'cover'}
           source={{ uri: launch.image }}
+          progressiveRenderingEnabled={true}
         />
       )}
       <View style={styles.cardBody}>
@@ -59,6 +62,7 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 18,
     fontWeight: '700',
+    lineHeight: 24,
   },
   cardText: {
     color: '#C5C6C7',

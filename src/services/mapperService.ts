@@ -1,5 +1,5 @@
-import { LaunchCommonLl2DTO, PadLl2DTO } from "../dtos";
-import { LaunchWindow, Pad, UpcomingLaunch } from "../models";
+import { ArticleSnDTO, LaunchCommonLl2DTO, PadLl2DTO } from "../dtos";
+import { Article, LaunchWindow, Pad, UpcomingLaunch } from "../models";
 
 export function mapLaunchLl2ToLaunch(
   launchLl2: LaunchCommonLl2DTO
@@ -28,4 +28,15 @@ function mapLaunchWindow(
 ): LaunchWindow | undefined {
   if (!start || !end) return;
   return { start, end };
+}
+
+export function mapArticleSnToArticle(articleSn: ArticleSnDTO): Article {
+  return {
+    id: articleSn.id.toString(),
+    title: articleSn.title,
+    url: articleSn.url,
+    image: articleSn.image_url,
+    summary: articleSn.summary,
+    publishedAt: articleSn.published_at,
+  };
 }

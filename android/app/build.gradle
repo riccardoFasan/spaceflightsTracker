@@ -118,6 +118,12 @@ dependencies {
     } else {
         implementation jscFlavor
     }
+
+    // images
+    implementation 'com.facebook.fresco:animated-gif:2.5.0'
+    implementation 'com.facebook.fresco:animated-webp:2.5.0'
+    implementation 'com.facebook.fresco:webpsupport:2.5.0'
+    implementation 'com.facebook.fresco:webpsupport:2.5.0'
 }
 
 

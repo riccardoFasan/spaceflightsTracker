@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { LaunchCommonLl2DTO, PaginatedListLl2DTO } from "../dtos";
 
-const ENDPOINT = "https://lldev.thespacedevs.com";
+const ENDPOINT: string = "https://lldev.thespacedevs.com/2.2.0";
 
 export async function getUpcomingLaunches(
   limit: number,
@@ -13,7 +13,7 @@ export async function getUpcomingLaunches(
   };
   const response: AxiosResponse<PaginatedListLl2DTO<LaunchCommonLl2DTO>> =
     await axios.get<PaginatedListLl2DTO<LaunchCommonLl2DTO>>(
-      `${ENDPOINT}/2.2.0/launch/upcoming/`,
+      `${ENDPOINT}/launch/upcoming/`,
       { params }
     );
   return response.data;

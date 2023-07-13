@@ -1,5 +1,5 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { Icon } from '../lib';
+import { Icon } from '../../lib';
 
 export const BottomNavigationBar = () => {
   return (
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   buttonIconWrapperActive: {
-    backgroundColor: '#212429',
+    backgroundColor: '#09334C',
   },
   buttonIcon: {
     textAlign: 'center',
