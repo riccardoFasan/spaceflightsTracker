@@ -1,5 +1,6 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { Animated, StyleSheet, Text, View } from 'react-native';
 import { Icon } from '../../lib';
+import { useEffect, useRef } from 'react';
 
 interface Props {
   focused: boolean;
@@ -8,15 +9,51 @@ interface Props {
 }
 
 export const NavigationButton = ({ focused, name, icon }: Props) => {
+  const backgroundScale = useRef<Animated.Value>(new Animated.Value(0)).current;
+  const backgroundOpacity = useRef<Animated.Value>(
+    new Animated.Value(0)
+  ).current;
+
+  const focusAnimation = Animated.parallel([
+    Animated.timing(backgroundScale, {
+      toValue: 1,
+      duration: 200,
+      useNativeDriver: true,
+    }),
+    Animated.timing(backgroundOpacity, {
+      toValue: 1,
+      duration: 200,
+      useNativeDriver: true,
+    }),
+  ]);
+
+  useEffect(() => {
+    if (focused) {
+      focusAnimation.start();
+      return;
+    }
+    focusAnimation.reset();
+  }, [focused, focusAnimation]);
+
   return (
     <View style={styles.container}>
-      <View style={[styles.iconWrapper, focused && styles.iconWrapperActive]}>
+      <View style={styles.iconWrapper}>
+        <Animated.View
+          style={[
+            styles.iconBackground,
+            { transform: [{ scaleX: backgroundScale }] },
+            { opacity: backgroundOpacity },
+          ]}
+        ></Animated.View>
         <Icon style={[styles.icon, focused && styles.iconActive]} name={icon} />
       </View>
       <Text style={[styles.text, focused && styles.textActive]}>{name}</Text>
     </View>
   );
 };
+
+const indicatorWidth: number = 65;
+const indicatorHeight: number = 40;
 
 const styles = StyleSheet.create({
   container: {
@@ -25,17 +62,22 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   iconWrapper: {
-    width: 65,
-    height: 40,
-    borderRadius: 25,
-    backgroundColor: 'transparent',
+    position: 'relative',
+    width: indicatorWidth,
+    height: indicatorHeight,
   },
-  iconWrapperActive: {
+  iconBackground: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: indicatorWidth,
+    height: indicatorHeight,
+    borderRadius: 25,
     backgroundColor: '#09334C',
   },
   icon: {
+    lineHeight: indicatorHeight,
     textAlign: 'center',
-    lineHeight: 40,
     fontSize: 28,
     color: '#9C9D9F',
   },
@@ -46,7 +88,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 12,
     fontWeight: '400',
-    marginTop: 8,
+    marginTop: 4,
     color: '#9C9D9F',
   },
   textActive: {

@@ -33,7 +33,6 @@ export const ScrollableList = <T,>({ idKey, getCard, getBatch }: Props<T>) => {
   }
 
   function refresh(): void {
-    setItems([]);
     const firstBatch: number = 1;
     setRefreshing(true);
     setCurrentBatch(firstBatch);
@@ -46,7 +45,6 @@ export const ScrollableList = <T,>({ idKey, getCard, getBatch }: Props<T>) => {
       const totalItems: T[] = uniqueBy(idKey, [...items, ...newItems]);
       setItems(totalItems);
     } catch (e: unknown) {
-      console.log(e);
       showErrorMessage('Error loading batch');
     } finally {
       if (refreshing) setRefreshing(false);
