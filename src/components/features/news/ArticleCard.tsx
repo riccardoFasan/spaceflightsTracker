@@ -5,10 +5,12 @@ import {
   Text,
   View,
   Pressable,
+  TouchableHighlight,
 } from 'react-native';
 import { formatDateTime } from '../../../utilities';
 import { Article } from '../../../models';
 import { openURL } from '../../../services';
+import { ButtonSecondary } from '../../common/ButtonSecondary';
 
 interface Props {
   article: Article;
@@ -39,10 +41,10 @@ export const ArticleCard = ({ article }: Props) => {
         <Text style={[styles.cardText, styles.cardTextSmall]} numberOfLines={2}>
           {article.summary}
         </Text>
-        <Pressable onPress={openArticle}>
-          <Text style={styles.buttonText}>Read More</Text>
-        </Pressable>
-        {/* TODO: notification button */}
+        <ButtonSecondary
+          title="Read more"
+          onPress={openArticle}
+        ></ButtonSecondary>
       </View>
     </View>
   );
@@ -85,16 +87,5 @@ const styles = StyleSheet.create({
   cardTextSmall: {
     fontWeight: '300',
     marginBottom: 20,
-  },
-  buttonText: {
-    backgroundColor: 'transparent',
-    paddingVertical: 10,
-    borderRadius: 18,
-    borderWidth: 1,
-    borderColor: '#0681C7',
-    textAlign: 'center',
-    color: '#0681C7',
-    fontSize: 16,
-    fontWeight: '700',
   },
 });

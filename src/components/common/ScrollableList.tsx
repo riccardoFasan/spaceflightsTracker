@@ -5,6 +5,7 @@ import {
   View,
   Dimensions,
   VirtualizedList,
+  SafeAreaView,
 } from 'react-native';
 import { uniqueBy } from '../../utilities';
 import { showErrorMessage } from '../../services';
@@ -54,30 +55,32 @@ export const ScrollableList = <T,>({ idKey, getCard, getBatch }: Props<T>) => {
   }
 
   return (
-    <VirtualizedList
-      initialNumToRender={2}
-      getItemCount={(_) => items.length}
-      getItem={(data, i) => data[i]}
-      data={items}
-      renderItem={({ item }: { item: T }) => getCard(item) as any}
-      onRefresh={() => refresh()}
-      refreshing={refreshing}
-      style={styles.list}
-      ListFooterComponent={() =>
-        loading &&
-        !refreshing && (
-          <View
-            style={[
-              styles.spinnerContainer,
-              items.length === 0 && styles.spinnerContainerCentered,
-            ]}
-          >
-            <ActivityIndicator size="large" color="#00A3FF" />
-          </View>
-        )
-      }
-      onEndReached={() => nextBatch()}
-    ></VirtualizedList>
+    <SafeAreaView style={styles.container}>
+      <VirtualizedList
+        initialNumToRender={2}
+        getItemCount={(_) => items.length}
+        getItem={(data, i) => data[i]}
+        data={items}
+        renderItem={({ item }: { item: T }) => getCard(item) as any}
+        onRefresh={() => refresh()}
+        refreshing={refreshing}
+        style={styles.list}
+        ListFooterComponent={() =>
+          loading &&
+          !refreshing && (
+            <View
+              style={[
+                styles.spinnerContainer,
+                items.length === 0 && styles.spinnerContainerCentered,
+              ]}
+            >
+              <ActivityIndicator size="large" color="#00A3FF" />
+            </View>
+          )
+        }
+        onEndReached={() => nextBatch()}
+      ></VirtualizedList>
+    </SafeAreaView>
   );
 };
 
@@ -86,6 +89,11 @@ const windowheight = Math.round(dimensions.height);
 const bottomBarHeight = 100;
 
 const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'column',
+    height: '100%',
+    backgroundColor: '#0C0E10',
+  },
   list: {
     position: 'relative',
     paddingVertical: 18,

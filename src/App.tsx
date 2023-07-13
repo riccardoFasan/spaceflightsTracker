@@ -1,22 +1,31 @@
 import React from 'react';
-import { SafeAreaView, StyleSheet } from 'react-native';
 import { BottomNavigationBar, UpcomingLaunchesList } from './components';
 import { ArticlesList } from './components/features/news/ArticlesList';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+const Stack = createBottomTabNavigator();
+const Navigator = Stack.Navigator;
+const Screen = Stack.Screen;
 
 export const App = () => {
   return (
-    <SafeAreaView style={styles.container}>
-      {/* <UpcomingLaunchesList /> */}
-      <ArticlesList />
-      <BottomNavigationBar />
-    </SafeAreaView>
+    <NavigationContainer>
+      <Navigator
+        tabBar={(props) => <BottomNavigationBar {...props} />}
+        initialRouteName="Upcomings"
+      >
+        <Screen
+          options={{ headerShown: false }}
+          name="Upcomings"
+          component={UpcomingLaunchesList}
+        />
+        <Screen
+          options={{ headerShown: false }}
+          name="News"
+          component={ArticlesList}
+        />
+      </Navigator>
+    </NavigationContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'column',
-    height: '100%',
-    backgroundColor: '#0C0E10',
-  },
-});

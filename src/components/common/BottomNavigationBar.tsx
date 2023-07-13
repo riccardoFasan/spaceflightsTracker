@@ -1,28 +1,39 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { Icon } from '../../lib';
+import { Pressable, StyleSheet, View } from 'react-native';
+import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
+import { NavigationButton } from './NavigationButton';
 
-export const BottomNavigationBar = () => {
+export const BottomNavigationBar = ({
+  state,
+  navigation,
+}: BottomTabBarProps) => {
+  function isFocused(index: number): boolean {
+    return state.index === index;
+  }
+
+  function navigateToUpcomings(): void {
+    navigation.navigate('Upcomings');
+  }
+
+  function navigateToNews(): void {
+    navigation.navigate('News');
+  }
+
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.button} onPress={() => {}}>
-        <View
-          style={[styles.buttonIconWrapper, styles.buttonIconWrapperActive]}
-        >
-          <Icon
-            style={[styles.buttonIcon, styles.buttonIconActive]}
-            name="rocket-3-start"
-          />
-        </View>
-        <Text style={[styles.buttonText, styles.buttonTextActive]}>
-          upcomings
-        </Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={() => {}}>
-        <View style={styles.buttonIconWrapper}>
-          <Icon style={styles.buttonIcon} name="globe-earth" />
-        </View>
-        <Text style={styles.buttonText}>news</Text>
-      </TouchableOpacity>
+      <Pressable onPress={navigateToUpcomings}>
+        <NavigationButton
+          focused={isFocused(0)}
+          name="upcomings"
+          icon="rocket-3-start"
+        />
+      </Pressable>
+      <Pressable onPress={navigateToNews}>
+        <NavigationButton
+          focused={isFocused(1)}
+          name="news"
+          icon="globe-earth"
+        />
+      </Pressable>
     </View>
   );
 };
@@ -33,41 +44,7 @@ const styles = StyleSheet.create({
     paddingBottom: 22,
     backgroundColor: '#181A1E',
     flexDirection: 'row',
+    justifyContent: 'space-around',
     alignItems: 'center',
-  },
-  button: {
-    flex: 1,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  buttonIconWrapper: {
-    width: 65,
-    height: 40,
-    borderRadius: 25,
-    backgroundColor: 'transparent',
-  },
-  buttonIconWrapperActive: {
-    backgroundColor: '#09334C',
-  },
-  buttonIcon: {
-    textAlign: 'center',
-    lineHeight: 40,
-    fontSize: 28,
-    color: '#C5C6C7',
-  },
-  buttonIconActive: {
-    color: '#fff',
-  },
-  buttonText: {
-    textAlign: 'center',
-    fontSize: 12,
-    fontWeight: '400',
-    marginTop: 8,
-    color: '#C5C6C7',
-  },
-  buttonTextActive: {
-    color: '#fff',
-    fontWeight: '600',
   },
 });
