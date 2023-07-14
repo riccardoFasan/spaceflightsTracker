@@ -10,9 +10,11 @@ export const ArticlesList = () => {
   return (
     <ScrollableList
       idKey={'id'}
+      batchSize={BATCH_SIZE}
+      maxBatches={MAX_BATCHES}
       getCard={(item: Article) => <ArticleCard article={item} />}
-      getBatch={(batch: number) =>
-        getArticlesBatch(batch, BATCH_SIZE, MAX_BATCHES)
+      getBatch={(batch: number, batchSize: number) =>
+        getArticlesBatch(batch, batchSize)
       }
     />
   );

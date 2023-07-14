@@ -10,9 +10,11 @@ export const UpcomingLaunchesList = () => {
   return (
     <ScrollableList
       idKey={'id'}
+      batchSize={BATCH_SIZE}
+      maxBatches={MAX_BATCHES}
       getCard={(item: UpcomingLaunch) => <UpcomingLaunchCard launch={item} />}
-      getBatch={(batch: number) =>
-        getUpcomingLaunchesBatch(batch, BATCH_SIZE, MAX_BATCHES)
+      getBatch={(batch: number, batchSize: number) =>
+        getUpcomingLaunchesBatch(batch, batchSize)
       }
     />
   );

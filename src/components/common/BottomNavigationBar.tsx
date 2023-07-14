@@ -1,6 +1,7 @@
 import { Pressable, StyleSheet, View } from 'react-native';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { NavigationButton } from './NavigationButton';
+import { Color } from '../../styles';
 
 export const BottomNavigationBar = ({
   state,
@@ -42,7 +43,7 @@ const styles = StyleSheet.create({
   container: {
     paddingTop: 14,
     paddingBottom: 22,
-    backgroundColor: '#181A1E',
+    backgroundColor: Color.DarkAnthracite,
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',

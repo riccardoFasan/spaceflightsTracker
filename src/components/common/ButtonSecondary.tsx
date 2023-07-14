@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { StyleSheet, Text, Pressable } from 'react-native';
+import { Color } from '../../styles';
 
 interface Props {
   title: string;
@@ -32,14 +33,14 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderRadius: 18,
     borderWidth: 1,
-    borderColor: '#0681C7',
     textAlign: 'center',
-    color: '#0681C7',
     fontSize: 16,
     fontWeight: '700',
+    color: Color.Blue,
+    borderColor: Color.Blue,
   },
   buttonActive: {
-    backgroundColor: '#0681C7',
-    color: '#fff',
+    backgroundColor: Color.Blue,
+    color: Color.White,
   },
 });

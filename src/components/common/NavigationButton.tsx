@@ -1,6 +1,7 @@
 import { Animated, StyleSheet, Text, View } from 'react-native';
 import { Icon } from '../../lib';
 import { useEffect, useRef } from 'react';
+import { Color } from '../../styles';
 
 interface Props {
   focused: boolean;
@@ -14,26 +15,28 @@ export const NavigationButton = ({ focused, name, icon }: Props) => {
     new Animated.Value(0)
   ).current;
 
-  const focusAnimation = Animated.parallel([
-    Animated.timing(backgroundScale, {
-      toValue: 1,
-      duration: 200,
-      useNativeDriver: true,
-    }),
-    Animated.timing(backgroundOpacity, {
-      toValue: 1,
-      duration: 200,
-      useNativeDriver: true,
-    }),
-  ]);
+  const focusAnimation: Animated.CompositeAnimation = generateAnimation(1);
+  const unfocusAnimation: Animated.CompositeAnimation = generateAnimation(0);
 
   useEffect(() => {
     if (focused) {
       focusAnimation.start();
       return;
     }
-    focusAnimation.reset();
+    unfocusAnimation.start();
   }, [focused, focusAnimation]);
+
+  function generateAnimation(value: number): Animated.CompositeAnimation {
+    const config: Animated.TimingAnimationConfig = {
+      toValue: value,
+      duration: 200,
+      useNativeDriver: true,
+    };
+    return Animated.parallel([
+      Animated.timing(backgroundScale, config),
+      Animated.timing(backgroundOpacity, config),
+    ]);
+  }
 
   return (
     <View style={styles.container}>
@@ -53,7 +56,7 @@ export const NavigationButton = ({ focused, name, icon }: Props) => {
 };
 
 const indicatorWidth: number = 65;
-const indicatorHeight: number = 40;
+const indicatorHeight: number = 34;
 
 const styles = StyleSheet.create({
   container: {
@@ -73,26 +76,26 @@ const styles = StyleSheet.create({
     width: indicatorWidth,
     height: indicatorHeight,
     borderRadius: 25,
-    backgroundColor: '#09334C',
+    backgroundColor: Color.DarkBlue,
   },
   icon: {
     lineHeight: indicatorHeight,
     textAlign: 'center',
     fontSize: 28,
-    color: '#9C9D9F',
+    color: Color.DarkGray,
   },
   iconActive: {
-    color: '#fff',
+    color: Color.White,
   },
   text: {
     textAlign: 'center',
     fontSize: 12,
     fontWeight: '400',
     marginTop: 4,
-    color: '#9C9D9F',
+    color: Color.DarkGray,
   },
   textActive: {
-    color: '#fff',
+    color: Color.White,
     fontWeight: '600',
   },
 });
