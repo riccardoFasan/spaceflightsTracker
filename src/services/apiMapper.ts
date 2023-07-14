@@ -66,5 +66,5 @@ function mapLocation(location: LocationLl2DTO): Location | undefined {
 
 function mapLaunchStatus(statusId: number): UpcomingLaunchStatus {
   if (statusId === 1) return UpcomingLaunchStatus.GoForLaunch;
-  return UpcomingLaunchStatus.ToBeConfirmed;
+  return UpcomingLaunchStatus.ToBeDetermined;
 }

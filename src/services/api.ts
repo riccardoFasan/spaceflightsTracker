@@ -6,7 +6,7 @@ import {
 import { ArticleSnDTO, LaunchCommonLl2DTO, PaginatedListLl2DTO } from "../dtos";
 import { Article, UpcomingLaunch } from "../models";
 import { ListBatch } from "../models/listBatchModel";
-import { getArticles } from "./spaceNewsService";
+import { getArticles } from "./spaceNewsApi";
 
 export async function getUpcomingLaunchesBatch(
   batch: number,

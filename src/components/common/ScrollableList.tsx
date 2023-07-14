@@ -11,12 +11,14 @@ import { uniqueBy } from '../../utilities';
 import { showErrorMessage } from '../../services';
 import { Color, Spacing, flexBoxStyles } from '../../styles';
 import { ListBatch } from '../../models/listBatchModel';
+import { invalidateCache } from '../../lib';
 
 interface Props<T> {
   idKey: keyof T;
   batchSize: number;
   maxBatches: number;
   getBatch: (batch: number, batchSize: number) => Promise<ListBatch<T>>;
+  invalidateCache: () => Promise<void>;
   getCard: (item: T) => ReactNode;
 }
 
@@ -25,12 +27,13 @@ export const ScrollableList = <T,>({
   batchSize,
   maxBatches,
   getBatch,
+  invalidateCache,
   getCard,
 }: Props<T>) => {
   const [items, setItems] = useState<T[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [refreshing, setRefreshing] = useState<boolean>(false);
-  const [currentBatch, setCurrentBatch] = useState<number>(0);
+  const [currentBatch, setCurrentBatch] = useState<number>(1);
   const [totalCount, setTotalCount] = useState<number>(0);
 
   useEffect(() => {
@@ -59,7 +62,8 @@ export const ScrollableList = <T,>({
     }
   }
 
-  function refresh(): void {
+  async function refresh(): Promise<void> {
+    await invalidateCache();
     const firstBatch: number = 1;
     setRefreshing(true);
     setCurrentBatch(firstBatch);

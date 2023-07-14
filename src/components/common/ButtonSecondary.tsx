@@ -31,7 +31,7 @@ export const ButtonSecondary = ({ title, onPress }: Props) => {
 const styles = StyleSheet.create({
   button: {
     ...typographyStyles.paragraph,
-    FontWeight: FontWeight.Bold,
+    fontWeight: FontWeight.Bold,
     paddingVertical: Spacing.Medium,
     backgroundColor: 'transparent',
     borderRadius: Spacing.Large,

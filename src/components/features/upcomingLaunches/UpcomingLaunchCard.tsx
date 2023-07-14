@@ -21,7 +21,7 @@ export const UpcomingLaunchCard = ({ launch }: Props) => {
         id: launch.id,
         title: launch.name,
         image: launch.image,
-        imageRatio: 2.75,
+        imageRatio: 3,
       }}
       badge={
         launch.status === UpcomingLaunchStatus.GoForLaunch && launch.window ? (

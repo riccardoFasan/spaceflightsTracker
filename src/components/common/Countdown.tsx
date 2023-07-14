@@ -14,12 +14,16 @@ export const Countdown = ({ date, styles }: Props) => {
   const [difference, setDifference] = useState<number>(0);
 
   useEffect(() => {
-    interval = setInterval(() => updateCountdown(), 10);
+    initCountdown();
   }, []);
 
   useEffect(() => {
     setCountdown(formatDateTmeDifference(difference));
   }, [difference]);
+
+  function initCountdown(): void {
+    interval = setInterval(() => updateCountdown(), 10);
+  }
 
   function updateCountdown(): void {
     const now: Date = new Date();
