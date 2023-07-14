@@ -2,8 +2,13 @@ import { UpcomingLaunch } from '../../../models';
 import { UpcomingLaunchStatus } from '../../../enums';
 import { StyleSheet, Text, View } from 'react-native';
 import { formatDateTime } from '../../../utilities';
-import { Color } from '../../../styles';
+import { Color, Spacing } from '../../../styles';
 import { Countdown, ListCard } from '../../common';
+import {
+  FontSize,
+  FontWeight,
+  typographyStyles,
+} from '../../../styles/typographyStyles';
 
 interface Props {
   launch: UpcomingLaunch;
@@ -39,9 +44,7 @@ export const UpcomingLaunchCard = ({ launch }: Props) => {
         </Text>
       )}
       {launch.pad?.location && (
-        <Text style={[styles.cardText, styles.cardTextSmall]}>
-          {launch.pad.location.name}
-        </Text>
+        <Text style={styles.cardTextSmall}>{launch.pad.location.name}</Text>
       )}
       {/* TODO: notification button */}
     </ListCard>
@@ -50,34 +53,34 @@ export const UpcomingLaunchCard = ({ launch }: Props) => {
 
 const styles = StyleSheet.create({
   cardText: {
-    color: Color.Gray,
-    fontSize: 16,
-    paddingTop: 4,
-    fontWeight: '700',
+    ...typographyStyles.paragraph,
+    fontWeight: FontWeight.Medium,
+    paddingTop: Spacing.Small,
   },
   cardTextSmall: {
-    fontSize: 14,
-    fontWeight: '300',
+    ...typographyStyles.paragraph,
+    fontSize: FontSize.Small,
+    fontWeight: FontWeight.Light,
   },
   badge: {
     position: 'absolute',
     backgroundColor: Color.Anthracite + 80,
-    padding: 8,
-    borderRadius: 8,
-    top: 20,
-    left: 20,
+    padding: Spacing.Medium,
+    borderRadius: Spacing.Medium,
+    top: Spacing.Large,
+    left: Spacing.Large,
   },
   badgeText: {
     color: Color.White,
     textTransform: 'uppercase',
     textAlign: 'center',
-    fontWeight: '600',
     letterSpacing: 0.25,
-    fontSize: 12,
+    fontWeight: FontWeight.Bold,
+    fontSize: FontSize.ExtraSmall,
   },
   badgeTextCountdown: {
-    fontSize: 14,
-    fontWeight: '800',
+    fontSize: FontSize.Small,
+    fontWeight: FontWeight.ExtraBold,
   },
   badgeTimer: {
     backgroundColor: Color.Red,

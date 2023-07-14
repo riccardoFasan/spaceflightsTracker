@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { uniqueBy } from '../../utilities';
 import { showErrorMessage } from '../../services';
-import { Color } from '../../styles';
+import { Color, Spacing, flexBoxStyles } from '../../styles';
 import { ListBatch } from '../../models/listBatchModel';
 
 interface Props<T> {
@@ -109,19 +109,16 @@ const bottomBarHeight = 100;
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'column',
     height: '100%',
     backgroundColor: Color.Black,
   },
   list: {
     position: 'relative',
-    paddingVertical: 18,
-    paddingHorizontal: 20,
+    paddingHorizontal: Spacing.ExtraLarge,
+    paddingVertical: Spacing.Large,
   },
   spinnerContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
+    ...flexBoxStyles.columnCenter,
     marginBottom: bottomBarHeight / 3,
   },
   spinnerContainerCentered: {

@@ -1,7 +1,8 @@
 import { Animated, StyleSheet, Text, View } from 'react-native';
 import { Icon } from '../../lib';
 import { useEffect, useRef } from 'react';
-import { Color } from '../../styles';
+import { Color, FontSize, FontWeight, Spacing } from '../../styles';
+import { flexBoxStyles } from '../../styles/flexBoxStyles';
 
 interface Props {
   focused: boolean;
@@ -59,11 +60,7 @@ const indicatorWidth: number = 65;
 const indicatorHeight: number = 34;
 
 const styles = StyleSheet.create({
-  container: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+  container: flexBoxStyles.columnCenter,
   iconWrapper: {
     position: 'relative',
     width: indicatorWidth,
@@ -71,11 +68,9 @@ const styles = StyleSheet.create({
   },
   iconBackground: {
     position: 'absolute',
-    top: 0,
-    left: 0,
     width: indicatorWidth,
     height: indicatorHeight,
-    borderRadius: 25,
+    borderRadius: Spacing.ExtraLarge,
     backgroundColor: Color.DarkBlue,
   },
   icon: {
@@ -89,13 +84,13 @@ const styles = StyleSheet.create({
   },
   text: {
     textAlign: 'center',
-    fontSize: 12,
-    fontWeight: '400',
-    marginTop: 4,
+    fontSize: FontSize.ExtraSmall,
+    marginTop: Spacing.ExtraSmall,
+    marginBottom: Spacing.Small,
     color: Color.DarkGray,
   },
   textActive: {
     color: Color.White,
-    fontWeight: '600',
+    fontWeight: FontWeight.SemiBold,
   },
 });

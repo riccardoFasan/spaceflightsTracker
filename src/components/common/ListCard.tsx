@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import { Dimensions, Image, StyleSheet, Text, View } from 'react-native';
-import { Color } from '../../styles';
+import { Color, Spacing } from '../../styles';
+import { typographyStyles } from '../../styles/typographyStyles';
 
 interface Content {
   id: string;
@@ -46,10 +47,10 @@ export const ListCard = ({ content, children, badge }: Props) => {
 const styles = StyleSheet.create({
   card: {
     position: 'relative',
-    borderRadius: 16,
+    borderRadius: Spacing.Large,
     borderWidth: 1,
     width: '100%',
-    marginBottom: 20,
+    marginBottom: Spacing.ExtraLarge,
     borderColor: Color.Anthracite,
     backgroundColor: Color.DarkAnthracite,
   },
@@ -58,12 +59,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
   },
   cardBody: {
-    padding: 20,
+    padding: Spacing.ExtraLarge,
   },
-  cardTitle: {
-    color: Color.White,
-    fontSize: 18,
-    fontWeight: '700',
-    lineHeight: 24,
-  },
+  cardTitle: typographyStyles.heading3,
 });

@@ -3,8 +3,9 @@ import { formatDateTime } from '../../../utilities';
 import { Article } from '../../../models';
 import { openURL } from '../../../services';
 import { ButtonSecondary } from '../../common/ButtonSecondary';
-import { Color } from '../../../styles';
+import { Color, Spacing } from '../../../styles';
 import { ListCard } from '../../common';
+import { typographyStyles, FontWeight } from '../../../styles/typographyStyles';
 
 interface Props {
   article: Article;
@@ -38,14 +39,12 @@ export const ArticleCard = ({ article }: Props) => {
 
 const styles = StyleSheet.create({
   cardText: {
-    color: Color.Gray,
-    fontSize: 16,
-    paddingTop: 4,
-    fontWeight: '700',
-    lineHeight: 24,
+    ...typographyStyles.paragraph,
+    paddingTop: Spacing.Small,
+    fontWeight: FontWeight.Bold,
   },
   cardTextSmall: {
-    fontWeight: '300',
-    marginBottom: 20,
+    fontWeight: FontWeight.Light,
+    marginBottom: Spacing.ExtraLarge,
   },
 });

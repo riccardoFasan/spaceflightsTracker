@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { StyleSheet, Text, Pressable } from 'react-native';
-import { Color } from '../../styles';
+import { Color, Spacing, typographyStyles } from '../../styles';
+import { FontWeight } from '../../styles/typographyStyles';
 
 interface Props {
   title: string;
@@ -29,13 +30,13 @@ export const ButtonSecondary = ({ title, onPress }: Props) => {
 
 const styles = StyleSheet.create({
   button: {
+    ...typographyStyles.paragraph,
+    FontWeight: FontWeight.Bold,
+    paddingVertical: Spacing.Medium,
     backgroundColor: 'transparent',
-    paddingVertical: 10,
-    borderRadius: 18,
+    borderRadius: Spacing.Large,
     borderWidth: 1,
     textAlign: 'center',
-    fontSize: 16,
-    fontWeight: '700',
     color: Color.Blue,
     borderColor: Color.Blue,
   },

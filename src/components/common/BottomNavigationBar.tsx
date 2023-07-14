@@ -1,7 +1,8 @@
 import { Pressable, StyleSheet, View } from 'react-native';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { NavigationButton } from './NavigationButton';
-import { Color } from '../../styles';
+import { Color, Spacing } from '../../styles';
+import { flexBoxStyles } from '../../styles/flexBoxStyles';
 
 export const BottomNavigationBar = ({
   state,
@@ -41,11 +42,8 @@ export const BottomNavigationBar = ({
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 14,
-    paddingBottom: 22,
+    paddingVertical: Spacing.Large,
     backgroundColor: Color.DarkAnthracite,
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
+    ...flexBoxStyles.rowAround,
   },
 });
