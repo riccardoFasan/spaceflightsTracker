@@ -1,1 +1,1 @@
-export * from "./upcomingLaunches";
+export * from "./launches";

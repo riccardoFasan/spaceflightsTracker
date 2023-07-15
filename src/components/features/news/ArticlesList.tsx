@@ -1,8 +1,5 @@
 import { Article } from '../../../models';
-import {
-  getArticlesBatch,
-  invalidateArticleListCache,
-} from '../../../services';
+import { getArticlesBatch } from '../../../services';
 import { ScrollableList } from '../../common';
 import { ArticleCard } from './ArticleCard';
 
@@ -16,7 +13,6 @@ export const ArticlesList = () => {
       batchSize={BATCH_SIZE}
       maxBatches={MAX_BATCHES}
       getCard={(item: Article) => <ArticleCard article={item} />}
-      invalidateCache={invalidateArticleListCache}
       getBatch={getArticlesBatch}
     />
   );

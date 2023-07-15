@@ -1,20 +1,18 @@
-import {
-  getUpcomingLaunches,
-  mapArticleSnToArticle,
-  mapLaunchLl2ToLaunch,
-} from ".";
+import { getLaunches, mapArticleSnToArticle, mapLaunchLl2ToLaunch } from ".";
 import { ArticleSnDTO, LaunchCommonLl2DTO, PaginatedListLl2DTO } from "../dtos";
-import { Article, UpcomingLaunch } from "../models";
+import { Article, Launch } from "../models";
 import { ListBatch } from "../models/listBatchModel";
 import { getArticles } from "./spaceNewsApi";
 
-export async function getUpcomingLaunchesBatch(
+export async function getLaunchesBatch(
   batch: number,
   bacthSize: number
-): Promise<ListBatch<UpcomingLaunch>> {
+): Promise<ListBatch<Launch>> {
   const { limit, offset } = getOffetAndLimit(batch, bacthSize);
-  const response: PaginatedListLl2DTO<LaunchCommonLl2DTO> =
-    await getUpcomingLaunches(limit, offset);
+  const response: PaginatedListLl2DTO<LaunchCommonLl2DTO> = await getLaunches(
+    limit,
+    offset
+  );
   return {
     totalCount: response.count,
     batch,

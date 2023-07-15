@@ -1,5 +1,5 @@
-import { UpcomingLaunch } from '../../../models';
-import { UpcomingLaunchStatus } from '../../../enums';
+import { Launch } from '../../../models';
+import { LaunchStatus } from '../../../enums';
 import { StyleSheet, Text, View } from 'react-native';
 import { formatDateTime } from '../../../utilities';
 import { Color, Spacing } from '../../../styles';
@@ -11,10 +11,10 @@ import {
 } from '../../../styles/typographyStyles';
 
 interface Props {
-  launch: UpcomingLaunch;
+  launch: Launch;
 }
 
-export const UpcomingLaunchCard = ({ launch }: Props) => {
+export const LaunchCard = ({ launch }: Props) => {
   return (
     <ListCard
       content={{
@@ -24,7 +24,7 @@ export const UpcomingLaunchCard = ({ launch }: Props) => {
         imageRatio: 3,
       }}
       badge={
-        launch.status === UpcomingLaunchStatus.GoForLaunch && launch.window ? (
+        launch.status === LaunchStatus.GoForLaunch && launch.window ? (
           <View style={[styles.badge, styles.badgeTimer]}>
             <Countdown
               date={launch.window.start}

@@ -1,6 +1,6 @@
 import { Text } from 'react-native';
 import { useState, useEffect } from 'react';
-import { formatDateTmeDifference } from '../../utilities';
+import { formatDateTmeDifference, getDateDiffererce } from '../../utilities';
 
 interface Props {
   date: string;
@@ -26,8 +26,7 @@ export const Countdown = ({ date, styles }: Props) => {
   }
 
   function updateCountdown(): void {
-    const now: Date = new Date();
-    const newDifference: number = new Date(date).getTime() - now.getTime();
+    const newDifference: number = getDateDiffererce(date);
     if (newDifference >= 0) {
       setDifference(newDifference);
       return;

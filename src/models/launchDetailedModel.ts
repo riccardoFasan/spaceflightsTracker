@@ -1,11 +1,11 @@
 import { LaunchWindow, Pad, Mission, Launcher } from ".";
-import { UpcomingLaunchStatus } from "../enums";
+import { LaunchStatus } from "../enums";
 
-export interface UpcomingLaunchDetailed {
+export interface LaunchDetailed {
   id: string;
   name: string;
   date: Date;
-  status: UpcomingLaunchStatus;
+  status: LaunchStatus;
   mission: Mission;
   launcher: Launcher;
   window?: LaunchWindow;

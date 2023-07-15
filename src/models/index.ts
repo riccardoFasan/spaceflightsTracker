@@ -1,5 +1,5 @@
-export * from "./upcomingLaunchModel";
-export * from "./upcomingLaunchDetailedModel";
+export * from "./launchModel";
+export * from "./LaunchDetailedModel";
 export * from "./launchWindowModel";
 export * from "./padModel";
 export * from "./missionModel";

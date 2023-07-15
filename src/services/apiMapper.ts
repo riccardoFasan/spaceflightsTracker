@@ -4,18 +4,10 @@ import {
   LocationLl2DTO,
   PadLl2DTO,
 } from "../dtos";
-import { UpcomingLaunchStatus } from "../enums";
-import {
-  Article,
-  LaunchWindow,
-  Location,
-  Pad,
-  UpcomingLaunch,
-} from "../models";
+import { LaunchStatus } from "../enums";
+import { Article, LaunchWindow, Location, Pad, Launch } from "../models";
 
-export function mapLaunchLl2ToLaunch(
-  launchLl2: LaunchCommonLl2DTO
-): UpcomingLaunch {
+export function mapLaunchLl2ToLaunch(launchLl2: LaunchCommonLl2DTO): Launch {
   return {
     id: launchLl2.id.toString(),
     name: launchLl2.name,
@@ -64,7 +56,7 @@ function mapLocation(location: LocationLl2DTO): Location | undefined {
   };
 }
 
-function mapLaunchStatus(statusId: number): UpcomingLaunchStatus {
-  if (statusId === 1) return UpcomingLaunchStatus.GoForLaunch;
-  return UpcomingLaunchStatus.ToBeDetermined;
+function mapLaunchStatus(statusId: number): LaunchStatus {
+  if (statusId === 1) return LaunchStatus.GoForLaunch;
+  return LaunchStatus.ToBeDetermined;
 }

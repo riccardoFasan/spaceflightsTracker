@@ -1,9 +1,9 @@
 import { LaunchWindow, Pad } from ".";
-import { UpcomingLaunchStatus } from "../enums";
-export interface UpcomingLaunch {
+import { LaunchStatus } from "../enums";
+export interface Launch {
   id: string;
   name: string;
-  status: UpcomingLaunchStatus;
+  status: LaunchStatus;
   pad?: Pad;
   window?: LaunchWindow;
   image?: string;
