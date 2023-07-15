@@ -1,5 +1,5 @@
 import React from 'react';
-import { BottomNavigationBar, LaunchesList } from './components';
+import { BottomNavigationBar, LaunchesList, Header } from './components';
 import { ArticlesList } from './components/features/news/ArticlesList';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -12,16 +12,19 @@ export const App = () => {
   return (
     <NavigationContainer>
       <Navigator
+        screenOptions={{
+          header: (props) => <Header title={props.route.name} />,
+        }}
         tabBar={(props) => <BottomNavigationBar {...props} />}
         initialRouteName="Upcomings"
       >
         <Screen
-          options={{ headerShown: false }}
+          options={{ title: 'Upcomings' }}
           name="Upcomings"
           component={LaunchesList}
         />
         <Screen
-          options={{ headerShown: false }}
+          options={{ title: 'News' }}
           name="News"
           component={ArticlesList}
         />
