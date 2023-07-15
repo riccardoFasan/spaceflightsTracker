@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     color: Color.DarkGray,
   },
   iconActive: {
-    color: Color.White,
+    color: Color.AccentBlue,
   },
   text: {
     textAlign: 'center',

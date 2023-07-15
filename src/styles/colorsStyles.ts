@@ -1,4 +1,5 @@
 export enum Color {
+  AccentBlue = "#B5E4FF",
   LightBlue = "#00A3FF",
   Blue = "#0681C7",
   DarkBlue = "#09334C",
