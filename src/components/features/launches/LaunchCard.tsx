@@ -22,6 +22,7 @@ export const LaunchCard = ({ launch }: Props) => {
         title: launch.name,
         image: launch.image,
         imageRatio: 3,
+        pageName: 'Launch',
       }}
       badge={
         launch.status === LaunchStatus.GoForLaunch && launch.window ? (

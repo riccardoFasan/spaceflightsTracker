@@ -3,7 +3,7 @@ import { formatDateTime } from '../../../utilities';
 import { Article } from '../../../models';
 import { openURL } from '../../../services';
 import { ButtonSecondary } from '../../common/ButtonSecondary';
-import { Color, Spacing } from '../../../styles';
+import { Spacing } from '../../../styles';
 import { ListCard } from '../../common';
 import { typographyStyles, FontWeight } from '../../../styles/typographyStyles';
 
@@ -23,6 +23,7 @@ export const ArticleCard = ({ article }: Props) => {
         title: article.title,
         image: article.image,
         imageRatio: 3.25,
+        pageName: 'Article',
       }}
     >
       <Text style={styles.cardText}>{formatDateTime(article.publishedAt)}</Text>

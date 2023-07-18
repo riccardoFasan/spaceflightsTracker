@@ -1,5 +1,10 @@
 import React from 'react';
-import { BottomNavigationBar, LaunchesList, Header } from './components';
+import {
+  BottomNavigationBar,
+  LaunchesList,
+  Header,
+  LaunchPage,
+} from './components';
 import { ArticlesList } from './components/features/news/ArticlesList';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -27,6 +32,11 @@ export const App = () => {
           options={{ title: 'News' }}
           name="News"
           component={ArticlesList}
+        />
+        <Screen
+          options={{ title: 'Launch' }}
+          name="Launch"
+          component={LaunchPage}
         />
       </Navigator>
     </NavigationContainer>
