@@ -35,6 +35,7 @@ export const ListCard = ({ content, children, badge }: Props) => {
   );
 
   function navigateToDetailPage(): void {
+    console.log(content.pageName);
     navigation.navigate(content.pageName, { id: content.id });
   }
 
@@ -73,7 +74,7 @@ const styles = StyleSheet.create({
   },
   cardImage: {
     width: '100%',
-    borderRadius: 16,
+    borderRadius: Spacing.Large,
   },
   cardBody: {
     padding: Spacing.ExtraLarge,

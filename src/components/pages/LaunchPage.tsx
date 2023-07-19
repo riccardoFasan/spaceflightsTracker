@@ -1,7 +1,113 @@
-import { View } from 'react-native';
+import { useEffect, useState } from 'react';
+import {
+  View,
+  Dimensions,
+  StyleSheet,
+  Image,
+  ActivityIndicator,
+  ScrollView,
+} from 'react-native';
+import { LaunchDetailed } from '../../models';
+import { getLaunch, showErrorMessage } from '../../services';
+import { Color, Spacing } from '../../styles';
+import { flexBoxStyles } from '../../styles/flexBoxStyles';
+import { DetailSection } from '../common';
 
-export const LaunchPage = ({ navigation, route }: any) => {
-  const lauchId: string = route.params.id;
+interface Props {
+  navigation: any;
+  route: any;
+}
 
-  return <View>LaunchPage of {lauchId}</View>;
+export const LaunchPage = ({ navigation, route }: Props) => {
+  const [loading, setLoading] = useState<boolean>(false);
+  const [launch, setLaunch] = useState<LaunchDetailed>();
+
+  useEffect(() => {
+    const id: string = route.params.id;
+    loadLaunch(id);
+  }, [route]);
+
+  async function loadLaunch(id: string): Promise<void> {
+    try {
+      setLoading(true);
+      const launch: LaunchDetailed = await getLaunch(id);
+      setLaunch(launch);
+    } catch (e: unknown) {
+      showErrorMessage('Error loading launch');
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  return (
+    <ScrollView style={styles.container}>
+      {loading && (
+        <View style={[styles.spinnerContainer]}>
+          <ActivityIndicator size="large" color={Color.LightBlue} />
+        </View>
+      )}
+      {!loading && launch && (
+        <>
+          <Image
+            accessibilityLabel={launch.name}
+            alt={launch.name}
+            style={[styles.image, { height: imageHeight }]}
+            resizeMode={'cover'}
+            source={{ uri: launch.image }}
+            progressiveRenderingEnabled={true}
+          />
+          <View style={styles.body}>
+            {launch.mission && (
+              <DetailSection
+                title={launch.mission.name}
+                subtitle="mission"
+                text={launch.mission.description}
+              />
+            )}
+            {launch.launcher && (
+              <DetailSection
+                title={launch!.launcher!.name}
+                subtitle="rocket"
+                text={launch!.launcher!.description}
+              />
+            )}
+            {launch.launcher?.company && (
+              <DetailSection
+                title={launch.launcher.company.name}
+                subtitle={`manufacturer`}
+                text={launch.launcher.company.description}
+              />
+            )}
+          </View>
+        </>
+      )}
+    </ScrollView>
+  );
 };
+
+const dimensions = Dimensions.get('window');
+const imageHeight: number = Math.round(dimensions.height / 2.5);
+const windowheight = Math.round(dimensions.height);
+const bottomBarHeight = 100;
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: Color.Black,
+    minHeight: '100%',
+  },
+  image: {
+    width: '100%',
+    borderRadius: Spacing.Medium,
+  },
+  spinnerContainer: {
+    ...flexBoxStyles.columnCenter,
+    marginBottom: bottomBarHeight / 3,
+    height: windowheight - bottomBarHeight,
+    marginVertical: 0,
+  },
+  body: {
+    paddingHorizontal: Spacing.ExtraLarge,
+    marginBottom: Spacing.Large,
+    marginTop: Spacing.ExtraExtraLarge,
+  },
+});

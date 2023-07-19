@@ -7,3 +7,4 @@ export * from "./launcherModel";
 export * from "./companyModel";
 export * from "./articleModel";
 export * from "./locationModel";
+export * from "./listBatchModel";

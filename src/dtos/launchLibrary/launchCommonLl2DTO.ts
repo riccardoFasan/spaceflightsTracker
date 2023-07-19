@@ -24,7 +24,7 @@ export interface LaunchCommonLl2DTO {
   failreason?: string;
   hashtag?: string;
   rocket: RocketCommonLl2DTO;
-  mission: MissionLl2DTO;
+  mission?: MissionLl2DTO;
   pad: PadLl2DTO;
   webcast_live?: boolean;
   image?: string;

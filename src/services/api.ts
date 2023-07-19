@@ -1,8 +1,13 @@
-import { getLaunches, mapArticleSnToArticle, mapLaunchLl2ToLaunch } from ".";
+import {
+  getLaunches,
+  getDetailedLaunch,
+  getArticles,
+  mapArticleSnToArticle,
+  mapLaunchLl2ToLaunch,
+  mapLaunchLl2ToDetailedLaunch,
+} from ".";
 import { ArticleSnDTO, LaunchCommonLl2DTO, PaginatedListLl2DTO } from "../dtos";
-import { Article, Launch } from "../models";
-import { ListBatch } from "../models/listBatchModel";
-import { getArticles } from "./spaceNewsApi";
+import { Article, Launch, LaunchDetailed, ListBatch } from "../models";
 
 export async function getLaunchesBatch(
   batch: number,
@@ -18,6 +23,11 @@ export async function getLaunchesBatch(
     batch,
     results: response.results.map((result) => mapLaunchLl2ToLaunch(result)),
   };
+}
+
+export async function getLaunch(id: string): Promise<LaunchDetailed> {
+  const response: LaunchCommonLl2DTO = await getDetailedLaunch(id);
+  return mapLaunchLl2ToDetailedLaunch(response);
 }
 
 export async function getArticlesBatch(

@@ -16,3 +16,11 @@ export async function getLaunches(
     );
   return response.data;
 }
+
+export async function getDetailedLaunch(
+  id: string
+): Promise<LaunchCommonLl2DTO> {
+  const response: AxiosResponse<LaunchCommonLl2DTO> =
+    await axios.get<LaunchCommonLl2DTO>(`${ENDPOINT}/launch/${id}/`);
+  return response.data;
+}

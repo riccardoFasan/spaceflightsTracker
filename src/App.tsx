@@ -34,7 +34,10 @@ export const App = () => {
           component={ArticlesList}
         />
         <Screen
-          options={{ title: 'Launch' }}
+          options={{
+            title: 'Launch',
+            headerShown: false,
+          }}
           name="Launch"
           component={LaunchPage}
         />
