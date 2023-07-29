@@ -34,7 +34,6 @@ export const ListCard = ({ content, children, badge }: Props) => {
   );
 
   function navigateToDetailPage(): void {
-    console.log(content.pageName);
     navigation.navigate(content.pageName, { id: content.id });
   }
 

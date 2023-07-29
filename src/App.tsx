@@ -1,13 +1,8 @@
 import React from 'react';
-import {
-  BottomNavigationBar,
-  LaunchesList,
-  Header,
-  LaunchPage,
-} from './components';
-import { ArticlesList } from './components/features/news/ArticlesList';
+import { BottomNavigationBar, Header } from './components';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { SCREENS, shouldShowNavigation } from './services';
 
 const Stack = createBottomTabNavigator();
 const Navigator = Stack.Navigator;
@@ -18,29 +13,26 @@ export const App = () => {
     <NavigationContainer>
       <Navigator
         screenOptions={{
-          header: (props) => <Header title={props.route.name} />,
+          header: (props) =>
+            shouldShowNavigation(props.route.name) && (
+              <Header title={props.route.name} />
+            ),
         }}
-        tabBar={(props) => <BottomNavigationBar {...props} />}
+        tabBar={(props) =>
+          shouldShowNavigation(props.state.index) && (
+            <BottomNavigationBar {...props} />
+          )
+        }
         initialRouteName="Upcomings"
       >
-        <Screen
-          options={{ title: 'Upcomings' }}
-          name="Upcomings"
-          component={LaunchesList}
-        />
-        <Screen
-          options={{ title: 'News' }}
-          name="News"
-          component={ArticlesList}
-        />
-        <Screen
-          options={{
-            title: 'Launch',
-            headerShown: false,
-          }}
-          name="Launch"
-          component={LaunchPage}
-        />
+        {SCREENS.map((screen) => (
+          <Screen
+            options={{ title: screen.name }}
+            name={screen.name}
+            component={screen.component}
+            key={screen.name}
+          />
+        ))}
       </Navigator>
     </NavigationContainer>
   );
