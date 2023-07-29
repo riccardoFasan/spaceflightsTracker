@@ -1,8 +1,13 @@
 import { Animated, StyleSheet, Text, View } from 'react-native';
 import { Icon } from '../../lib';
 import { useEffect, useRef } from 'react';
-import { Color, FontSize, FontWeight, Spacing } from '../../styles';
-import { flexBoxStyles } from '../../styles/flexBoxStyles';
+import {
+  Color,
+  FontSize,
+  FontWeight,
+  Spacing,
+  flexBoxStyles,
+} from '../../styles';
 
 interface Props {
   focused: boolean;

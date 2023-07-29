@@ -7,8 +7,7 @@ import {
   View,
   TouchableHighlight,
 } from 'react-native';
-import { Color, Spacing } from '../../styles';
-import { typographyStyles } from '../../styles/typographyStyles';
+import { Color, Spacing, typographyStyles } from '../../styles';
 import { useNavigation } from '@react-navigation/native';
 
 interface Content {

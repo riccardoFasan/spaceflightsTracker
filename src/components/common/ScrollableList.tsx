@@ -10,7 +10,7 @@ import {
 import { uniqueBy } from '../../utilities';
 import { showErrorMessage } from '../../services';
 import { Color, Spacing, flexBoxStyles } from '../../styles';
-import { ListBatch } from '../../models/listBatchModel';
+import { ListBatch } from '../../models/';
 
 interface Props<T> {
   idKey: keyof T;

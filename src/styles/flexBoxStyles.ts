@@ -12,4 +12,10 @@ export const flexBoxStyles = StyleSheet.create({
     justifyContent: "space-around",
     alignItems: "center",
   },
+  rowStartCenter: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center",
+  },
 });

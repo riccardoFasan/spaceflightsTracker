@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { StyleSheet, Text, Pressable } from 'react-native';
-import { Color, Spacing, typographyStyles } from '../../styles';
-import { FontWeight } from '../../styles/typographyStyles';
+import { Color, Spacing, typographyStyles, FontWeight } from '../../styles';
 
 interface Props {
   title: string;

@@ -1,8 +1,7 @@
 import { Pressable, StyleSheet, View } from 'react-native';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { NavigationButton } from './NavigationButton';
-import { Color, Spacing } from '../../styles';
-import { flexBoxStyles } from '../../styles/flexBoxStyles';
+import { Color, Spacing, flexBoxStyles } from '../../styles';
 
 export const BottomNavigationBar = ({
   state,

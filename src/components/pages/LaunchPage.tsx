@@ -9,9 +9,9 @@ import {
 } from 'react-native';
 import { LaunchDetailed } from '../../models';
 import { getLaunch, showErrorMessage } from '../../services';
-import { Color, Spacing } from '../../styles';
-import { flexBoxStyles } from '../../styles/flexBoxStyles';
+import { Color, Spacing, flexBoxStyles } from '../../styles';
 import { DetailSection } from '../common';
+import { DeatailHeader } from '../layout';
 
 interface Props {
   navigation: any;
@@ -40,7 +40,7 @@ export const LaunchPage = ({ navigation, route }: Props) => {
   }
 
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
       {loading && (
         <View style={[styles.spinnerContainer]}>
           <ActivityIndicator size="large" color={Color.LightBlue} />
@@ -48,40 +48,43 @@ export const LaunchPage = ({ navigation, route }: Props) => {
       )}
       {!loading && launch && (
         <>
-          <Image
-            accessibilityLabel={launch.name}
-            alt={launch.name}
-            style={[styles.image, { height: imageHeight }]}
-            resizeMode={'cover'}
-            source={{ uri: launch.image }}
-            progressiveRenderingEnabled={true}
-          />
-          <View style={styles.body}>
-            {launch.mission && (
-              <DetailSection
-                title={launch.mission.name}
-                subtitle="mission"
-                text={launch.mission.description}
-              />
-            )}
-            {launch.launcher && (
-              <DetailSection
-                title={launch!.launcher!.name}
-                subtitle="rocket"
-                text={launch!.launcher!.description}
-              />
-            )}
-            {launch.launcher?.company && (
-              <DetailSection
-                title={launch.launcher.company.name}
-                subtitle={`manufacturer`}
-                text={launch.launcher.company.description}
-              />
-            )}
-          </View>
+          <DeatailHeader title={launch?.name || 'Launch'} />
+          <ScrollView>
+            <Image
+              accessibilityLabel={launch.name}
+              alt={launch.name}
+              style={[styles.image, { height: imageHeight }]}
+              resizeMode={'cover'}
+              source={{ uri: launch.image }}
+              progressiveRenderingEnabled={true}
+            />
+            <View style={styles.body}>
+              {launch.mission && (
+                <DetailSection
+                  title={launch.mission.name}
+                  subtitle="mission"
+                  text={launch.mission.description}
+                />
+              )}
+              {launch.launcher && (
+                <DetailSection
+                  title={launch!.launcher!.name}
+                  subtitle="rocket"
+                  text={launch!.launcher!.description}
+                />
+              )}
+              {launch.launcher?.company && (
+                <DetailSection
+                  title={launch.launcher.company.name}
+                  subtitle={`manufacturer`}
+                  text={launch.launcher.company.description}
+                />
+              )}
+            </View>
+          </ScrollView>
         </>
       )}
-    </ScrollView>
+    </View>
   );
 };
 
@@ -91,6 +94,9 @@ const windowheight = Math.round(dimensions.height);
 const bottomBarHeight = 100;
 
 const styles = StyleSheet.create({
+  header: {
+    backgroundColor: Color.Black,
+  },
   container: {
     backgroundColor: Color.Black,
     minHeight: '100%',
