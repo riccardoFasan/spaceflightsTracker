@@ -1,14 +1,13 @@
 import { Launch } from '../../../models';
-import { LaunchStatus } from '../../../enums';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 import { formatDateTime } from '../../../utilities';
-import { Color, Spacing } from '../../../styles';
-import { Countdown, ListCard } from '../../common';
+import { LaunchStatusBadge, ListCard } from '../../common';
 import {
   FontSize,
   FontWeight,
   typographyStyles,
-} from '../../../styles/typographyStyles';
+  Spacing,
+} from '../../../styles';
 
 interface Props {
   launch: Launch;
@@ -24,20 +23,7 @@ export const LaunchCard = ({ launch }: Props) => {
         imageRatio: 3,
         pageName: 'Launch',
       }}
-      badge={
-        launch.status === LaunchStatus.GoForLaunch && launch.window ? (
-          <View style={[styles.badge, styles.badgeTimer]}>
-            <Countdown
-              date={launch.window.start}
-              styles={[styles.badgeText, styles.badgeTextCountdown]}
-            />
-          </View>
-        ) : (
-          <View style={styles.badge}>
-            <Text style={styles.badgeText}>To Be Determined</Text>
-          </View>
-        )
-      }
+      badge={<LaunchStatusBadge launch={launch} />}
     >
       {launch.window && (
         <Text style={styles.cardText}>
@@ -62,29 +48,5 @@ const styles = StyleSheet.create({
     ...typographyStyles.paragraph,
     fontSize: FontSize.Small,
     fontWeight: FontWeight.Light,
-  },
-  badge: {
-    position: 'absolute',
-    backgroundColor: Color.Anthracite + 80,
-    padding: Spacing.Medium,
-    borderRadius: Spacing.Medium,
-    top: Spacing.Large,
-    left: Spacing.Large,
-  },
-  badgeText: {
-    color: Color.White,
-    textTransform: 'uppercase',
-    textAlign: 'center',
-    letterSpacing: 0.25,
-    fontWeight: FontWeight.Bold,
-    fontSize: FontSize.ExtraSmall,
-  },
-  badgeTextCountdown: {
-    fontSize: FontSize.Small,
-    fontWeight: FontWeight.ExtraBold,
-  },
-  badgeTimer: {
-    backgroundColor: Color.Red,
-    paddingVertical: 6,
   },
 });

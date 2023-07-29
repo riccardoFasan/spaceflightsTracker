@@ -10,7 +10,7 @@ import {
 import { LaunchDetailed } from '../../models';
 import { getLaunch, showErrorMessage } from '../../services';
 import { Color, Spacing, flexBoxStyles } from '../../styles';
-import { DetailSection } from '../common';
+import { DetailSection, LaunchStatusBadge } from '../common';
 import { DeatailHeader } from '../layout';
 
 interface Props {
@@ -58,6 +58,7 @@ export const LaunchPage = ({ navigation, route }: Props) => {
               source={{ uri: launch.image }}
               progressiveRenderingEnabled={true}
             />
+            <LaunchStatusBadge launch={launch} />
             <View style={styles.body}>
               {launch.mission && (
                 <DetailSection
@@ -112,8 +113,8 @@ const styles = StyleSheet.create({
     marginVertical: 0,
   },
   body: {
-    paddingHorizontal: Spacing.ExtraLarge,
-    marginBottom: Spacing.Large,
+    paddingHorizontal: Spacing.Large,
+    marginBottom: Spacing.ExtraExtraLarge,
     marginTop: Spacing.ExtraExtraLarge,
   },
 });

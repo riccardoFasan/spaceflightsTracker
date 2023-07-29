@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     backgroundColor: Color.Black,
     paddingTop: Spacing.Medium,
     paddingBottom: Spacing.Large,
-    paddingHorizontal: Spacing.Large,
+    paddingHorizontal: Spacing.Medium,
     borderBottomColor: Color.DarkAnthracite,
     borderBottomWidth: 1,
     ...flexBoxStyles.rowStartCenter,
