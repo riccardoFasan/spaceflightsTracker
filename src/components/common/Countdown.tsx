@@ -8,32 +8,35 @@ interface Props {
 }
 
 export const Countdown = ({ date, styles }: Props) => {
-  let interval: any;
-
   const [countdown, setCountdown] = useState<string>('');
   const [difference, setDifference] = useState<number>(0);
 
   useEffect(() => {
+    let interval: NodeJS.Timer;
+
+    function initCountdown(): void {
+      interval = setInterval(() => updateCountdown(), 10);
+    }
+
+    function updateCountdown(): void {
+      const newDifference: number = getDateDiffererce(date);
+      if (newDifference >= 0) {
+        setDifference(newDifference);
+        return;
+      }
+      setDifference(0);
+      clearInterval(interval);
+    }
+
     initCountdown();
-  }, []);
+
+    return () => clearInterval(interval);
+  }, [date]);
 
   useEffect(() => {
-    setCountdown(formatDateTmeDifference(difference));
+    const formattedDifference: string = formatDateTmeDifference(difference);
+    setCountdown(formattedDifference);
   }, [difference]);
-
-  function initCountdown(): void {
-    interval = setInterval(() => updateCountdown(), 10);
-  }
-
-  function updateCountdown(): void {
-    const newDifference: number = getDateDiffererce(date);
-    if (newDifference >= 0) {
-      setDifference(newDifference);
-      return;
-    }
-    setDifference(0);
-    if (interval) clearInterval(interval);
-  }
 
   return <Text style={styles}>T- {countdown}</Text>;
 };
