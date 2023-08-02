@@ -53,7 +53,7 @@ export const LaunchPage = ({ navigation, route }: Props) => {
             <Image
               accessibilityLabel={launch.name}
               alt={launch.name}
-              style={[styles.image, { height: imageHeight }]}
+              style={styles.image}
               resizeMode={'cover'}
               source={{ uri: launch.image }}
               progressiveRenderingEnabled={true}
@@ -90,7 +90,7 @@ export const LaunchPage = ({ navigation, route }: Props) => {
 };
 
 const dimensions = Dimensions.get('window');
-const imageHeight: number = Math.round(dimensions.height / 2.5);
+const imageHeight: number = Math.round(dimensions.height / 2.75);
 const windowheight = Math.round(dimensions.height);
 const bottomBarHeight = 100;
 
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: '100%',
-    borderRadius: Spacing.Medium,
+    height: imageHeight,
   },
   spinnerContainer: {
     ...flexBoxStyles.columnCenter,
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
     marginVertical: 0,
   },
   body: {
-    paddingHorizontal: Spacing.Large,
+    paddingHorizontal: Spacing.ExtraLarge,
     marginBottom: Spacing.ExtraExtraLarge,
     marginTop: Spacing.ExtraExtraLarge,
   },
