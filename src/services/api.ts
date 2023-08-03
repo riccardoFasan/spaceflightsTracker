@@ -13,7 +13,7 @@ export async function getLaunchesBatch(
   batch: number,
   bacthSize: number
 ): Promise<ListBatch<Launch>> {
-  const { limit, offset } = getOffetAndLimit(batch, bacthSize);
+  const { limit, offset } = getOffsetAndLimit(batch, bacthSize);
   const response: PaginatedListLl2DTO<LaunchCommonLl2DTO> = await getLaunches(
     limit,
     offset
@@ -34,7 +34,7 @@ export async function getArticlesBatch(
   batch: number,
   bacthSize: number
 ): Promise<ListBatch<Article>> {
-  const { limit, offset } = getOffetAndLimit(batch, bacthSize);
+  const { limit, offset } = getOffsetAndLimit(batch, bacthSize);
   const response: PaginatedListLl2DTO<ArticleSnDTO> = await getArticles(
     limit,
     offset
@@ -46,7 +46,7 @@ export async function getArticlesBatch(
   };
 }
 
-function getOffetAndLimit(
+function getOffsetAndLimit(
   batch: number,
   bacthSize: number
 ): { limit: number; offset: number } {

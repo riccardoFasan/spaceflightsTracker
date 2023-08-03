@@ -41,8 +41,9 @@ export const ScrollableList = <T,>({
     try {
       setLoading(true);
       const { results, totalCount } = await getBatch(batch, batchSize);
-      const totalItems: T[] = uniqueBy(idKey, [...items, ...results]);
-      setItems(totalItems);
+      setItems((currentItems) =>
+        uniqueBy(idKey, [...currentItems, ...results])
+      );
       setTotalCount(totalCount);
     } catch (e: unknown) {
       showErrorMessage('Error loading batch');

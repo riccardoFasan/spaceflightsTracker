@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, useMemo } from 'react';
 import {
   Dimensions,
   Image,
@@ -29,8 +29,9 @@ const dimensions = Dimensions.get('window');
 export const ListCard = ({ content, children, badge }: Props) => {
   const navigation = useNavigation<any>();
 
-  const imageHeight: number = Math.round(
-    dimensions.height / content.imageRatio
+  const imageHeight: number = useMemo(
+    () => Math.round(dimensions.height / content.imageRatio),
+    [content.imageRatio]
   );
 
   function navigateToDetailPage(): void {

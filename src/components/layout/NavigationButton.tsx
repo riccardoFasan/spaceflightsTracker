@@ -30,7 +30,7 @@ export const NavigationButton = ({ focused, name, icon }: Props) => {
       return;
     }
     unfocusAnimation.start();
-  }, [focused, focusAnimation]);
+  }, [focused]);
 
   function generateAnimation(value: number): Animated.CompositeAnimation {
     const config: Animated.TimingAnimationConfig = {
