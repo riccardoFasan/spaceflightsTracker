@@ -25,11 +25,8 @@ export const NavigationButton = ({ focused, name, icon }: Props) => {
   const unfocusAnimation: Animated.CompositeAnimation = generateAnimation(0);
 
   useEffect(() => {
-    if (focused) {
-      focusAnimation.start();
-      return;
-    }
-    unfocusAnimation.start();
+    const animation = focused ? focusAnimation : unfocusAnimation;
+    animation.start();
   }, [focused]);
 
   function generateAnimation(value: number): Animated.CompositeAnimation {

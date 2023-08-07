@@ -23,21 +23,24 @@ export const LaunchPage = ({ navigation, route }: Props) => {
   const [launch, setLaunch] = useState<LaunchDetailed>();
 
   useEffect(() => {
-    const id: string = route.params.id;
-    loadLaunch(id);
-  }, [route]);
+    const controller = getLaunch(route.params.id);
 
-  async function loadLaunch(id: string): Promise<void> {
-    try {
-      setLoading(true);
-      const launch: LaunchDetailed = await getLaunch(id);
-      setLaunch(launch);
-    } catch (e: unknown) {
-      showErrorMessage('Error loading launch');
-    } finally {
-      setLoading(false);
+    async function loadLaunch(): Promise<void> {
+      try {
+        setLoading(true);
+        const launch: LaunchDetailed = await controller.fetch();
+        setLaunch(launch);
+      } catch (e: unknown) {
+        showErrorMessage('Error loading launch');
+      } finally {
+        setLoading(false);
+      }
     }
-  }
+
+    loadLaunch();
+
+    return () => controller.cancel();
+  }, [route]);
 
   return (
     <View style={styles.container}>

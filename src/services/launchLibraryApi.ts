@@ -1,26 +1,38 @@
 import { AxiosResponse } from "axios";
 import { LaunchCommonLl2DTO, PaginatedListLl2DTO } from "../dtos";
 import axios from "axios";
+import { FetchController } from "../models/fetchControllerModel";
 
 const ENDPOINT: string = "https://lldev.thespacedevs.com/2.2.0";
 
-export async function getLaunches(
+export function getLaunches(
   limit: number,
   offset: number
-): Promise<PaginatedListLl2DTO<LaunchCommonLl2DTO>> {
+): FetchController<PaginatedListLl2DTO<LaunchCommonLl2DTO>> {
+  const abortController: AbortController = new AbortController();
   const params = { limit, offset, window_start__gte: new Date().toISOString() };
-  const response: AxiosResponse<PaginatedListLl2DTO<LaunchCommonLl2DTO>> =
-    await axios.get<PaginatedListLl2DTO<LaunchCommonLl2DTO>>(
-      `${ENDPOINT}/launch/upcoming/`,
-      { params }
-    );
-  return response.data;
+  const response: Promise<
+    AxiosResponse<PaginatedListLl2DTO<LaunchCommonLl2DTO>>
+  > = axios.get<PaginatedListLl2DTO<LaunchCommonLl2DTO>>(
+    `${ENDPOINT}/launch/upcoming/`,
+    { params, signal: abortController.signal }
+  );
+  return {
+    abort: () => abortController.abort(),
+    fetch: async () => (await response).data,
+  };
 }
 
-export async function getDetailedLaunch(
+export function getDetailedLaunch(
   id: string
-): Promise<LaunchCommonLl2DTO> {
-  const response: AxiosResponse<LaunchCommonLl2DTO> =
-    await axios.get<LaunchCommonLl2DTO>(`${ENDPOINT}/launch/${id}/`);
-  return response.data;
+): FetchController<LaunchCommonLl2DTO> {
+  const abortController: AbortController = new AbortController();
+  const response: Promise<AxiosResponse<LaunchCommonLl2DTO>> =
+    axios.get<LaunchCommonLl2DTO>(`${ENDPOINT}/launch/${id}/`, {
+      signal: abortController.signal,
+    });
+  return {
+    abort: () => abortController.abort(),
+    fetch: async () => (await response).data,
+  };
 }

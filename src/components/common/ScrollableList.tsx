@@ -11,12 +11,13 @@ import { uniqueBy } from '../../utilities';
 import { showErrorMessage } from '../../services';
 import { Color, Spacing, flexBoxStyles } from '../../styles';
 import { ListBatch } from '../../models/';
+import { ApiController } from '../../models/apiControllerModel';
 
 interface Props<T> {
   idKey: keyof T;
   batchSize: number;
   maxBatches: number;
-  getBatch: (batch: number, batchSize: number) => Promise<ListBatch<T>>;
+  getBatch: (batch: number, batchSize: number) => ApiController<ListBatch<T>>;
   getCard: (item: T) => ReactNode;
 }
 
@@ -34,24 +35,28 @@ export const ScrollableList = <T,>({
   const [totalCount, setTotalCount] = useState<number>(0);
 
   useEffect(() => {
-    loadBatch(currentBatch);
-  }, [currentBatch]);
+    const controller = getBatch(currentBatch, batchSize);
 
-  async function loadBatch(batch: number): Promise<void> {
-    try {
-      setLoading(true);
-      const { results, totalCount } = await getBatch(batch, batchSize);
-      setItems((currentItems) =>
-        uniqueBy(idKey, [...currentItems, ...results])
-      );
-      setTotalCount(totalCount);
-    } catch (e: unknown) {
-      showErrorMessage('Error loading batch');
-    } finally {
-      if (refreshing) setRefreshing(false);
-      setLoading(false);
+    async function loadBatch(): Promise<void> {
+      try {
+        setLoading(true);
+        const { results, totalCount } = await controller.fetch();
+        setItems((currentItems) =>
+          uniqueBy(idKey, [...currentItems, ...results])
+        );
+        setTotalCount(totalCount);
+      } catch (e: unknown) {
+        showErrorMessage('Error loading batch');
+      } finally {
+        if (refreshing) setRefreshing(false);
+        setLoading(false);
+      }
     }
-  }
+
+    loadBatch();
+
+    return () => controller.cancel();
+  }, [currentBatch, getBatch, batchSize, idKey]);
 
   function nextBatch(): void {
     if (canLoadNextBatch()) {

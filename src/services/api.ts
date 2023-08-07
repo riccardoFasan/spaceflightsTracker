@@ -8,49 +8,67 @@ import {
 } from ".";
 import { ArticleSnDTO, LaunchCommonLl2DTO, PaginatedListLl2DTO } from "../dtos";
 import { Article, Launch, LaunchDetailed, ListBatch } from "../models";
+import { ApiController } from "../models/apiControllerModel";
+import { FetchController } from "../models/fetchControllerModel";
 
-export async function getLaunchesBatch(
+export function getLaunchesBatch(
   batch: number,
-  bacthSize: number
-): Promise<ListBatch<Launch>> {
-  const { limit, offset } = getOffsetAndLimit(batch, bacthSize);
-  const response: PaginatedListLl2DTO<LaunchCommonLl2DTO> = await getLaunches(
-    limit,
-    offset
-  );
+  batchSize: number
+): ApiController<ListBatch<Launch>> {
+  const { limit, offset } = getOffsetAndLimit(batch, batchSize);
+  const controller: FetchController<PaginatedListLl2DTO<LaunchCommonLl2DTO>> =
+    getLaunches(limit, offset);
   return {
-    totalCount: response.count,
-    batch,
-    results: response.results.map((result) => mapLaunchLl2ToLaunch(result)),
+    cancel: controller.abort,
+    fetch: async () => {
+      const response = await controller.fetch();
+      return {
+        totalCount: response.count,
+        batch,
+        results: response.results.map((result) => mapLaunchLl2ToLaunch(result)),
+      };
+    },
   };
 }
 
-export async function getLaunch(id: string): Promise<LaunchDetailed> {
-  const response: LaunchCommonLl2DTO = await getDetailedLaunch(id);
-  return mapLaunchLl2ToDetailedLaunch(response);
+export function getLaunch(id: string): ApiController<LaunchDetailed> {
+  const controller: FetchController<LaunchCommonLl2DTO> = getDetailedLaunch(id);
+  return {
+    cancel: controller.abort,
+    fetch: async () => {
+      const response = await controller.fetch();
+      return mapLaunchLl2ToDetailedLaunch(response);
+    },
+  };
 }
 
-export async function getArticlesBatch(
+export function getArticlesBatch(
   batch: number,
-  bacthSize: number
-): Promise<ListBatch<Article>> {
-  const { limit, offset } = getOffsetAndLimit(batch, bacthSize);
-  const response: PaginatedListLl2DTO<ArticleSnDTO> = await getArticles(
-    limit,
-    offset
-  );
+  batchSize: number
+): ApiController<ListBatch<Article>> {
+  const { limit, offset } = getOffsetAndLimit(batch, batchSize);
+  const controller: FetchController<PaginatedListLl2DTO<ArticleSnDTO>> =
+    getArticles(limit, offset);
   return {
-    totalCount: response.count,
-    batch,
-    results: response.results.map((result) => mapArticleSnToArticle(result)),
+    cancel: controller.abort,
+    fetch: async () => {
+      const response = await controller.fetch();
+      return {
+        totalCount: response.count,
+        batch,
+        results: response.results.map((result) =>
+          mapArticleSnToArticle(result)
+        ),
+      };
+    },
   };
 }
 
 function getOffsetAndLimit(
   batch: number,
-  bacthSize: number
+  batchSize: number
 ): { limit: number; offset: number } {
-  const offset: number = (batch - 1) * bacthSize;
-  const limit: number = bacthSize;
+  const offset: number = (batch - 1) * batchSize;
+  const limit: number = batchSize;
   return { limit, offset };
 }
