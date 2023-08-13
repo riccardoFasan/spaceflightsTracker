@@ -1,4 +1,4 @@
-export enum MissionTypeLl2 {
+export enum MissionTypeLl2Enum {
   EarthScience = "Earth Science",
   PlanetaryScience = "Planetary Science",
   Astrophysics = "Astrophysics",

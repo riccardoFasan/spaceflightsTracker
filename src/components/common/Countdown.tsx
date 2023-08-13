@@ -31,7 +31,7 @@ export const Countdown = ({ date, styles }: Props) => {
     initCountdown();
 
     return () => clearInterval(interval);
-  }, [date]);
+  }, [date, countdown, difference]);
 
   useEffect(() => {
     const formattedDifference: string = formatDateTmeDifference(difference);

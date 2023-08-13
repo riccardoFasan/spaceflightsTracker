@@ -3,5 +3,6 @@ export * from "./ButtonSecondary";
 export * from "./ListCard";
 export * from "./Countdown";
 export * from "./DetailSection";
-export * from "./launchStatusBadge";
+export * from "./LaunchStatusBadge";
 export * from "./NewsCard";
+export * from "./CardBadge";

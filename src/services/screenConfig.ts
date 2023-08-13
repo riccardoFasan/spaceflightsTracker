@@ -4,7 +4,6 @@ import {
   LaunchPage,
   UpcomingsPage,
   NewsPage,
-  TestsList,
   EventsList,
 } from "../components";
 import { BlogsList } from "../components/features/blogs";
@@ -37,10 +36,6 @@ export const LAUNCH_SCREENS: ScreenConfig[] = [
   {
     name: "events",
     component: EventsList,
-  },
-  {
-    name: "tests",
-    component: TestsList,
   },
 ];
 

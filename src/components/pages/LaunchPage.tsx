@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
   spinnerContainer: {
     ...flexBoxStyles.columnCenter,
     marginBottom: bottomBarHeight / 3,
-    height: windowheight - bottomBarHeight,
+    height: windowheight,
     marginVertical: 0,
   },
   body: {

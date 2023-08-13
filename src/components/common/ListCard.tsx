@@ -1,14 +1,6 @@
 import { ReactNode, useMemo } from 'react';
-import {
-  Dimensions,
-  Image,
-  StyleSheet,
-  Text,
-  View,
-  TouchableHighlight,
-} from 'react-native';
+import { Dimensions, Image, StyleSheet, Text, View } from 'react-native';
 import { Color, Spacing, typographyStyles } from '../../styles';
-import { useNavigation } from '@react-navigation/native';
 
 interface Content {
   id: string;
@@ -27,37 +19,29 @@ interface Props {
 const dimensions = Dimensions.get('window');
 
 export const ListCard = ({ content, children, badge }: Props) => {
-  const navigation = useNavigation<any>();
-
   const imageHeight: number = useMemo(
     () => Math.round(dimensions.height / content.imageRatio),
     [content.imageRatio]
   );
 
-  function navigateToDetailPage(): void {
-    navigation.navigate(content.pageName, { id: content.id });
-  }
-
   return (
-    <TouchableHighlight onPress={() => navigateToDetailPage()}>
-      <View key={content.id} style={styles.card}>
-        {content.image && (
-          <Image
-            accessibilityLabel={content.title}
-            alt={content.title}
-            style={[styles.cardImage, { height: imageHeight }]}
-            resizeMode={'cover'}
-            source={{ uri: content.image }}
-            progressiveRenderingEnabled={true}
-          />
-        )}
-        {badge}
-        <View style={styles.cardBody}>
-          <Text style={styles.cardTitle}>{content.title}</Text>
-          {children}
-        </View>
+    <View key={content.id} style={styles.card}>
+      {content.image && (
+        <Image
+          accessibilityLabel={content.title}
+          alt={content.title}
+          style={[styles.cardImage, { height: imageHeight }]}
+          resizeMode={'cover'}
+          source={{ uri: content.image }}
+          progressiveRenderingEnabled={true}
+        />
+      )}
+      {badge}
+      <View style={styles.cardBody}>
+        <Text style={styles.cardTitle}>{content.title}</Text>
+        {children}
       </View>
-    </TouchableHighlight>
+    </View>
   );
 };
 

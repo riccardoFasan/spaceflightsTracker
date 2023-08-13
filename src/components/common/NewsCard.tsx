@@ -1,13 +1,12 @@
 import { StyleSheet, Text } from 'react-native';
 import { formatDateTime } from '../../utilities';
-import { Article } from '../../models';
+import { Article, Blog, Report } from '../../models';
 import { openURL } from '../../services';
-import { ButtonSecondary } from './ButtonSecondary';
+import { ButtonSecondary, ListCard } from '.';
 import { Spacing, typographyStyles, FontWeight } from '../../styles';
-import { ListCard } from './ListCard';
 
 interface Props {
-  article: Article;
+  article: Article | Report | Blog;
 }
 
 export const NewsCard = ({ article }: Props) => {

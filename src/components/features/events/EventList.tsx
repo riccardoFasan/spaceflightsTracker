@@ -1,7 +1,7 @@
-import { Launch } from '../../../models';
-import { getLaunchesBatch } from '../../../services';
+import { SpaceEvent } from '../../../models';
+import { getEventsBatch } from '../../../services';
 import { ScrollableList } from '../../common';
-import { LaunchCard } from '../launches/LaunchCard';
+import { SpaceEventCard } from '.';
 
 const MAX_BATCHES: number = 5;
 const BATCH_SIZE: number = 15;
@@ -12,8 +12,8 @@ export const EventsList = () => {
       idKey="id"
       batchSize={BATCH_SIZE}
       maxBatches={MAX_BATCHES}
-      getCard={(item: Launch) => <LaunchCard launch={item} />}
-      getBatch={getLaunchesBatch}
+      getCard={(item: SpaceEvent) => <SpaceEventCard event={item} />}
+      getBatch={getEventsBatch}
     />
   );
 };

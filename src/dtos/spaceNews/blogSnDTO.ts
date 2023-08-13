@@ -1,5 +1,3 @@
-import { EventSnDTO, LaunchSnDTO } from ".";
-
 export interface BlogSnDTO {
   id: number;
   title: string;
@@ -10,6 +8,4 @@ export interface BlogSnDTO {
   published_at: string;
   updated_at: string;
   featured?: boolean;
-  lauches: LaunchSnDTO[];
-  events: EventSnDTO[];
 }

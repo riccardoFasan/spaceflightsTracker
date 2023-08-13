@@ -11,3 +11,6 @@ export * from "./listBatchModel";
 export * from "./screenConfigModel";
 export * from "./reportModel";
 export * from "./blogModel";
+export * from "./spaceEventModel";
+export * from "./fetchControllerModel";
+export * from "./apiControllerModel";

@@ -1,6 +1,4 @@
 export * from "./articleSnDTO";
-export * from "./eventSnDTO";
-export * from "./launchSnDTO";
 export * from "./blogSnDTO";
 export * from "./paginatedListSnDTO";
 export * from "./reportSnDTO";

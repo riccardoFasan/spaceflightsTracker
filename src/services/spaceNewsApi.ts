@@ -5,7 +5,7 @@ import {
   PaginatedListSnDTO,
   ReportSnDTO,
 } from "../dtos";
-import { FetchController } from "../models/fetchControllerModel";
+import { FetchController } from "../models";
 
 const ENDPOINT: string = "https://api.spaceflightnewsapi.net/v4";
 

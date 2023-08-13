@@ -112,6 +112,7 @@ export const ScrollableList = <T,>({
 const dimensions = Dimensions.get('window');
 const windowheight = Math.round(dimensions.height);
 const bottomBarHeight = 100;
+const topBarHeight = 150;
 
 const styles = StyleSheet.create({
   container: {
@@ -128,7 +129,7 @@ const styles = StyleSheet.create({
     marginBottom: bottomBarHeight / 3,
   },
   spinnerContainerCentered: {
-    height: windowheight - bottomBarHeight,
+    height: windowheight - bottomBarHeight - topBarHeight,
     marginVertical: 0,
   },
 });
