@@ -2,7 +2,7 @@ import React from 'react';
 import { BottomNavigationBar, Header } from './components';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { SCREENS, shouldShowNavigation } from './services';
+import { ROOT_SCREENS, shouldShowNavigation } from './services';
 
 const Stack = createBottomTabNavigator();
 const Navigator = Stack.Navigator;
@@ -25,7 +25,7 @@ export const App = () => {
         }
         initialRouteName="Upcomings"
       >
-        {SCREENS.map((screen) => (
+        {ROOT_SCREENS.map((screen) => (
           <Screen
             options={{ title: screen.name }}
             name={screen.name}

@@ -23,7 +23,7 @@ export const LaunchCard = ({ launch }: Props) => {
         imageRatio: 3,
         pageName: 'Launch',
       }}
-      badge={<LaunchStatusBadge launch={launch} />}
+      // badge={<LaunchStatusBadge launch={launch} />}
     >
       {launch.window && (
         <Text style={styles.cardText}>

@@ -7,30 +7,27 @@ export const BottomNavigationBar = ({
   state,
   navigation,
 }: BottomTabBarProps) => {
-  function isFocused(index: number): boolean {
-    return state.index === index;
+  function isActive(routeName: string): boolean {
+    return state.routes[state.index].name === routeName;
   }
 
-  function navigateToUpcomings(): void {
-    navigation.navigate('Upcomings');
-  }
-
-  function navigateToNews(): void {
-    navigation.navigate('News');
+  function navigate(routeName: string): void {
+    if (isActive(routeName)) return;
+    navigation.navigate(routeName);
   }
 
   return (
     <View style={styles.container}>
-      <Pressable onPress={navigateToUpcomings}>
+      <Pressable onPress={() => navigate('Upcomings')}>
         <NavigationButton
-          focused={isFocused(0)}
+          focused={isActive('Upcomings')}
           name="upcomings"
           icon="rocket-3-start"
         />
       </Pressable>
-      <Pressable onPress={navigateToNews}>
+      <Pressable onPress={() => navigate('News')}>
         <NavigationButton
-          focused={isFocused(1)}
+          focused={isActive('News')}
           name="news"
           icon="globe-earth"
         />

@@ -21,10 +21,8 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: Color.Black,
     paddingTop: Spacing.Medium,
-    paddingBottom: Spacing.Large,
-    paddingHorizontal: Spacing.Large,
-    borderBottomColor: Color.DarkAnthracite,
-    borderBottomWidth: 1,
+    paddingBottom: Spacing.ExtraLarge,
+    paddingHorizontal: Spacing.ExtraLarge,
   },
   title: {
     ...typographyStyles.heading1,
