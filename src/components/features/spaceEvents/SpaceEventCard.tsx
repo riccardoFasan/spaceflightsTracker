@@ -4,8 +4,8 @@ import { openURL } from '../../../services';
 import { ListCard, ButtonSecondary } from '../../common';
 import { FontWeight, Spacing, typographyStyles } from '../../../styles';
 import { formatDateTime } from '../../../utilities';
-import { EventTypeBadge } from '.';
-import { EventType } from '../../../enums';
+import { SpaceEventBadge } from '.';
+import { SpaceEventType } from '../../../enums';
 
 interface Props {
   event: SpaceEvent;
@@ -13,7 +13,7 @@ interface Props {
 
 export const SpaceEventCard = ({ event }: Props) => {
   function openSpaceEvent(): void {
-    openURL(event.url);
+    if (event.url) openURL(event.url);
   }
 
   return (
@@ -26,17 +26,30 @@ export const SpaceEventCard = ({ event }: Props) => {
         pageName: 'Article',
       }}
       badge={
-        event.type !== EventType.Unknown && <EventTypeBadge type={event.type} />
+        event.type !== SpaceEventType.Unknown && (
+          <SpaceEventBadge type={event.type} />
+        )
       }
     >
       <Text style={styles.cardText}>On: {formatDateTime(event.date)}</Text>
-      <Text style={[styles.cardText, styles.cardTextSmall]} numberOfLines={2}>
+      <Text
+        style={[
+          styles.cardText,
+          {
+            fontWeight: FontWeight.Light,
+            marginBottom: event.url ? Spacing.ExtraLarge : 0,
+          },
+        ]}
+        numberOfLines={2}
+      >
         {event.description}
       </Text>
-      <ButtonSecondary
-        title="Read more"
-        onPress={openSpaceEvent}
-      ></ButtonSecondary>
+      {event.url && (
+        <ButtonSecondary
+          title="Read more"
+          onPress={openSpaceEvent}
+        ></ButtonSecondary>
+      )}
     </ListCard>
   );
 };
@@ -46,9 +59,5 @@ const styles = StyleSheet.create({
     ...typographyStyles.paragraph,
     paddingTop: Spacing.Small,
     fontWeight: FontWeight.Bold,
-  },
-  cardTextSmall: {
-    fontWeight: FontWeight.Light,
-    marginBottom: Spacing.ExtraLarge,
   },
 });

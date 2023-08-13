@@ -11,7 +11,7 @@ interface Props {
 
 export const NewsCard = ({ article }: Props) => {
   function openArticle(): void {
-    openURL(article.url);
+    if (article.url) openURL(article.url);
   }
 
   return (
@@ -25,13 +25,24 @@ export const NewsCard = ({ article }: Props) => {
       }}
     >
       <Text style={styles.cardText}>{formatDateTime(article.publishedAt)}</Text>
-      <Text style={[styles.cardText, styles.cardTextSmall]} numberOfLines={2}>
+      <Text
+        style={[
+          styles.cardText,
+          {
+            fontWeight: FontWeight.Light,
+            marginBottom: article.url ? Spacing.ExtraLarge : 0,
+          },
+        ]}
+        numberOfLines={2}
+      >
         {article.summary}
       </Text>
-      <ButtonSecondary
-        title="Read more"
-        onPress={openArticle}
-      ></ButtonSecondary>
+      {article.url && (
+        <ButtonSecondary
+          title="Read more"
+          onPress={openArticle}
+        ></ButtonSecondary>
+      )}
     </ListCard>
   );
 };
@@ -41,9 +52,5 @@ const styles = StyleSheet.create({
     ...typographyStyles.paragraph,
     paddingTop: Spacing.Small,
     fontWeight: FontWeight.Bold,
-  },
-  cardTextSmall: {
-    fontWeight: FontWeight.Light,
-    marginBottom: Spacing.ExtraLarge,
   },
 });

@@ -1,5 +1,5 @@
 import {
-  SpaceStationStatusLl2Enum,
+  SpaceStationStatusLl2,
   AgencyMiniForSpaceStationLl2DTO,
   OrbitLl2DTO,
   ExpeditionForSpaceStationLl2DTO,
@@ -9,7 +9,7 @@ export interface SpaceStationLl2DTO {
   id: number;
   url: string;
   name: string;
-  status: SpaceStationStatusLl2Enum;
+  status: SpaceStationStatusLl2;
   type: {
     id: number;
     name: string;

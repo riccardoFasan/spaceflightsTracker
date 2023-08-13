@@ -1,4 +1,4 @@
-import { EventType } from "../enums";
+import { SpaceEventType } from "../enums";
 
 export interface SpaceEvent {
   id: string;
@@ -6,6 +6,6 @@ export interface SpaceEvent {
   description: string;
   image: string;
   date: string;
-  type: EventType;
-  url: string;
+  type: SpaceEventType;
+  url?: string;
 }

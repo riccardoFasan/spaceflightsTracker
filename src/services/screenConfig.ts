@@ -4,7 +4,7 @@ import {
   LaunchPage,
   UpcomingsPage,
   NewsPage,
-  EventsList,
+  SpaceEventsList,
 } from "../components";
 import { BlogsList } from "../components/features/blogs";
 import { ReportsList } from "../components/features/reports";
@@ -35,7 +35,7 @@ export const LAUNCH_SCREENS: ScreenConfig[] = [
   },
   {
     name: "events",
-    component: EventsList,
+    component: SpaceEventsList,
   },
 ];
 

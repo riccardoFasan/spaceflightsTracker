@@ -6,7 +6,7 @@ import { SpaceEventCard } from '.';
 const MAX_BATCHES: number = 5;
 const BATCH_SIZE: number = 15;
 
-export const EventsList = () => {
+export const SpaceEventsList = () => {
   return (
     <ScrollableList
       idKey="id"

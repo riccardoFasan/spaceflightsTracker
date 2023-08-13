@@ -1,4 +1,4 @@
-export enum EventType {
+export enum SpaceEventType {
   Unknown = "UNKNOWN",
   Docking = "DOCKING",
   EVA = "EVA",

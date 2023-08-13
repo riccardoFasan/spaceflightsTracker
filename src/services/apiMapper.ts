@@ -2,7 +2,7 @@ import {
   AgencyCommonLl2DTO,
   ArticleSnDTO,
   BlogSnDTO,
-  EventLl2DTO,
+  SpaceEventLl2DTO,
   LaunchCommonLl2DTO,
   LauncherConfigDetailedLl2DTO,
   LocationLl2DTO,
@@ -11,7 +11,7 @@ import {
   ReportSnDTO,
   RocketCommonLl2DTO,
 } from "../dtos";
-import { EventType, LaunchStatus, MissionType, Orbit } from "../enums";
+import { SpaceEventType, LaunchStatus, MissionType, Orbit } from "../enums";
 import {
   Article,
   LaunchWindow,
@@ -65,14 +65,14 @@ export function mapBlogSnToBlog(blogSn: BlogSnDTO): Blog {
   return mapNewsSnToNews(blogSn);
 }
 
-export function mapEventLl2ToEvent(eventLl2: EventLl2DTO): SpaceEvent {
+export function mapEventLl2ToEvent(eventLl2: SpaceEventLl2DTO): SpaceEvent {
   return {
     id: eventLl2.id.toString(),
     name: eventLl2.name,
     description: eventLl2.description,
     image: eventLl2.feature_image,
     date: eventLl2.date,
-    type: mapSpaceEventType(eventLl2.type.name),
+    type: mapSpaceSpaceEventType(eventLl2.type.name),
     url: eventLl2.news_url,
   };
 }
@@ -150,17 +150,17 @@ function mapMissionType(type: string | undefined): MissionType {
   return MissionType.Unknown;
 }
 
-function mapSpaceEventType(type: string): EventType {
-  if (type === "Docking") return EventType.Docking;
-  if (type === "EVA") return EventType.EVA;
-  if (type === "Static Fire") return EventType.StaticFire;
-  if (type === "Spacecraft Event") return EventType.SpacecraftEvent;
-  if (type === "Moon Landing") return EventType.MoonLanding;
-  if (type === "Abort Test") return EventType.AbortTest;
-  if (type === "Spacecraft Capture") return EventType.SpacecraftCapture;
-  if (type === "Celestial Event") return EventType.CelestialEvent;
-  if (type === "Test Flight") return EventType.TestFlight;
-  return EventType.Unknown;
+function mapSpaceSpaceEventType(type: string): SpaceEventType {
+  if (type === "Docking") return SpaceEventType.Docking;
+  if (type === "EVA") return SpaceEventType.EVA;
+  if (type === "Static Fire") return SpaceEventType.StaticFire;
+  if (type === "Spacecraft Event") return SpaceEventType.SpacecraftEvent;
+  if (type === "Moon Landing") return SpaceEventType.MoonLanding;
+  if (type === "Abort Test") return SpaceEventType.AbortTest;
+  if (type === "Spacecraft Capture") return SpaceEventType.SpacecraftCapture;
+  if (type === "Celestial Event") return SpaceEventType.CelestialEvent;
+  if (type === "Test Flight") return SpaceEventType.TestFlight;
+  return SpaceEventType.Unknown;
 }
 
 function mapOrbit(id: number): Orbit {

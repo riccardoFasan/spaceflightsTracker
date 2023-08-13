@@ -1,7 +1,5 @@
 import { AgencyTypeLl2 } from ".";
 
-// same of AgencyDetailedLl2DTO but without launcher_list and spacecraft_list (prevent circular dependency I think)
-
 export interface AgencyCommonLl2DTO {
   id: string;
   url: string;

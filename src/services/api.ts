@@ -4,12 +4,12 @@ import {
   getArticles,
   getReports,
   getBlogs,
+  getSpaceEvents,
   mapArticleSnToArticle,
   mapReportSnToReport,
   mapBlogSnToBlog,
   mapLaunchLl2ToLaunch,
   mapLaunchLl2ToDetailedLaunch,
-  getSpaceEvents,
   mapEventLl2ToEvent,
 } from ".";
 import {
@@ -68,17 +68,6 @@ export function getEventsBatch(
         batch,
         results: response.results.map((result) => mapEventLl2ToEvent(result)),
       };
-    },
-  };
-}
-
-export function getLaunch(id: string): ApiController<LaunchDetailed> {
-  const controller: FetchController<LaunchCommonLl2DTO> = getDetailedLaunch(id);
-  return {
-    cancel: controller.abort,
-    fetch: async () => {
-      const response = await controller.fetch();
-      return mapLaunchLl2ToDetailedLaunch(response);
     },
   };
 }
@@ -143,6 +132,17 @@ export function getBlogsBatch(
         batch,
         results: response.results.map((result) => mapBlogSnToBlog(result)),
       };
+    },
+  };
+}
+
+export function getLaunch(id: string): ApiController<LaunchDetailed> {
+  const controller: FetchController<LaunchCommonLl2DTO> = getDetailedLaunch(id);
+  return {
+    cancel: controller.abort,
+    fetch: async () => {
+      const response = await controller.fetch();
+      return mapLaunchLl2ToDetailedLaunch(response);
     },
   };
 }

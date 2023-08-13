@@ -1,10 +1,10 @@
 import { AgencyCommonLl2DTO } from "./agencyCommonLl2DTO";
-import { EventTypeLl2Enum } from "./eventTypeLl2Enum";
+import { SpaceEventTypeLl2 } from "./SpaceEventTypeLl2";
 import { LaunchCommonLl2DTO } from "./launchCommonLl2DTO";
 import { ProgramLl2DTO } from "./programLl2DTO";
 import { SpaceStationLl2DTO } from "./spaceStationLl2DTO";
 
-export interface EventLl2DTO {
+export interface SpaceEventLl2DTO {
   id: number;
   url: string;
   slug: string;
@@ -12,12 +12,12 @@ export interface EventLl2DTO {
   updates: object[];
   type: {
     id: number;
-    name: EventTypeLl2Enum;
+    name: SpaceEventTypeLl2;
   };
   description: string;
   webcast_live: boolean;
   location: string;
-  news_url: string;
+  news_url?: string;
   video_url: string;
   feature_image: string;
   date: string;
