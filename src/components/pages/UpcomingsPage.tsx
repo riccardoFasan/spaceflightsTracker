@@ -3,17 +3,22 @@ import { LAUNCH_SCREENS } from '../../services';
 import { TopTabBar } from '../layout';
 
 const Tab = createMaterialTopTabNavigator();
+const Navigator = Tab.Navigator;
+const Screen = Tab.Screen;
 
 export const UpcomingsPage = () => {
   return (
-    <Tab.Navigator tabBar={(props) => <TopTabBar {...props} />}>
+    <Navigator
+      initialRouteName="Launches"
+      tabBar={(props) => <TopTabBar {...props} />}
+    >
       {LAUNCH_SCREENS.map((screen) => (
-        <Tab.Screen
+        <Screen
           key={screen.name}
           name={screen.name}
           component={screen.component}
         />
       ))}
-    </Tab.Navigator>
+    </Navigator>
   );
 };

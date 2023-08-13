@@ -4,7 +4,11 @@ import {
   LaunchPage,
   UpcomingsPage,
   NewsPage,
+  TestsList,
+  EventsList,
 } from "../components";
+import { BlogsList } from "../components/features/blogs";
+import { ReportsList } from "../components/features/reports";
 import { ScreenConfig, RootScreenConfig } from "../models";
 
 export const ROOT_SCREENS: RootScreenConfig[] = [
@@ -32,11 +36,11 @@ export const LAUNCH_SCREENS: ScreenConfig[] = [
   },
   {
     name: "events",
-    component: LaunchesList,
+    component: EventsList,
   },
   {
     name: "tests",
-    component: LaunchesList,
+    component: TestsList,
   },
 ];
 
@@ -44,6 +48,14 @@ export const NEWS_SCREENS: ScreenConfig[] = [
   {
     name: "Articles",
     component: ArticlesList,
+  },
+  {
+    name: "Blogs",
+    component: BlogsList,
+  },
+  {
+    name: "ISS reports",
+    component: ReportsList,
   },
 ];
 

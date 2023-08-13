@@ -1,1 +1,1 @@
-export * from "./eventList";
+export * from "./EventList";

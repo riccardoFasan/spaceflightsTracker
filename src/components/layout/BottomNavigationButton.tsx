@@ -8,6 +8,7 @@ import {
   Spacing,
   flexBoxStyles,
 } from '../../styles';
+import { generateNumericAnimations } from '../../utilities';
 
 interface Props {
   focused: boolean;
@@ -15,31 +16,21 @@ interface Props {
   icon: string;
 }
 
-export const NavigationButton = ({ focused, name, icon }: Props) => {
+export const BottomNavigationButton = ({ focused, name, icon }: Props) => {
   const backgroundScale = useRef<Animated.Value>(new Animated.Value(0)).current;
   const backgroundOpacity = useRef<Animated.Value>(
     new Animated.Value(0)
   ).current;
 
-  const focusAnimation: Animated.CompositeAnimation = generateAnimation(1);
-  const unfocusAnimation: Animated.CompositeAnimation = generateAnimation(0);
+  const [focusAnimation, unfocusAnimation]: [
+    Animated.CompositeAnimation,
+    Animated.CompositeAnimation
+  ] = generateNumericAnimations(backgroundScale, backgroundOpacity);
 
   useEffect(() => {
     const animation = focused ? focusAnimation : unfocusAnimation;
     animation.start();
   }, [focused]);
-
-  function generateAnimation(value: number): Animated.CompositeAnimation {
-    const config: Animated.TimingAnimationConfig = {
-      toValue: value,
-      duration: 200,
-      useNativeDriver: true,
-    };
-    return Animated.parallel([
-      Animated.timing(backgroundScale, config),
-      Animated.timing(backgroundOpacity, config),
-    ]);
-  }
 
   return (
     <View style={styles.container}>
@@ -47,8 +38,10 @@ export const NavigationButton = ({ focused, name, icon }: Props) => {
         <Animated.View
           style={[
             styles.iconBackground,
-            { transform: [{ scaleX: backgroundScale }] },
-            { opacity: backgroundOpacity },
+            {
+              transform: [{ scaleX: backgroundScale }],
+              opacity: backgroundOpacity,
+            },
           ]}
         ></Animated.View>
         <Icon style={[styles.icon, focused && styles.iconActive]} name={icon} />

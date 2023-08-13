@@ -1,6 +1,6 @@
 import { Pressable, StyleSheet, View } from 'react-native';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
-import { NavigationButton } from './NavigationButton';
+import { BottomNavigationButton } from '.';
 import { Color, Spacing, flexBoxStyles } from '../../styles';
 
 export const BottomNavigationBar = ({
@@ -19,14 +19,14 @@ export const BottomNavigationBar = ({
   return (
     <View style={styles.container}>
       <Pressable onPress={() => navigate('Upcomings')}>
-        <NavigationButton
+        <BottomNavigationButton
           focused={isActive('Upcomings')}
           name="upcomings"
           icon="rocket-3-start"
         />
       </Pressable>
       <Pressable onPress={() => navigate('News')}>
-        <NavigationButton
+        <BottomNavigationButton
           focused={isActive('News')}
           name="news"
           icon="globe-earth"
@@ -38,8 +38,8 @@ export const BottomNavigationBar = ({
 
 const styles = StyleSheet.create({
   container: {
+    ...flexBoxStyles.rowAround,
     paddingVertical: Spacing.Large,
     backgroundColor: Color.DarkAnthracite,
-    ...flexBoxStyles.rowAround,
   },
 });
