@@ -9,3 +9,5 @@ export * from "./articleModel";
 export * from "./locationModel";
 export * from "./listBatchModel";
 export * from "./screenConfigModel";
+export * from "./reportModel";
+export * from "./blogModel";

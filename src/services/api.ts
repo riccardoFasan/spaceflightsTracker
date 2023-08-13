@@ -2,12 +2,29 @@ import {
   getLaunches,
   getDetailedLaunch,
   getArticles,
+  getReports,
+  getBlogs,
   mapArticleSnToArticle,
+  mapReportSnToReport,
+  mapBlogSnToBlog,
   mapLaunchLl2ToLaunch,
   mapLaunchLl2ToDetailedLaunch,
 } from ".";
-import { ArticleSnDTO, LaunchCommonLl2DTO, PaginatedListLl2DTO } from "../dtos";
-import { Article, Launch, LaunchDetailed, ListBatch } from "../models";
+import {
+  ArticleSnDTO,
+  BlogSnDTO,
+  LaunchCommonLl2DTO,
+  PaginatedListLl2DTO,
+  ReportSnDTO,
+} from "../dtos";
+import {
+  Article,
+  Blog,
+  Launch,
+  LaunchDetailed,
+  ListBatch,
+  Report,
+} from "../models";
 import { ApiController } from "../models/apiControllerModel";
 import { FetchController } from "../models/fetchControllerModel";
 
@@ -59,6 +76,48 @@ export function getArticlesBatch(
         results: response.results.map((result) =>
           mapArticleSnToArticle(result)
         ),
+      };
+    },
+  };
+}
+
+export function getReportsBatch(
+  batch: number,
+  batchSize: number
+): ApiController<ListBatch<Report>> {
+  const { limit, offset } = getOffsetAndLimit(batch, batchSize);
+  const controller: FetchController<PaginatedListLl2DTO<ReportSnDTO>> =
+    getReports(limit, offset);
+  return {
+    cancel: controller.abort,
+    fetch: async () => {
+      const response = await controller.fetch();
+      return {
+        totalCount: response.count,
+        batch,
+        results: response.results.map((result) => mapReportSnToReport(result)),
+      };
+    },
+  };
+}
+
+export function getBlogsBatch(
+  batch: number,
+  batchSize: number
+): ApiController<ListBatch<Blog>> {
+  const { limit, offset } = getOffsetAndLimit(batch, batchSize);
+  const controller: FetchController<PaginatedListLl2DTO<BlogSnDTO>> = getBlogs(
+    limit,
+    offset
+  );
+  return {
+    cancel: controller.abort,
+    fetch: async () => {
+      const response = await controller.fetch();
+      return {
+        totalCount: response.count,
+        batch,
+        results: response.results.map((result) => mapBlogSnToBlog(result)),
       };
     },
   };

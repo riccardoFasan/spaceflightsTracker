@@ -1,11 +1,13 @@
 import {
   AgencyCommonLl2DTO,
   ArticleSnDTO,
+  BlogSnDTO,
   LaunchCommonLl2DTO,
   LauncherConfigDetailedLl2DTO,
   LocationLl2DTO,
   MissionLl2DTO,
   PadLl2DTO,
+  ReportSnDTO,
   RocketCommonLl2DTO,
 } from "../dtos";
 import { LaunchStatus, MissionType, Orbit } from "../enums";
@@ -19,6 +21,8 @@ import {
   Mission,
   Launcher,
   Company,
+  Report,
+  Blog,
 } from "../models";
 
 export function mapLaunchLl2ToLaunch(launchLl2: LaunchCommonLl2DTO): Launch {
@@ -48,13 +52,27 @@ export function mapLaunchLl2ToDetailedLaunch(
 }
 
 export function mapArticleSnToArticle(articleSn: ArticleSnDTO): Article {
+  return mapNewsSnToNews(articleSn);
+}
+
+export function mapReportSnToReport(reportSn: ReportSnDTO): Report {
+  return mapNewsSnToNews(reportSn);
+}
+
+export function mapBlogSnToBlog(blogSn: BlogSnDTO): Blog {
+  return mapNewsSnToNews(blogSn);
+}
+
+function mapNewsSnToNews(
+  newsSn: ArticleSnDTO | ReportSnDTO | BlogSnDTO
+): Article | Report | Blog {
   return {
-    id: articleSn.id.toString(),
-    title: articleSn.title,
-    url: articleSn.url,
-    image: articleSn.image_url,
-    summary: articleSn.summary,
-    publishedAt: articleSn.published_at,
+    id: newsSn.id.toString(),
+    title: newsSn.title,
+    url: newsSn.url,
+    image: newsSn.image_url,
+    summary: newsSn.summary,
+    publishedAt: newsSn.published_at,
   };
 }
 

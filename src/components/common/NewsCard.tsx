@@ -1,17 +1,16 @@
 import { StyleSheet, Text } from 'react-native';
-import { formatDateTime } from '../../../utilities';
-import { Article } from '../../../models';
-import { openURL } from '../../../services';
-import { ButtonSecondary } from '../../common/ButtonSecondary';
-import { Spacing } from '../../../styles';
-import { ListCard } from '../../common';
-import { typographyStyles, FontWeight } from '../../../styles/typographyStyles';
+import { formatDateTime } from '../../utilities';
+import { Article } from '../../models';
+import { openURL } from '../../services';
+import { ButtonSecondary } from './ButtonSecondary';
+import { Spacing, typographyStyles, FontWeight } from '../../styles';
+import { ListCard } from './ListCard';
 
 interface Props {
   article: Article;
 }
 
-export const BlogCard = ({ article }: Props) => {
+export const NewsCard = ({ article }: Props) => {
   function openArticle(): void {
     openURL(article.url);
   }
