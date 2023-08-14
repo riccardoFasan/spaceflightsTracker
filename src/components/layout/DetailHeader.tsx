@@ -1,8 +1,8 @@
-import { View, Text, StyleSheet, TouchableHighlight } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { Color, Spacing, flexBoxStyles, typographyStyles } from '../../styles';
 import { StatusBar } from 'react-native';
-import { Icon } from '../../lib';
 import { useNavigation } from '@react-navigation/native';
+import { IconButton } from '../common';
 
 interface Props {
   title: string;
@@ -19,9 +19,7 @@ export const DeatailHeader = ({ title }: Props) => {
     <>
       <StatusBar animated={true} backgroundColor={Color.Black} />
       <View style={styles.container}>
-        <TouchableHighlight onPress={back}>
-          <Icon style={styles.icon} name="chevron-left" />
-        </TouchableHighlight>
+        <IconButton icon="arrow-left" onPress={back} />
         <Text style={styles.title}>{title}</Text>
       </View>
     </>
@@ -37,12 +35,6 @@ const styles = StyleSheet.create({
     borderBottomColor: Color.DarkAnthracite,
     borderBottomWidth: 1,
     ...flexBoxStyles.rowStartCenter,
-  },
-  icon: {
-    textAlign: 'center',
-    fontSize: 28,
-    color: Color.White,
-    marginRight: Spacing.Small,
   },
   title: {
     ...typographyStyles.label,

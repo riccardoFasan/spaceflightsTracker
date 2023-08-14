@@ -22,14 +22,16 @@ export const BottomNavigationBar = ({
         <BottomNavigationButton
           focused={isActive('Upcomings')}
           name="upcomings"
-          icon="rocket-3-start"
+          icon="rocket-launch-outline"
+          iconActive="rocket-launch"
         />
       </Pressable>
       <Pressable onPress={() => navigate('News')}>
         <BottomNavigationButton
           focused={isActive('News')}
           name="news"
-          icon="globe-earth"
+          icon="newspaper-variant-multiple-outline"
+          iconActive="newspaper-variant-multiple"
         />
       </Pressable>
     </View>

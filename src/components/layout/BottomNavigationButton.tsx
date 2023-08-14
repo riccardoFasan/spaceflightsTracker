@@ -1,6 +1,5 @@
 import { Animated, StyleSheet, Text, View } from 'react-native';
-import { Icon } from '../../lib';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import {
   Color,
   FontSize,
@@ -8,28 +7,27 @@ import {
   Spacing,
   flexBoxStyles,
 } from '../../styles';
-import { generateNumericAnimations } from '../../utilities';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useFocusAnimation } from '../../hooks';
 
 interface Props {
   focused: boolean;
   name: string;
   icon: string;
+  iconActive: string;
 }
 
-export const BottomNavigationButton = ({ focused, name, icon }: Props) => {
-  const backgroundScale = useRef<Animated.Value>(new Animated.Value(0)).current;
-  const backgroundOpacity = useRef<Animated.Value>(
-    new Animated.Value(0)
-  ).current;
-
-  const [focusAnimation, unfocusAnimation]: [
-    Animated.CompositeAnimation,
-    Animated.CompositeAnimation
-  ] = generateNumericAnimations(backgroundScale, backgroundOpacity);
+export const BottomNavigationButton = ({
+  focused,
+  name,
+  icon,
+  iconActive,
+}: Props) => {
+  const [[backgroundScale, backgroundOpacity], toogleAnimation] =
+    useFocusAnimation(0, 0);
 
   useEffect(() => {
-    const animation = focused ? focusAnimation : unfocusAnimation;
-    animation.start();
+    toogleAnimation(focused);
   }, [focused]);
 
   return (
@@ -44,7 +42,10 @@ export const BottomNavigationButton = ({ focused, name, icon }: Props) => {
             },
           ]}
         ></Animated.View>
-        <Icon style={[styles.icon, focused && styles.iconActive]} name={icon} />
+        <Icon
+          style={[styles.icon, focused && styles.iconActive]}
+          name={focused ? iconActive : icon}
+        />
       </View>
       <Text style={[styles.text, focused && styles.textActive]}>{name}</Text>
     </View>

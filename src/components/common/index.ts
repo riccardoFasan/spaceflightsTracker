@@ -6,3 +6,4 @@ export * from "./DetailSection";
 export * from "./LaunchStatusBadge";
 export * from "./NewsCard";
 export * from "./CardBadge";
+export * from "./IconButton";

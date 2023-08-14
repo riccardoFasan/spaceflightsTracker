@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import { StyleSheet, Text, Pressable } from 'react-native';
 import { Color, Spacing, typographyStyles, FontWeight } from '../../styles';
+import { useActive } from '../../hooks';
 
 interface Props {
   title: string;
@@ -8,18 +8,14 @@ interface Props {
 }
 
 export const ButtonSecondary = ({ title, onPress }: Props) => {
-  const [active, setActive] = useState<boolean>(false);
-
-  function onPressIn(): void {
-    setActive(true);
-  }
-
-  function onPressOut(): void {
-    setActive(false);
-  }
+  const [active, toogleActive] = useActive(false);
 
   return (
-    <Pressable onPress={onPress} onPressIn={onPressIn} onPressOut={onPressOut}>
+    <Pressable
+      onPress={onPress}
+      onPressIn={toogleActive}
+      onPressOut={toogleActive}
+    >
       <Text style={[styles.button, active && styles.buttonActive]}>
         {title}
       </Text>

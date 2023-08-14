@@ -6,8 +6,8 @@ import {
   typographyStyles,
   flexBoxStyles,
 } from '../../styles';
-import { useEffect, useRef } from 'react';
-import { generateNumericAnimations } from '../../utilities';
+import { useEffect } from 'react';
+import { useFocusAnimation } from '../../hooks';
 
 interface Props {
   name: string;
@@ -15,19 +15,11 @@ interface Props {
 }
 
 export const TopTapBarButton = ({ name, active }: Props) => {
-  const backgroundScale = useRef<Animated.Value>(new Animated.Value(0)).current;
-  const backgroundOpacity = useRef<Animated.Value>(
-    new Animated.Value(0)
-  ).current;
-
-  const [focusAnimation, unfocusAnimation]: [
-    Animated.CompositeAnimation,
-    Animated.CompositeAnimation
-  ] = generateNumericAnimations(backgroundScale, backgroundOpacity);
+  const [[backgroundScale, backgroundOpacity], toogleAnimation] =
+    useFocusAnimation(0, 0);
 
   useEffect(() => {
-    const animation = active ? focusAnimation : unfocusAnimation;
-    animation.start();
+    toogleAnimation(active);
   }, [active]);
 
   return (
@@ -37,8 +29,8 @@ export const TopTapBarButton = ({ name, active }: Props) => {
         style={[
           styles.tabIndicator,
           {
-            opacity: backgroundOpacity,
             transform: [{ scaleX: backgroundScale }],
+            opacity: backgroundOpacity,
           },
         ]}
       />
