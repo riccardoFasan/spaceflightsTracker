@@ -1,6 +1,13 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { ScheduledNotification } from '../models';
 import { NotificationTarget } from '../enums';
+import {
+  cancelNotification,
+  getNotifications,
+  scheduleNotification,
+  setUpNotifications,
+  showNotificationMessage,
+} from '../services';
 
 interface ContextType {
   get: (
@@ -9,7 +16,9 @@ interface ContextType {
   ) => Promise<ScheduledNotification | null>;
   schedule: (
     targetId: string,
+    targetName: string,
     target: NotificationTarget,
+    eventDate: Date,
   ) => Promise<ScheduledNotification>;
   cancel: (notification: ScheduledNotification) => Promise<void>;
 }
@@ -34,6 +43,15 @@ export const NotificationProvider = ({ children }: Props) => {
     [],
   );
 
+  useEffect(() => {
+    loadNotifications();
+  }, []);
+
+  async function loadNotifications(): Promise<void> {
+    await setUpNotifications();
+    setNotifications(await getNotifications());
+  }
+
   async function get(
     targetId: string,
     target: NotificationTarget,
@@ -47,18 +65,27 @@ export const NotificationProvider = ({ children }: Props) => {
 
   async function schedule(
     targetId: string,
+    targetName: string,
     target: NotificationTarget,
+    eventDate: Date,
   ): Promise<ScheduledNotification> {
-    const notification: ScheduledNotification = {
-      id: targetId,
-      targetId,
+    const MS_PER_MINUTE: number = 60000;
+    const fireDate = new Date(eventDate.getTime() - 30 * MS_PER_MINUTE);
+
+    const notification: ScheduledNotification = await scheduleNotification(
+      { id: targetId, name: targetName, fireDate },
       target,
-    };
+    );
+
     setNotifications((notifications) => [...notifications, notification]);
+
+    showNotificationMessage(fireDate);
+
     return notification;
   }
 
   async function cancel(notification: ScheduledNotification): Promise<void> {
+    await cancelNotification(notification);
     setNotifications((notifications) =>
       notifications.filter((n) => n.id !== notification.id),
     );

@@ -58,7 +58,15 @@ export const NotificationButton = ({ launch }: Props) => {
   async function scheduleNotification(): Promise<void> {
     if (notification) return;
     setLoading(true);
-    await setNotification(await schedule(launch.id, NotificationTarget.Launch));
+    const startDate: Date = new Date(launch.window!.start!);
+    await setNotification(
+      await schedule(
+        launch.id,
+        launch.name,
+        NotificationTarget.Launch,
+        startDate,
+      ),
+    );
     setLoading(false);
   }
 
@@ -77,8 +85,8 @@ export const NotificationButton = ({ launch }: Props) => {
       onPressOut={toogleFocus}
       style={[
         styles.button,
-        focus && styles.buttonFocus,
         notification && styles.buttonActive,
+        focus && styles.buttonFocus,
       ]}
     >
       <Icon style={styles.icon} name={icon} />

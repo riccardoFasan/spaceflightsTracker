@@ -31,7 +31,7 @@ export const SpaceEventCard = ({ event }: Props) => {
         )
       }
     >
-      <Text style={styles.cardText}>On: {formatDateTime(event.date)}</Text>
+      <Text style={styles.cardText}>On:&nbsp;{formatDateTime(event.date)}</Text>
       <Text
         style={[
           styles.cardText,

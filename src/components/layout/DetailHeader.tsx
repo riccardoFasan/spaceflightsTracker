@@ -5,10 +5,10 @@ import { useNavigation } from '@react-navigation/native';
 import { IconButton } from '../common';
 
 interface Props {
-  title: string;
+  backLabel: string;
 }
 
-export const DeatailHeader = ({ title }: Props) => {
+export const DeatailHeader = ({ backLabel }: Props) => {
   const navigation = useNavigation();
 
   function back(): void {
@@ -20,7 +20,7 @@ export const DeatailHeader = ({ title }: Props) => {
       <StatusBar animated={true} backgroundColor={Color.Black} />
       <View style={styles.container}>
         <IconButton icon="arrow-left" onPress={back} />
-        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.title}>{backLabel}</Text>
       </View>
     </>
   );

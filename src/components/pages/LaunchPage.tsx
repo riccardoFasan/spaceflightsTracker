@@ -10,7 +10,11 @@ import {
 import { LaunchDetailed } from '../../models';
 import { getLaunch, showErrorMessage } from '../../services';
 import { Color, Spacing, flexBoxStyles } from '../../styles';
-import { DetailSection, LaunchStatusBadge } from '../common';
+import {
+  DetailSection,
+  LaunchStatusBadge,
+  NotificationButton,
+} from '../common';
 import { DeatailHeader } from '../layout';
 
 interface Props {
@@ -51,7 +55,7 @@ export const LaunchPage = ({ navigation, route }: Props) => {
       )}
       {!loading && launch && (
         <>
-          <DeatailHeader title={launch?.name || 'Launch'} />
+          <DeatailHeader backLabel="Launches" />
           <ScrollView>
             <Image
               accessibilityLabel={launch.name}
@@ -86,6 +90,11 @@ export const LaunchPage = ({ navigation, route }: Props) => {
               )}
             </View>
           </ScrollView>
+          {launch.window?.start && (
+            <View style={styles.footer}>
+              <NotificationButton launch={launch} />
+            </View>
+          )}
         </>
       )}
     </View>
@@ -95,7 +104,7 @@ export const LaunchPage = ({ navigation, route }: Props) => {
 const dimensions = Dimensions.get('window');
 const imageHeight: number = Math.round(dimensions.height / 2.75);
 const windowheight = Math.round(dimensions.height);
-const bottomBarHeight = 100;
+const bottomBarHeight = Spacing.Large * 2 + 36;
 
 const styles = StyleSheet.create({
   header: {
@@ -117,7 +126,15 @@ const styles = StyleSheet.create({
   },
   body: {
     paddingHorizontal: Spacing.ExtraLarge,
-    marginBottom: Spacing.ExtraExtraLarge,
+    marginBottom: bottomBarHeight,
+    paddingBottom: Spacing.ExtraExtraLarge,
     marginTop: Spacing.ExtraExtraLarge,
+  },
+  footer: {
+    position: 'absolute',
+    width: '100%',
+    top: windowheight - bottomBarHeight,
+    padding: Spacing.Large,
+    backgroundColor: Color.DarkAnthracite,
   },
 });

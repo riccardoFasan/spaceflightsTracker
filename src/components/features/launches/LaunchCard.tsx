@@ -36,7 +36,7 @@ export const LaunchCard = ({ launch }: Props) => {
         <View style={styles.cardContent}>
           {launch.window && (
             <Text style={styles.cardText}>
-              On:
+              On:&nbsp;
               {formatDateTime(launch.window.start)}
             </Text>
           )}
@@ -44,7 +44,7 @@ export const LaunchCard = ({ launch }: Props) => {
             <Text style={styles.cardTextSmall}>{launch.pad.location.name}</Text>
           )}
         </View>
-        <NotificationButton launch={launch} />
+        {launch.window?.start && <NotificationButton launch={launch} />}
       </ListCard>
     </TouchableHighlight>
   );

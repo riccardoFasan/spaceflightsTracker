@@ -5,3 +5,4 @@ export * from "./spaceNewsApi";
 export * from "./snackbar";
 export * from "./inAppBrowser";
 export * from "./screenConfig";
+export * from "./localNotifications";
