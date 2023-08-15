@@ -1,7 +1,7 @@
 import { Pressable, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Color, Spacing } from '../../styles';
-import { useActive } from '../../hooks';
+import { useFocus } from '../../hooks';
 
 interface Props {
   icon: string;
@@ -9,7 +9,7 @@ interface Props {
 }
 
 export const IconButton = ({ icon, onPress }: Props) => {
-  const [active, toogleActive] = useActive(false);
+  const [active, toogleActive] = useFocus(false);
 
   return (
     <Pressable

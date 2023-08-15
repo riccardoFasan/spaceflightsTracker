@@ -2,7 +2,7 @@ import { StyleSheet, Text } from 'react-native';
 import { formatDateTime } from '../../utilities';
 import { Article, Blog, Report } from '../../models';
 import { openURL } from '../../services';
-import { ButtonSecondary, ListCard } from '.';
+import { ButtonPrimary, ListCard } from '.';
 import { Spacing, typographyStyles, FontWeight } from '../../styles';
 
 interface Props {
@@ -38,10 +38,7 @@ export const NewsCard = ({ article }: Props) => {
         {article.summary}
       </Text>
       {article.url && (
-        <ButtonSecondary
-          title="Read more"
-          onPress={openArticle}
-        ></ButtonSecondary>
+        <ButtonPrimary title="Read more" onPress={openArticle}></ButtonPrimary>
       )}
     </ListCard>
   );

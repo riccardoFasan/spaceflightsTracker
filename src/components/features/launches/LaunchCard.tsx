@@ -1,8 +1,8 @@
 import { useNavigation } from '@react-navigation/native';
 import { Launch } from '../../../models';
-import { StyleSheet, Text, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 import { formatDateTime } from '../../../utilities';
-import { LaunchStatusBadge, ListCard } from '../../common';
+import { LaunchStatusBadge, ListCard, NotificationButton } from '../../common';
 import {
   FontSize,
   FontWeight,
@@ -33,16 +33,18 @@ export const LaunchCard = ({ launch }: Props) => {
         }}
         badge={<LaunchStatusBadge launch={launch} />}
       >
-        {launch.window && (
-          <Text style={styles.cardText}>
-            On:
-            {formatDateTime(launch.window.start)}
-          </Text>
-        )}
-        {launch.pad?.location && (
-          <Text style={styles.cardTextSmall}>{launch.pad.location.name}</Text>
-        )}
-        {/* TODO: notification button */}
+        <View style={styles.cardContent}>
+          {launch.window && (
+            <Text style={styles.cardText}>
+              On:
+              {formatDateTime(launch.window.start)}
+            </Text>
+          )}
+          {launch.pad?.location && (
+            <Text style={styles.cardTextSmall}>{launch.pad.location.name}</Text>
+          )}
+        </View>
+        <NotificationButton launch={launch} />
       </ListCard>
     </TouchableHighlight>
   );
@@ -58,5 +60,8 @@ const styles = StyleSheet.create({
     ...typographyStyles.paragraph,
     fontSize: FontSize.Small,
     fontWeight: FontWeight.Light,
+  },
+  cardContent: {
+    marginBottom: Spacing.Large,
   },
 });

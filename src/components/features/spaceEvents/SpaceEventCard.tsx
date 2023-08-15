@@ -1,7 +1,7 @@
 import { StyleSheet, Text } from 'react-native';
 import { SpaceEvent } from '../../../models';
 import { openURL } from '../../../services';
-import { ListCard, ButtonSecondary } from '../../common';
+import { ListCard, ButtonPrimary } from '../../common';
 import { FontWeight, Spacing, typographyStyles } from '../../../styles';
 import { formatDateTime } from '../../../utilities';
 import { SpaceEventBadge } from '.';
@@ -45,10 +45,10 @@ export const SpaceEventCard = ({ event }: Props) => {
         {event.description}
       </Text>
       {event.url && (
-        <ButtonSecondary
+        <ButtonPrimary
           title="Read more"
           onPress={openSpaceEvent}
-        ></ButtonSecondary>
+        ></ButtonPrimary>
       )}
     </ListCard>
   );

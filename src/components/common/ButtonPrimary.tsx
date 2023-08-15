@@ -1,24 +1,22 @@
 import { StyleSheet, Text, Pressable } from 'react-native';
 import { Color, Spacing, typographyStyles, FontWeight } from '../../styles';
-import { useActive } from '../../hooks';
+import { useFocus } from '../../hooks';
 
 interface Props {
   title: string;
   onPress: () => void;
 }
 
-export const ButtonSecondary = ({ title, onPress }: Props) => {
-  const [active, toogleActive] = useActive(false);
+export const ButtonPrimary = ({ title, onPress }: Props) => {
+  const [focus, toogleFocus] = useFocus(false);
 
   return (
     <Pressable
       onPress={onPress}
-      onPressIn={toogleActive}
-      onPressOut={toogleActive}
+      onPressIn={toogleFocus}
+      onPressOut={toogleFocus}
     >
-      <Text style={[styles.button, active && styles.buttonActive]}>
-        {title}
-      </Text>
+      <Text style={[styles.button, focus && styles.buttonFocus]}>{title}</Text>
     </Pressable>
   );
 };
@@ -35,7 +33,7 @@ const styles = StyleSheet.create({
     color: Color.Blue,
     borderColor: Color.Blue,
   },
-  buttonActive: {
+  buttonFocus: {
     backgroundColor: Color.Blue,
     color: Color.White,
   },

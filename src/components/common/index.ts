@@ -1,5 +1,5 @@
 export * from "./ScrollableList";
-export * from "./ButtonSecondary";
+export * from "./ButtonPrimary";
 export * from "./ListCard";
 export * from "./Countdown";
 export * from "./DetailSection";
@@ -7,3 +7,4 @@ export * from "./LaunchStatusBadge";
 export * from "./NewsCard";
 export * from "./CardBadge";
 export * from "./IconButton";
+export * from "./NotificationButton";

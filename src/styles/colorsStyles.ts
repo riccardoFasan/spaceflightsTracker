@@ -8,6 +8,7 @@ export enum Color {
   Black = "#0C0E10",
   Anthracite = "#212429",
   DarkAnthracite = "#181A1E",
+  LightAnthracite = "#353A43",
   Gray = "#C5C6C7",
   DarkGray = "#9C9D9F",
 }

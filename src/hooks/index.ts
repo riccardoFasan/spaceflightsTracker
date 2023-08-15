@@ -1,2 +1,2 @@
-export * from "./activeHook";
+export * from "./focusHook";
 export * from "./focusAnimationHook";

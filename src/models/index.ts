@@ -1,5 +1,5 @@
 export * from "./launchModel";
-export * from "./LaunchDetailedModel";
+export * from "./launchDetailedModel";
 export * from "./launchWindowModel";
 export * from "./padModel";
 export * from "./missionModel";
@@ -14,3 +14,4 @@ export * from "./blogModel";
 export * from "./spaceEventModel";
 export * from "./fetchControllerModel";
 export * from "./apiControllerModel";
+export * from "./scheduledNotificationModel";
