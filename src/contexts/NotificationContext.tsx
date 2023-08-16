@@ -10,10 +10,11 @@ import {
 } from '../services';
 
 interface ContextType {
+  notifications: ScheduledNotification[];
   get: (
     targetId: string,
     target: NotificationTarget,
-  ) => Promise<ScheduledNotification | null>;
+  ) => ScheduledNotification | null;
   schedule: (
     targetId: string,
     targetName: string,
@@ -24,7 +25,8 @@ interface ContextType {
 }
 
 const NotificationContext = createContext<ContextType>({
-  get: async () => null,
+  notifications: [],
+  get: () => null,
   schedule: (async () => {}) as any,
   cancel: async () => {},
 });
@@ -52,10 +54,10 @@ export const NotificationProvider = ({ children }: Props) => {
     setNotifications(await getNotifications());
   }
 
-  async function get(
+  function get(
     targetId: string,
     target: NotificationTarget,
-  ): Promise<ScheduledNotification | null> {
+  ): ScheduledNotification | null {
     return (
       notifications.find(
         (n) => n.targetId === targetId && n.target === target,
@@ -91,5 +93,9 @@ export const NotificationProvider = ({ children }: Props) => {
     );
   }
 
-  return <Provider value={{ get, schedule, cancel }}>{children}</Provider>;
+  return (
+    <Provider value={{ notifications, get, schedule, cancel }}>
+      {children}
+    </Provider>
+  );
 };

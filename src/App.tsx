@@ -1,7 +1,7 @@
 import React from 'react';
-import { BottomNavigationBar, Header } from './components';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { BottomNavigationBar, Header } from './components';
 import { ROOT_SCREENS, shouldShowNavigation } from './services';
 import { NotificationProvider } from './contexts';
 

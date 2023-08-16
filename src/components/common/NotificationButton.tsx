@@ -27,11 +27,11 @@ export const NotificationButton = ({ launch }: Props) => {
     useState<ScheduledNotification | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const { get, schedule, cancel } = useNotifications();
+  const { notifications, get, schedule, cancel } = useNotifications();
 
   useEffect(() => {
-    loadNotification();
-  }, [launch]);
+    getLaunchNotification();
+  }, [launch, notifications]);
 
   useEffect(() => {
     const text: string = notification ? 'notice activated' : 'notify me';
@@ -39,6 +39,10 @@ export const NotificationButton = ({ launch }: Props) => {
     setText(text);
     setIcon(icon);
   }, [notification]);
+
+  function getLaunchNotification(): void {
+    setNotification(get(launch.id, NotificationTarget.Launch));
+  }
 
   async function onPress(): Promise<void> {
     if (loading) return;
@@ -49,17 +53,11 @@ export const NotificationButton = ({ launch }: Props) => {
     await scheduleNotification();
   }
 
-  async function loadNotification(): Promise<void> {
-    setLoading(true);
-    setNotification(await get(launch.id, NotificationTarget.Launch));
-    setLoading(false);
-  }
-
   async function scheduleNotification(): Promise<void> {
     if (notification) return;
     setLoading(true);
     const startDate: Date = new Date(launch.window!.start!);
-    await setNotification(
+    setNotification(
       await schedule(
         launch.id,
         launch.name,
@@ -74,7 +72,7 @@ export const NotificationButton = ({ launch }: Props) => {
     if (!notification) return;
     setLoading(true);
     await cancel(notification);
-    await setNotification(null);
+    setNotification(null);
     setLoading(false);
   }
 

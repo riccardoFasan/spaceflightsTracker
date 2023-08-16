@@ -41,7 +41,7 @@ export const BottomNavigationButton = ({
               opacity: backgroundOpacity,
             },
           ]}
-        ></Animated.View>
+        />
         <Icon
           style={[styles.icon, focused && styles.iconActive]}
           name={focused ? iconActive : icon}
