@@ -1,12 +1,16 @@
 import axios, { AxiosResponse } from "axios";
-import { LaunchCommonLl2DTO, PaginatedListLl2DTO, EventLl2DTO } from "../dtos";
+import {
+  LaunchCommonLl2DTO,
+  PaginatedListLl2DTO,
+  SpaceEventLl2DTO,
+} from "../dtos";
 import { FetchController } from "../models";
 
 const ENDPOINT: string = "https://lldev.thespacedevs.com/2.2.0";
 
 export function getLaunches(
   limit: number,
-  offset: number
+  offset: number,
 ): FetchController<PaginatedListLl2DTO<LaunchCommonLl2DTO>> {
   const abortController: AbortController = new AbortController();
   const params = { limit, offset, window_start__gte: new Date().toISOString() };
@@ -14,7 +18,7 @@ export function getLaunches(
     AxiosResponse<PaginatedListLl2DTO<LaunchCommonLl2DTO>>
   > = axios.get<PaginatedListLl2DTO<LaunchCommonLl2DTO>>(
     `${ENDPOINT}/launch/upcoming/`,
-    { params, signal: abortController.signal }
+    { params, signal: abortController.signal },
   );
   return {
     abort: () => abortController.abort(),
@@ -24,15 +28,19 @@ export function getLaunches(
 
 export function getSpaceEvents(
   limit: number,
-  offset: number
-): FetchController<PaginatedListLl2DTO<EventLl2DTO>> {
+  offset: number,
+): FetchController<PaginatedListLl2DTO<SpaceEventLl2DTO>> {
   const abortController: AbortController = new AbortController();
   const params = { limit, offset };
-  const response: Promise<AxiosResponse<PaginatedListLl2DTO<EventLl2DTO>>> =
-    axios.get<PaginatedListLl2DTO<EventLl2DTO>>(`${ENDPOINT}/event/upcoming/`, {
+  const response: Promise<
+    AxiosResponse<PaginatedListLl2DTO<SpaceEventLl2DTO>>
+  > = axios.get<PaginatedListLl2DTO<SpaceEventLl2DTO>>(
+    `${ENDPOINT}/event/upcoming/`,
+    {
       params,
       signal: abortController.signal,
-    });
+    },
+  );
   return {
     abort: () => abortController.abort(),
     fetch: async () => (await response).data,
@@ -40,7 +48,7 @@ export function getSpaceEvents(
 }
 
 export function getDetailedLaunch(
-  id: string
+  id: string,
 ): FetchController<LaunchCommonLl2DTO> {
   const abortController: AbortController = new AbortController();
   const response: Promise<AxiosResponse<LaunchCommonLl2DTO>> =

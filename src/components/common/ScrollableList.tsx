@@ -42,7 +42,7 @@ export const ScrollableList = <T,>({
         setLoading(true);
         const { results, totalCount } = await controller.fetch();
         setItems((currentItems) =>
-          uniqueBy(idKey, [...currentItems, ...results])
+          uniqueBy(idKey, [...currentItems, ...results]),
         );
         setTotalCount(totalCount);
       } catch (e: unknown) {

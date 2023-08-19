@@ -27,7 +27,7 @@ export const SpaceEventCard = ({ event }: Props) => {
       }}
       badge={
         event.type !== SpaceEventType.Unknown && (
-          <SpaceEventBadge type={event.type} />
+          <SpaceEventBadge event={event} />
         )
       }
     >
