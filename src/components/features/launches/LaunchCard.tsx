@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import { Launch } from '../../../models';
 import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 import { formatDateTime } from '../../../utilities';
-import { LaunchStatusBadge, ListCard, NotificationButton } from '../../common';
+import { ListCard, NotificationButton } from '../../common';
 import {
   FontSize,
   FontWeight,
@@ -31,7 +31,6 @@ export const LaunchCard = ({ launch }: Props) => {
           imageRatio: 2.75,
           pageName: 'Launch',
         }}
-        badge={<LaunchStatusBadge launch={launch} />}
       >
         <View style={styles.cardContent}>
           {launch.window && (

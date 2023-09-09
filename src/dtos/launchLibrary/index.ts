@@ -20,4 +20,3 @@ export * from "./rocketCommonLl2DTO";
 export * from "./spaceStationLl2DTO";
 export * from "./spaceStationStatusLl2Enum";
 export * from "./paginatedListLl2DTO";
-export * from "./spaceEventLl2DTO";

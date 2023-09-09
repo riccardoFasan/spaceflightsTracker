@@ -6,5 +6,6 @@ export interface ScreenConfig {
 }
 
 export interface RootScreenConfig extends ScreenConfig {
+  hasChildren: boolean;
   showNavigation: boolean;
 }

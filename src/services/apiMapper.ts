@@ -2,7 +2,6 @@ import {
   AgencyCommonLl2DTO,
   ArticleSnDTO,
   BlogSnDTO,
-  SpaceEventLl2DTO,
   LaunchCommonLl2DTO,
   LauncherConfigDetailedLl2DTO,
   LocationLl2DTO,
@@ -11,7 +10,7 @@ import {
   ReportSnDTO,
   RocketCommonLl2DTO,
 } from "../dtos";
-import { SpaceEventType, LaunchStatus, MissionType, Orbit } from "../enums";
+import { LaunchStatus, MissionType, Orbit } from "../enums";
 import {
   Article,
   LaunchWindow,
@@ -24,7 +23,6 @@ import {
   Company,
   Report,
   Blog,
-  SpaceEvent,
 } from "../models";
 
 export function mapLaunchLl2ToLaunch(launchLl2: LaunchCommonLl2DTO): Launch {
@@ -39,7 +37,7 @@ export function mapLaunchLl2ToLaunch(launchLl2: LaunchCommonLl2DTO): Launch {
 }
 
 export function mapLaunchLl2ToDetailedLaunch(
-  launchLl2: LaunchCommonLl2DTO
+  launchLl2: LaunchCommonLl2DTO,
 ): LaunchDetailed {
   return {
     id: launchLl2.id.toString(),
@@ -65,20 +63,8 @@ export function mapBlogSnToBlog(blogSn: BlogSnDTO): Blog {
   return mapNewsSnToNews(blogSn);
 }
 
-export function mapEventLl2ToEvent(eventLl2: SpaceEventLl2DTO): SpaceEvent {
-  return {
-    id: eventLl2.id.toString(),
-    name: eventLl2.name,
-    description: eventLl2.description,
-    image: eventLl2.feature_image,
-    date: eventLl2.date,
-    type: mapSpaceSpaceEventType(eventLl2.type.name),
-    url: eventLl2.news_url,
-  };
-}
-
 function mapNewsSnToNews(
-  newsSn: ArticleSnDTO | ReportSnDTO | BlogSnDTO
+  newsSn: ArticleSnDTO | ReportSnDTO | BlogSnDTO,
 ): Article | Report | Blog {
   return {
     id: newsSn.id.toString(),
@@ -101,14 +87,14 @@ function mapPadLl2ToPad(pad: PadLl2DTO): Pad | undefined {
 
 function mapLaunchWindow(
   start?: string,
-  end?: string
+  end?: string,
 ): LaunchWindow | undefined {
   if (!start || !end) return;
   return { start, end };
 }
 
 function mapLocationLl2ToLocation(
-  location: LocationLl2DTO
+  location: LocationLl2DTO,
 ): Location | undefined {
   if (!location.name || !location.country_code) return;
   return {
@@ -125,7 +111,7 @@ function mapLaunchStatusLl2ToStutis(id: number): LaunchStatus {
 }
 
 function mapMissionLl2ToMission(
-  missionLl2: MissionLl2DTO
+  missionLl2: MissionLl2DTO,
 ): Mission | undefined {
   if (!missionLl2.description) return;
   return {
@@ -148,19 +134,6 @@ function mapMissionType(type: string | undefined): MissionType {
   if (type === "Tourism") return MissionType.Tourism;
   if (type === "Communications") return MissionType.Communications;
   return MissionType.Unknown;
-}
-
-function mapSpaceSpaceEventType(type: string): SpaceEventType {
-  if (type === "Docking") return SpaceEventType.Docking;
-  if (type === "EVA") return SpaceEventType.EVA;
-  if (type === "Static Fire") return SpaceEventType.StaticFire;
-  if (type === "Spacecraft Event") return SpaceEventType.SpacecraftEvent;
-  if (type === "Moon Landing") return SpaceEventType.MoonLanding;
-  if (type === "Abort Test") return SpaceEventType.AbortTest;
-  if (type === "Spacecraft Capture") return SpaceEventType.SpacecraftCapture;
-  if (type === "Celestial Event") return SpaceEventType.CelestialEvent;
-  if (type === "Test Flight") return SpaceEventType.TestFlight;
-  return SpaceEventType.Unknown;
 }
 
 function mapOrbit(id: number): Orbit {
@@ -193,7 +166,7 @@ function mapOrbit(id: number): Orbit {
 }
 
 function mapRocketDetailedLl2ToLauncherDetailed(
-  rocketLl2: RocketCommonLl2DTO
+  rocketLl2: RocketCommonLl2DTO,
 ): Launcher | undefined {
   const config: LauncherConfigDetailedLl2DTO =
     rocketLl2.configuration as LauncherConfigDetailedLl2DTO;
@@ -209,7 +182,7 @@ function mapRocketDetailedLl2ToLauncherDetailed(
 }
 
 function mapAgencyLl2ToCompany(
-  agencyLl2: AgencyCommonLl2DTO
+  agencyLl2: AgencyCommonLl2DTO,
 ): Company | undefined {
   if (!agencyLl2.description) return;
   return {

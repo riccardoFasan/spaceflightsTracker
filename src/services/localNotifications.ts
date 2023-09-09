@@ -8,18 +8,11 @@ import notifee, {
   TriggerNotification,
   TriggerType,
 } from "@notifee/react-native";
-import { NotificationTarget } from "../enums";
 import { ScheduledNotification } from "../models";
 import { Alert } from "react-native";
 
 const ANDROID_CHANNEL_ID: string = "space-flights-tracker-channel";
 const ANDROID_CHANNEL_NAME: string = "Space Flights Tracker Channel";
-
-interface NotificationPayload {
-  id: string;
-  name: string;
-  fireDate: Date;
-}
 
 export async function setUpNotifications(): Promise<void> {
   const settings: NotificationSettings = await notifee.requestPermission();
@@ -55,13 +48,14 @@ export async function getNotifications(): Promise<ScheduledNotification[]> {
 }
 
 export async function scheduleNotification(
-  payload: NotificationPayload,
-  target: NotificationTarget,
+  id: string,
+  name: string,
+  fireDate: Date,
 ): Promise<ScheduledNotification> {
   const notification: Notification = {
     title: "Space Flights Tracker",
-    body: getNotificationBody(target, payload.name),
-    data: { payload, target },
+    body: `${name} is about to launch!`,
+    data: { id, name, fireDate },
     android: {
       channelId: ANDROID_CHANNEL_ID,
       importance: AndroidImportance.HIGH,
@@ -71,15 +65,15 @@ export async function scheduleNotification(
 
   const trigger: Trigger = {
     type: TriggerType.TIMESTAMP,
-    timestamp: payload.fireDate.getTime(),
+    timestamp: fireDate.getTime(),
   };
 
-  const id: string = await notifee.createTriggerNotification(
+  const notificationId: string = await notifee.createTriggerNotification(
     notification,
     trigger,
   );
 
-  return { id, targetId: payload.id, target };
+  return { id: notificationId, targetId: id };
 }
 
 export async function cancelNotification(
@@ -94,11 +88,4 @@ function isAuthorized(settings: NotificationSettings): boolean {
     status === AuthorizationStatus.AUTHORIZED ||
     status === AuthorizationStatus.PROVISIONAL
   );
-}
-
-function getNotificationBody(target: NotificationTarget, name: string): string {
-  if (target === NotificationTarget.Launch) {
-    return `${name} is about to launch!`;
-  }
-  return `${name} will begin shortly!`;
 }

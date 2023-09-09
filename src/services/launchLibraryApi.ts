@@ -1,9 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import {
-  LaunchCommonLl2DTO,
-  PaginatedListLl2DTO,
-  SpaceEventLl2DTO,
-} from "../dtos";
+import { LaunchCommonLl2DTO, PaginatedListLl2DTO } from "../dtos";
 import { FetchController } from "../models";
 
 const ENDPOINT: string = "https://lldev.thespacedevs.com/2.2.0";
@@ -19,27 +15,6 @@ export function getLaunches(
   > = axios.get<PaginatedListLl2DTO<LaunchCommonLl2DTO>>(
     `${ENDPOINT}/launch/upcoming/`,
     { params, signal: abortController.signal },
-  );
-  return {
-    abort: () => abortController.abort(),
-    fetch: async () => (await response).data,
-  };
-}
-
-export function getSpaceEvents(
-  limit: number,
-  offset: number,
-): FetchController<PaginatedListLl2DTO<SpaceEventLl2DTO>> {
-  const abortController: AbortController = new AbortController();
-  const params = { limit, offset };
-  const response: Promise<
-    AxiosResponse<PaginatedListLl2DTO<SpaceEventLl2DTO>>
-  > = axios.get<PaginatedListLl2DTO<SpaceEventLl2DTO>>(
-    `${ENDPOINT}/event/upcoming/`,
-    {
-      params,
-      signal: abortController.signal,
-    },
   );
   return {
     abort: () => abortController.abort(),
