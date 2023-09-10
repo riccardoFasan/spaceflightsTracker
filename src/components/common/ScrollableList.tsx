@@ -60,8 +60,7 @@ export const ScrollableList = <T,>({
 
   function nextBatch(): void {
     if (canLoadNextBatch()) {
-      const nextBatch: number = currentBatch + 1;
-      setCurrentBatch(nextBatch);
+      setCurrentBatch((currentBatch) => currentBatch + 1);
     }
   }
 
