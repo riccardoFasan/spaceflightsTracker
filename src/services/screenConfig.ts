@@ -10,7 +10,7 @@ import { ScreenConfig, RootScreenConfig } from "../models";
 
 export const ROOT_SCREENS: RootScreenConfig[] = [
   {
-    name: "Upcomings",
+    name: "Launches",
     component: LaunchesPage,
     showNavigation: true,
     hasChildren: false,
