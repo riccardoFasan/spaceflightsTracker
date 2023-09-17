@@ -1,4 +1,4 @@
-import { StyleSheet, Text } from 'react-native';
+import React, { StyleSheet, Text } from 'react-native';
 import { formatDateTime } from '../../utilities';
 import { Article, Blog, Report } from '../../models';
 import { openURL } from '../../services';
@@ -31,7 +31,6 @@ export const NewsCard = ({ article }: Props) => {
         style={[
           styles.cardText,
           {
-            fontWeight: FontWeight.Light,
             marginBottom: article.url ? Spacing.ExtraLarge : 0,
           },
         ]}
@@ -39,7 +38,7 @@ export const NewsCard = ({ article }: Props) => {
       >
         {article.summary}
       </Text>
-      {article.url && <ButtonPrimary title="Read more" onPress={openArticle} />}
+      {article.url && <ButtonPrimary title='Read more' onPress={openArticle} />}
     </ListCard>
   );
 };
@@ -48,6 +47,6 @@ const styles = StyleSheet.create({
   cardText: {
     ...typographyStyles.paragraph,
     paddingTop: Spacing.Small,
-    fontWeight: FontWeight.Bold,
+    fontWeight: FontWeight.Light,
   },
 });

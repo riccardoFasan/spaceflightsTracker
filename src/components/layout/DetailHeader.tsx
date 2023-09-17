@@ -1,3 +1,4 @@
+import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Color, Spacing, flexBoxStyles, typographyStyles } from '../../styles';
 import { StatusBar } from 'react-native';
@@ -19,7 +20,7 @@ export const DeatailHeader = ({ backLabel }: Props) => {
     <>
       <StatusBar animated={true} backgroundColor={Color.Black} />
       <View style={styles.container}>
-        <IconButton icon="arrow-left" onPress={back} />
+        <IconButton icon='arrow-left' onPress={back} />
         <Text style={styles.title}>{backLabel}</Text>
       </View>
     </>

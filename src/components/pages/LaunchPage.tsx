@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Dimensions, StyleSheet, Image, ActivityIndicator, ScrollView } from 'react-native';
 import { LaunchDetailed } from '../../models';
 import { getLaunch, showErrorMessage } from '../../services';
@@ -11,7 +11,7 @@ interface Props {
   route: any;
 }
 
-export const LaunchPage = ({ navigation, route }: Props) => {
+export const LaunchPage = ({ route }: Props) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [launch, setLaunch] = useState<LaunchDetailed>();
 
@@ -39,12 +39,12 @@ export const LaunchPage = ({ navigation, route }: Props) => {
     <View style={styles.container}>
       {loading && (
         <View style={[styles.spinnerContainer]}>
-          <ActivityIndicator size="large" color={Color.LightBlue} />
+          <ActivityIndicator size='large' color={Color.LightBlue} />
         </View>
       )}
       {!loading && launch && (
         <>
-          <DeatailHeader backLabel="Launches" />
+          <DeatailHeader backLabel='Launches' />
           <ScrollView>
             <Image
               accessibilityLabel={launch.name}
@@ -58,14 +58,14 @@ export const LaunchPage = ({ navigation, route }: Props) => {
               {launch.mission && (
                 <DetailSection
                   title={launch.mission.name}
-                  subtitle="mission"
+                  subtitle='mission'
                   text={launch.mission.description}
                 />
               )}
               {launch.launcher && (
                 <DetailSection
                   title={launch!.launcher!.name}
-                  subtitle="rocket"
+                  subtitle='rocket'
                   text={launch!.launcher!.description}
                 />
               )}

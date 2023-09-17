@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import {
   ActivityIndicator,
   StyleSheet,
@@ -58,7 +58,7 @@ export const ScrollableList = <T,>({
     return () => controller.cancel();
   }, [currentBatch, getBatch, batchSize, idKey]);
 
-  function nextBatch(): void {
+  function loadNextBatch(): void {
     if (canLoadNextBatch()) {
       setCurrentBatch((batch: number) => batch + 1);
     }
@@ -104,11 +104,11 @@ export const ScrollableList = <T,>({
                 items.length === 0 && styles.spinnerContainerCentered,
               ]}
             >
-              <ActivityIndicator size="large" color={Color.LightBlue} />
+              <ActivityIndicator size='large' color={Color.LightBlue} />
             </View>
           )
         }
-        onEndReached={() => nextBatch()}
+        onEndReached={() => loadNextBatch()}
       />
     </SafeAreaView>
   );

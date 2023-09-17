@@ -9,8 +9,8 @@ import {
   PadLl2DTO,
   ReportSnDTO,
   RocketCommonLl2DTO,
-} from "../dtos";
-import { LaunchStatus, MissionType, Orbit } from "../enums";
+} from '../dtos';
+import { LaunchStatus, MissionType, Orbit } from '../enums';
 import {
   Article,
   LaunchWindow,
@@ -23,8 +23,7 @@ import {
   Company,
   Report,
   Blog,
-} from "../models";
-
+} from '../models';
 
 export function mapLaunchLl2ToLaunch(launchLl2: LaunchCommonLl2DTO): Launch {
   return {
@@ -37,10 +36,7 @@ export function mapLaunchLl2ToLaunch(launchLl2: LaunchCommonLl2DTO): Launch {
   };
 }
 
-
-export function mapLaunchLl2ToDetailedLaunch(
-  launchLl2: LaunchCommonLl2DTO,
-): LaunchDetailed {
+export function mapLaunchLl2ToDetailedLaunch(launchLl2: LaunchCommonLl2DTO): LaunchDetailed {
   return {
     id: launchLl2.id.toString(),
     name: launchLl2.name,
@@ -65,10 +61,7 @@ export function mapBlogSnToBlog(blogSn: BlogSnDTO): Blog {
   return mapNewsSnToNews(blogSn);
 }
 
-
-function mapNewsSnToNews(
-  newsSn: ArticleSnDTO | ReportSnDTO | BlogSnDTO,
-): Article | Report | Blog {
+function mapNewsSnToNews(newsSn: ArticleSnDTO | ReportSnDTO | BlogSnDTO): Article | Report | Blog {
   return {
     id: newsSn.id.toString(),
     title: newsSn.title,
@@ -90,19 +83,17 @@ function mapPadLl2ToPad(pad: PadLl2DTO): Pad | undefined {
   };
 }
 
-
-function mapLaunchWindow(
-  start?: string,
-  end?: string,
-): LaunchWindow | undefined {
-  if (!start || !end) return;
+function mapLaunchWindow(start?: string, end?: string): LaunchWindow | undefined {
+  if (!start || !end) {
+    return;
+  }
   return { start, end };
 }
 
-function mapLocationLl2ToLocation(
-  location: LocationLl2DTO,
-): Location | undefined {
-  if (!location.name || !location.country_code) return;
+function mapLocationLl2ToLocation(location: LocationLl2DTO): Location | undefined {
+  if (!location.name || !location.country_code) {
+    return;
+  }
 
   return {
     id: location.id.toString(),
@@ -119,11 +110,10 @@ function mapLaunchStatusLl2ToStutis(id: number): LaunchStatus {
   return LaunchStatus.ToBeDetermined;
 }
 
-
-function mapMissionLl2ToMission(
-  missionLl2: MissionLl2DTO,
-): Mission | undefined {
-  if (!missionLl2.description) return;
+function mapMissionLl2ToMission(missionLl2: MissionLl2DTO): Mission | undefined {
+  if (!missionLl2.description) {
+    return;
+  }
   return {
     id: missionLl2.id.toString(),
     name: missionLl2.name,
@@ -163,7 +153,6 @@ function mapMissionType(type: string | undefined): MissionType {
   }
   return MissionType.Unknown;
 }
-
 
 function mapOrbit(id: number): Orbit {
   if (id === 0) {
@@ -262,10 +251,10 @@ function mapRocketDetailedLl2ToLauncherDetailed(
   };
 }
 
-function mapAgencyLl2ToCompany(
-  agencyLl2: AgencyCommonLl2DTO,
-): Company | undefined {
-  if (!agencyLl2.description) return;
+function mapAgencyLl2ToCompany(agencyLl2: AgencyCommonLl2DTO): Company | undefined {
+  if (!agencyLl2.description) {
+    return;
+  }
   return {
     id: agencyLl2.id.toString(),
     name: agencyLl2.name,

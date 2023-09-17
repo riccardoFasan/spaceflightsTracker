@@ -1,7 +1,6 @@
-import axios, { AxiosResponse } from "axios";
-import { LaunchCommonLl2DTO, PaginatedListLl2DTO } from "../dtos";
-import { FetchController } from "../models";
-
+import axios, { AxiosResponse } from 'axios';
+import { LaunchCommonLl2DTO, PaginatedListLl2DTO } from '../dtos';
+import { FetchController } from '../models';
 
 const ENDPOINT: string = 'https://lldev.thespacedevs.com/2.2.0';
 
@@ -20,10 +19,7 @@ export function getLaunches(
   };
 }
 
-
-export function getDetailedLaunch(
-  id: string,
-): FetchController<LaunchCommonLl2DTO> {
+export function getDetailedLaunch(id: string): FetchController<LaunchCommonLl2DTO> {
   const abortController: AbortController = new AbortController();
   const response: Promise<AxiosResponse<LaunchCommonLl2DTO>> = axios.get<LaunchCommonLl2DTO>(
     `${ENDPOINT}/launch/${id}/`,

@@ -2,7 +2,7 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { BottomNavigationBar, Header } from './components';
-import { ROOT_SCREENS,  shouldShowNavigation, hasChildren } from './services';
+import { ROOT_SCREENS, shouldShowNavigation, hasChildren } from './services';
 import { NotificationProvider } from './contexts';
 
 const Stack = createBottomTabNavigator();
@@ -15,16 +15,22 @@ export const App = () => {
       <NavigationContainer>
         <Navigator
           screenOptions={{
-            header: (props) =>
-              shouldShowNavigation(props.route.name) && <Header
-               title={props.route.name} 
-                hasChildren={hasChildren(props.route.name)}
-               />,
+            header: ({ route }) =>
+              shouldShowNavigation(route.name) && (
+                <Header title={route.name} hasChildren={hasChildren(route.name)} />
+              ),
           }}
-          tabBar={(props) =>
-            shouldShowNavigation(props.state.index) && <BottomNavigationBar {...props} />
+          tabBar={({ state, descriptors, navigation, insets }) =>
+            shouldShowNavigation(state.index) && (
+              <BottomNavigationBar
+                state={state}
+                descriptors={descriptors}
+                navigation={navigation}
+                insets={insets}
+              />
+            )
           }
-          initialRouteName="Upcomings"
+          initialRouteName='Launches'
         >
           {ROOT_SCREENS.map((screen) => (
             <Screen

@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import { ScheduledNotification } from '../models';
 import {
   cancelNotification,
@@ -45,7 +45,6 @@ export const NotificationProvider = ({ children }: Props) => {
     await setUpNotifications();
     setNotifications(await getNotifications());
   }
-
 
   function get(targetId: string): ScheduledNotification | null {
     return notifications.find((n) => n.targetId === targetId) || null;

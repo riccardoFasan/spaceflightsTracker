@@ -4,17 +4,19 @@ import { Animated } from 'react-native';
 export function useFocusAnimation(
   ...values: (0 | 1)[]
 ): [Animated.Value[], (active: boolean) => void] {
-  const refs = values.map(() => useRef<Animated.Value>(new Animated.Value(0)).current);
+  const ref = useRef<Animated.Value[]>([]);
 
-  const focusAnimation = generateAnimation(refs, 1);
-  const blurAnimation = generateAnimation(refs, 0);
+  values.forEach((_, i) => (ref.current[i] = new Animated.Value(0)));
+
+  const focusAnimation = generateAnimation(ref.current, 1);
+  const blurAnimation = generateAnimation(ref.current, 0);
 
   const toggleAnimation = (active: boolean) => {
     const animation = active ? focusAnimation : blurAnimation;
     animation.start();
   };
 
-  return [refs, toggleAnimation];
+  return [ref.current, toggleAnimation];
 }
 
 function generateAnimation(

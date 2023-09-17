@@ -7,7 +7,7 @@
     "ios": "react-native run-ios",
     "lint": "eslint .",
     "lint:fix": "eslint --fix src/**/*.{js,jsx,ts,tsx,json}",
-    "format": "prettier --write src/**/*.{js,jsx,ts,tsx,css,md,json,scss} --config ./.prettierrc",
+    "format": "prettier --write src/**/*.{js,jsx,ts,tsx,md,json} --config ./.prettierrc",
     "start": "react-native start"
   },
   "dependencies": {

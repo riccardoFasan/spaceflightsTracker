@@ -1,4 +1,4 @@
-import { ReactNode, useMemo } from 'react';
+import React, { ReactNode, useMemo } from 'react';
 import { Dimensions, Image, StyleSheet, Text, View } from 'react-native';
 import { Color, Spacing, typographyStyles } from '../../styles';
 

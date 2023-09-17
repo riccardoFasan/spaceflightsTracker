@@ -9,7 +9,7 @@ import {
   mapBlogSnToBlog,
   mapLaunchLl2ToLaunch,
   mapLaunchLl2ToDetailedLaunch,
-} from ".";
+} from '.';
 import {
   ArticleSnDTO,
   BlogSnDTO,
@@ -26,8 +26,7 @@ import {
   Report,
   FetchController,
   ApiController,
-
-} from "../models";
+} from '../models';
 
 export function getLaunchesBatch(
   batch: number,
@@ -50,7 +49,6 @@ export function getLaunchesBatch(
     },
   };
 }
-
 
 export function getArticlesBatch(
   batch: number,

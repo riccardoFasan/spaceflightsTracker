@@ -1,3 +1,4 @@
+import React from 'react';
 import { StyleSheet, Text, Pressable } from 'react-native';
 import { Color, Spacing, FontWeight, typographyStyles, flexBoxStyles } from '../../styles';
 import { useFocus } from '../../hooks';
@@ -22,8 +23,8 @@ export const NotificationButton = ({ launch }: Props) => {
   const { notifications, get, schedule, cancel } = useNotifications();
 
   useEffect(() => {
-    getLaunchNotification();
-  }, [launch, notifications]);
+    setNotification(get(launch.id));
+  }, [launch, notifications, get]);
 
   useEffect(() => {
     const text: string = notification ? 'notice activated' : 'notify me';
@@ -31,10 +32,6 @@ export const NotificationButton = ({ launch }: Props) => {
     setText(text);
     setIcon(icon);
   }, [notification]);
-
-  function getLaunchNotification(): void {
-    setNotification(get(launch.id));
-  }
 
   async function onPress(): Promise<void> {
     if (loading) {

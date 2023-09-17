@@ -1,3 +1,4 @@
+import React from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { BottomNavigationButton } from '.';
@@ -20,17 +21,17 @@ export const BottomNavigationBar = ({ state, navigation }: BottomTabBarProps) =>
       <Pressable onPress={() => navigate('Launches')}>
         <BottomNavigationButton
           focused={isActive('Launches')}
-          name="launches"
-          icon="rocket-launch-outline"
-          iconActive="rocket-launch"
+          name='launches'
+          icon='rocket-launch-outline'
+          iconActive='rocket-launch'
         />
       </Pressable>
       <Pressable onPress={() => navigate('News')}>
         <BottomNavigationButton
           focused={isActive('News')}
-          name="news"
-          icon="newspaper-variant-multiple-outline"
-          iconActive="newspaper-variant-multiple"
+          name='news'
+          icon='newspaper-variant-multiple-outline'
+          iconActive='newspaper-variant-multiple'
         />
       </Pressable>
     </View>

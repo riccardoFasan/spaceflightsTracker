@@ -1,15 +1,10 @@
+import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { Launch } from '../../../models';
 import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 import { formatDateTime } from '../../../utilities';
 import { ListCard, NotificationButton } from '../../common';
-import {
-  FontSize,
-  FontWeight,
-  typographyStyles,
-  Spacing,
-} from '../../../styles';
-
+import { FontSize, FontWeight, typographyStyles, Spacing } from '../../../styles';
 
 interface Props {
   launch: Launch;

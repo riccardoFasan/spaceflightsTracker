@@ -1,15 +1,11 @@
-import {
-  ArticlesList,
-  LaunchPage,
-  NewsPage,
-} from '../components';
+import { ArticlesList, LaunchPage, LaunchesPage, NewsPage } from '../components';
 import { BlogsList } from '../components/features/blogs';
 import { ReportsList } from '../components/features/reports';
 import { ScreenConfig, RootScreenConfig } from '../models';
 
 export const ROOT_SCREENS: RootScreenConfig[] = [
   {
-    name: 'Upcomings',
+    name: 'Launches',
     component: LaunchesPage,
     showNavigation: true,
     hasChildren: false,
@@ -25,17 +21,6 @@ export const ROOT_SCREENS: RootScreenConfig[] = [
     component: LaunchPage,
     showNavigation: false,
     hasChildren: false,
-  },
-];
-
-export const LAUNCH_SCREENS: ScreenConfig[] = [
-  {
-    name: "Launches",
-    component: LaunchesList,
-  },
-  {
-    name: "events",
-    component: SpaceEventsList,
   },
 ];
 
@@ -64,10 +49,8 @@ export function hasChildren(indexOrName: number | string): boolean {
   return !!screen?.hasChildren;
 }
 
-function findScreen(
-  indexOrName: number | string,
-): RootScreenConfig | undefined {
-  return typeof indexOrName === "number"
+function findScreen(indexOrName: number | string): RootScreenConfig | undefined {
+  return typeof indexOrName === 'number'
     ? ROOT_SCREENS[indexOrName]
     : ROOT_SCREENS.find((screen) => screen.name === indexOrName);
 }

@@ -1,3 +1,4 @@
+import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Color, Spacing, typographyStyles } from '../../styles';
 import { StatusBar } from 'react-native';

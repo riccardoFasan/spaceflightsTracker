@@ -1,9 +1,10 @@
+import React from 'react';
 import { MaterialTopTabBarProps } from '@react-navigation/material-top-tabs';
 import { StyleSheet, Pressable, View } from 'react-native';
 import { Color, Spacing, flexBoxStyles } from '../../styles';
 import { TopTapBarButton } from '.';
 
-export const TopTabBar = ({ state, descriptors, navigation, position }: MaterialTopTabBarProps) => {
+export const TopTabBar = ({ state, navigation }: MaterialTopTabBarProps) => {
   function isActive(routeName: string): boolean {
     return state.routes[state.index].name === routeName;
   }

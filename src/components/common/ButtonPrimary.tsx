@@ -1,3 +1,4 @@
+import React from 'react';
 import { StyleSheet, Text, Pressable } from 'react-native';
 import { Color, Spacing, typographyStyles, FontWeight } from '../../styles';
 import { useFocus } from '../../hooks';

@@ -15,6 +15,16 @@ module.exports = {
     'no-param-reassign': 0,
     'import/extensions': 0,
     'dot-notation': 1,
-    '@typescript-eslint/no-unused-vars': ['error'],
+    '@typescript-eslint/no-unused-vars': ['warn'],
+    '@typescript-eslint/no-shadow': 'off',
+    'jsx-quotes': ['warn', 'prefer-single'],
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'warn',
+    'react/no-unstable-nested-components': [
+      'off',
+      {
+        allowAsProps: true,
+      },
+    ],
   },
 };

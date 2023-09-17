@@ -1,3 +1,4 @@
+import React from 'react';
 import { Animated, StyleSheet, Text, View } from 'react-native';
 import { useEffect } from 'react';
 import { Color, FontSize, FontWeight, Spacing, flexBoxStyles } from '../../styles';
@@ -16,7 +17,7 @@ export const BottomNavigationButton = ({ focused, name, icon, iconActive }: Prop
 
   useEffect(() => {
     toogleAnimation(focused);
-  }, [focused]);
+  }, [focused, toogleAnimation]);
 
   return (
     <View style={styles.container}>

@@ -1,3 +1,4 @@
+import React from 'react';
 import { Animated, StyleSheet, Text, View } from 'react-native';
 import { Color, FontWeight, Spacing, typographyStyles, flexBoxStyles } from '../../styles';
 import { useEffect } from 'react';
@@ -13,7 +14,7 @@ export const TopTapBarButton = ({ name, active }: Props) => {
 
   useEffect(() => {
     toogleAnimation(active);
-  }, [active]);
+  }, [active, toogleAnimation]);
 
   return (
     <View style={flexBoxStyles.columnCenter}>
