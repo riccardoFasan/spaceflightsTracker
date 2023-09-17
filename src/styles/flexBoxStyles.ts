@@ -12,7 +12,13 @@ export const flexBoxStyles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
   },
-  rowStartCenter: {
+  rowBetween: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  rowStart: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'flex-start',

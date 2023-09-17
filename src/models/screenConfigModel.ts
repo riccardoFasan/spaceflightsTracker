@@ -5,7 +5,8 @@ export interface ScreenConfig {
   component: React.FC<any>;
 }
 
-export interface RootScreenConfig extends ScreenConfig {
-  hasChildren: boolean;
+export interface TabScreenConfig extends ScreenConfig {
   showNavigation: boolean;
+  hasChildren: boolean;
+  action?: React.FC;
 }

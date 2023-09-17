@@ -6,3 +6,4 @@ export * from './NewsCard';
 export * from './CardBadge';
 export * from './IconButton';
 export * from './NotificationButton';
+export * from './SearchLaunchesButton';

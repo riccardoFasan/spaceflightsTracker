@@ -1,14 +1,22 @@
-import { ArticlesList, LaunchPage, LaunchesPage, NewsPage } from '../components';
-import { BlogsList } from '../components/features/blogs';
-import { ReportsList } from '../components/features/reports';
-import { ScreenConfig, RootScreenConfig } from '../models';
+import {
+  ArticlesList,
+  LaunchPage,
+  LaunchesPage,
+  NewsPage,
+  BlogsList,
+  ReportsList,
+  SearchLaunchesModal,
+  SearchLaunchesButton,
+} from '../components';
+import { ScreenConfig, TabScreenConfig } from '../models';
 
-export const ROOT_SCREENS: RootScreenConfig[] = [
+export const TAB_SCREENS: TabScreenConfig[] = [
   {
     name: 'Launches',
     component: LaunchesPage,
     showNavigation: true,
     hasChildren: false,
+    action: SearchLaunchesButton,
   },
   {
     name: 'News',
@@ -39,18 +47,32 @@ export const NEWS_SCREENS: ScreenConfig[] = [
   },
 ];
 
+export const MODAL_SCREENS: ScreenConfig[] = [
+  {
+    name: 'Search launches',
+    component: SearchLaunchesModal,
+  },
+];
+
 export function shouldShowNavigation(indexOrName: number | string): boolean {
-  const screen: RootScreenConfig | undefined = findScreen(indexOrName);
+  const screen: TabScreenConfig | undefined = findScreen(indexOrName);
   return !!screen?.showNavigation;
 }
 
 export function hasChildren(indexOrName: number | string): boolean {
-  const screen: RootScreenConfig | undefined = findScreen(indexOrName);
+  const screen: TabScreenConfig | undefined = findScreen(indexOrName);
   return !!screen?.hasChildren;
 }
 
-function findScreen(indexOrName: number | string): RootScreenConfig | undefined {
+export function getRouteAction(
+  indexOrName: number | string,
+): React.FC<any> | undefined {
+  const screen: TabScreenConfig | undefined = findScreen(indexOrName);
+  return screen?.action;
+}
+
+function findScreen(indexOrName: number | string): TabScreenConfig | undefined {
   return typeof indexOrName === 'number'
-    ? ROOT_SCREENS[indexOrName]
-    : ROOT_SCREENS.find((screen) => screen.name === indexOrName);
+    ? TAB_SCREENS[indexOrName]
+    : TAB_SCREENS.find((screen) => screen.name === indexOrName);
 }

@@ -1,23 +1,36 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { BottomNavigationBar, Header } from './components';
-import { ROOT_SCREENS, shouldShowNavigation, hasChildren } from './services';
+import {
+  shouldShowNavigation,
+  getRouteAction,
+  TAB_SCREENS,
+  hasChildren,
+  MODAL_SCREENS,
+} from './services';
 import { NotificationProvider } from './contexts';
 
-const Stack = createBottomTabNavigator();
-const { Navigator } = Stack;
-const { Screen } = Stack;
+const TabStack = createBottomTabNavigator();
+const { Navigator: TabNavigator, Screen: TabScreen } = TabStack;
+
+const ModalsStack = createNativeStackNavigator();
+const { Group: ModalsGroup, Screen: ModalScreen } = ModalsStack;
 
 export const App = () => {
   return (
     <NotificationProvider>
       <NavigationContainer>
-        <Navigator
+        <TabNavigator
           screenOptions={{
             header: ({ route }) =>
               shouldShowNavigation(route.name) && (
-                <Header title={route.name} hasChildren={hasChildren(route.name)} />
+                <Header
+                  title={route.name}
+                  hasChildren={hasChildren(route.name)}
+                  action={getRouteAction(route.name)}
+                />
               ),
           }}
           tabBar={({ state, descriptors, navigation, insets }) =>
@@ -32,15 +45,24 @@ export const App = () => {
           }
           initialRouteName='Launches'
         >
-          {ROOT_SCREENS.map((screen) => (
-            <Screen
+          {TAB_SCREENS.map((screen) => (
+            <TabScreen
               options={{ title: screen.name }}
               name={screen.name}
               component={screen.component}
               key={screen.name}
             />
           ))}
-        </Navigator>
+          <ModalsGroup screenOptions={{ presentation: 'modal' }}>
+            {MODAL_SCREENS.map((screen) => (
+              <ModalScreen
+                name={screen.name}
+                component={screen.component}
+                key={screen.name}
+              />
+            ))}
+          </ModalsGroup>
+        </TabNavigator>
       </NavigationContainer>
     </NotificationProvider>
   );
