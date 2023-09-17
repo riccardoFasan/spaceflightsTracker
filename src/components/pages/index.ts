@@ -1,4 +1,3 @@
-export * from './UpcomingsPage';
-export * from './NewsPage';
-export * from './SearchPage';
-export * from './LaunchPage';
+export * from "./LaunchesPage";
+export * from "./NewsPage";
+export * from "./LaunchPage";

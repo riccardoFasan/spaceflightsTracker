@@ -1,10 +1,7 @@
 import {
-  LaunchesList,
   ArticlesList,
   LaunchPage,
-  UpcomingsPage,
   NewsPage,
-  SpaceEventsList,
 } from '../components';
 import { BlogsList } from '../components/features/blogs';
 import { ReportsList } from '../components/features/reports';
@@ -13,28 +10,31 @@ import { ScreenConfig, RootScreenConfig } from '../models';
 export const ROOT_SCREENS: RootScreenConfig[] = [
   {
     name: 'Upcomings',
-    component: UpcomingsPage,
+    component: LaunchesPage,
     showNavigation: true,
+    hasChildren: false,
   },
   {
     name: 'News',
     component: NewsPage,
     showNavigation: true,
+    hasChildren: true,
   },
   {
     name: 'Launch',
     component: LaunchPage,
     showNavigation: false,
+    hasChildren: false,
   },
 ];
 
 export const LAUNCH_SCREENS: ScreenConfig[] = [
   {
-    name: 'Launches',
+    name: "Launches",
     component: LaunchesList,
   },
   {
-    name: 'events',
+    name: "events",
     component: SpaceEventsList,
   },
 ];
@@ -55,9 +55,19 @@ export const NEWS_SCREENS: ScreenConfig[] = [
 ];
 
 export function shouldShowNavigation(indexOrName: number | string): boolean {
-  const screen: RootScreenConfig | undefined =
-    typeof indexOrName === 'number'
-      ? ROOT_SCREENS[indexOrName]
-      : ROOT_SCREENS.find((screen) => screen.name === indexOrName);
+  const screen: RootScreenConfig | undefined = findScreen(indexOrName);
   return !!screen?.showNavigation;
+}
+
+export function hasChildren(indexOrName: number | string): boolean {
+  const screen: RootScreenConfig | undefined = findScreen(indexOrName);
+  return !!screen?.hasChildren;
+}
+
+function findScreen(
+  indexOrName: number | string,
+): RootScreenConfig | undefined {
+  return typeof indexOrName === "number"
+    ? ROOT_SCREENS[indexOrName]
+    : ROOT_SCREENS.find((screen) => screen.name === indexOrName);
 }

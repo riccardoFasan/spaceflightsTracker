@@ -1,6 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { ScheduledNotification } from '../models';
-import { NotificationTarget } from '../enums';
 import {
   cancelNotification,
   getNotifications,
@@ -11,11 +10,10 @@ import {
 
 interface ContextType {
   notifications: ScheduledNotification[];
-  get: (targetId: string, target: NotificationTarget) => ScheduledNotification | null;
+  get: (targetId: string) => ScheduledNotification | null;
   schedule: (
     targetId: string,
     targetName: string,
-    target: NotificationTarget,
     eventDate: Date,
   ) => Promise<ScheduledNotification>;
   cancel: (notification: ScheduledNotification) => Promise<void>;
@@ -48,22 +46,23 @@ export const NotificationProvider = ({ children }: Props) => {
     setNotifications(await getNotifications());
   }
 
-  function get(targetId: string, target: NotificationTarget): ScheduledNotification | null {
-    return notifications.find((n) => n.targetId === targetId && n.target === target) || null;
+
+  function get(targetId: string): ScheduledNotification | null {
+    return notifications.find((n) => n.targetId === targetId) || null;
   }
 
   async function schedule(
     targetId: string,
     targetName: string,
-    target: NotificationTarget,
     eventDate: Date,
   ): Promise<ScheduledNotification> {
     const MS_PER_MINUTE: number = 60000;
     const fireDate = new Date(eventDate.getTime() - 30 * MS_PER_MINUTE);
 
     const notification: ScheduledNotification = await scheduleNotification(
-      { id: targetId, name: targetName, fireDate },
-      target,
+      targetId,
+      targetName,
+      fireDate,
     );
 
     setNotifications((notifications) => [...notifications, notification]);

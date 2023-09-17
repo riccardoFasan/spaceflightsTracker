@@ -4,18 +4,15 @@ import {
   getArticles,
   getReports,
   getBlogs,
-  getSpaceEvents,
   mapArticleSnToArticle,
   mapReportSnToReport,
   mapBlogSnToBlog,
   mapLaunchLl2ToLaunch,
   mapLaunchLl2ToDetailedLaunch,
-  mapEventLl2ToEvent,
-} from '.';
+} from ".";
 import {
   ArticleSnDTO,
   BlogSnDTO,
-  SpaceEventLl2DTO,
   LaunchCommonLl2DTO,
   PaginatedListLl2DTO,
   ReportSnDTO,
@@ -29,8 +26,8 @@ import {
   Report,
   FetchController,
   ApiController,
-  SpaceEvent,
-} from '../models';
+
+} from "../models";
 
 export function getLaunchesBatch(
   batch: number,
@@ -54,27 +51,6 @@ export function getLaunchesBatch(
   };
 }
 
-export function getEventsBatch(
-  batch: number,
-  batchSize: number,
-): ApiController<ListBatch<SpaceEvent>> {
-  const { limit, offset } = getOffsetAndLimit(batch, batchSize);
-  const controller: FetchController<PaginatedListLl2DTO<SpaceEventLl2DTO>> = getSpaceEvents(
-    limit,
-    offset,
-  );
-  return {
-    cancel: controller.abort,
-    fetch: async () => {
-      const response = await controller.fetch();
-      return {
-        totalCount: response.count,
-        batch,
-        results: response.results.map((result) => mapEventLl2ToEvent(result)),
-      };
-    },
-  };
-}
 
 export function getArticlesBatch(
   batch: number,

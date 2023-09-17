@@ -19,7 +19,7 @@ interface Props {
 const dimensions = Dimensions.get('window');
 
 export const ListCard = ({ content, children, badge }: Props) => {
-  const imageHeight: number = useMemo(
+  const height: number = useMemo(
     () => Math.round(dimensions.height / content.imageRatio),
     [content.imageRatio],
   );
@@ -30,7 +30,7 @@ export const ListCard = ({ content, children, badge }: Props) => {
         <Image
           accessibilityLabel={content.title}
           alt={content.title}
-          style={[styles.cardImage, { height: imageHeight }]}
+          style={[styles.cardImage, { height }]}
           resizeMode={'cover'}
           source={{ uri: content.image }}
           progressiveRenderingEnabled={true}

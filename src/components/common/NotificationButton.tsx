@@ -5,7 +5,6 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useEffect, useState } from 'react';
 import { Launch, ScheduledNotification } from '../../models';
 import { useNotifications } from '../../contexts';
-import { NotificationTarget } from '../../enums';
 
 interface Props {
   launch: Launch;
@@ -34,7 +33,7 @@ export const NotificationButton = ({ launch }: Props) => {
   }, [notification]);
 
   function getLaunchNotification(): void {
-    setNotification(get(launch.id, NotificationTarget.Launch));
+    setNotification(get(launch.id));
   }
 
   async function onPress(): Promise<void> {
@@ -54,7 +53,7 @@ export const NotificationButton = ({ launch }: Props) => {
     }
     setLoading(true);
     const startDate: Date = new Date(launch.window!.start!);
-    setNotification(await schedule(launch.id, launch.name, NotificationTarget.Launch, startDate));
+    setNotification(await schedule(launch.id, launch.name, startDate));
     setLoading(false);
   }
 

@@ -1,3 +1,2 @@
-export * from './launches';
-export * from './articles';
-export * from './spaceEvents';
+export * from "./launches";
+export * from "./articles";

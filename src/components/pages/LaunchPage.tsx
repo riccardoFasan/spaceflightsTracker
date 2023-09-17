@@ -3,7 +3,7 @@ import { View, Dimensions, StyleSheet, Image, ActivityIndicator, ScrollView } fr
 import { LaunchDetailed } from '../../models';
 import { getLaunch, showErrorMessage } from '../../services';
 import { Color, Spacing, flexBoxStyles } from '../../styles';
-import { DetailSection, LaunchStatusBadge, NotificationButton } from '../common';
+import { DetailSection, NotificationButton } from '../common';
 import { DeatailHeader } from '../layout';
 
 interface Props {
@@ -54,7 +54,6 @@ export const LaunchPage = ({ navigation, route }: Props) => {
               source={{ uri: launch.image }}
               progressiveRenderingEnabled={true}
             />
-            <LaunchStatusBadge launch={launch} />
             <View style={styles.body}>
               {launch.mission && (
                 <DetailSection

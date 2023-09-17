@@ -17,10 +17,10 @@ export const BottomNavigationBar = ({ state, navigation }: BottomTabBarProps) =>
 
   return (
     <View style={styles.container}>
-      <Pressable onPress={() => navigate('Upcomings')}>
+      <Pressable onPress={() => navigate('Launches')}>
         <BottomNavigationButton
-          focused={isActive('Upcomings')}
-          name="upcomings"
+          focused={isActive('Launches')}
+          name="launches"
           icon="rocket-launch-outline"
           iconActive="rocket-launch"
         />
