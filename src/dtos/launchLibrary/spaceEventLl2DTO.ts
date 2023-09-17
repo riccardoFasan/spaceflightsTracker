@@ -1,8 +1,8 @@
-import { AgencyCommonLl2DTO } from "./agencyCommonLl2DTO";
-import { SpaceEventTypeLl2 } from "./SpaceEventTypeLl2";
-import { LaunchCommonLl2DTO } from "./launchCommonLl2DTO";
-import { ProgramLl2DTO } from "./programLl2DTO";
-import { SpaceStationLl2DTO } from "./spaceStationLl2DTO";
+import { AgencyCommonLl2DTO } from './agencyCommonLl2DTO';
+import { SpaceEventTypeLl2 } from './SpaceEventTypeLl2';
+import { LaunchCommonLl2DTO } from './launchCommonLl2DTO';
+import { ProgramLl2DTO } from './programLl2DTO';
+import { SpaceStationLl2DTO } from './spaceStationLl2DTO';
 
 export interface SpaceEventLl2DTO {
   id: number;

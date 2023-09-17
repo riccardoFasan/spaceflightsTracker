@@ -41,14 +41,14 @@ export const ScrollableList = <T,>({
       try {
         setLoading(true);
         const { results, totalCount } = await controller.fetch();
-        setItems((currentItems) =>
-          uniqueBy(idKey, [...currentItems, ...results]),
-        );
+        setItems((currentItems) => uniqueBy(idKey, [...currentItems, ...results]));
         setTotalCount(totalCount);
       } catch (e: unknown) {
         showErrorMessage('Error loading batch');
       } finally {
-        if (refreshing) setRefreshing(false);
+        if (refreshing) {
+          setRefreshing(false);
+        }
         setLoading(false);
       }
     }
@@ -72,10 +72,16 @@ export const ScrollableList = <T,>({
   }
 
   function canLoadNextBatch(): boolean {
-    if (loading || refreshing) return false;
+    if (loading || refreshing) {
+      return false;
+    }
     const nextBatch: number = currentBatch + 1;
-    if (nextBatch >= maxBatches) return false;
-    if (nextBatch * batchSize >= totalCount) return false;
+    if (nextBatch >= maxBatches) {
+      return false;
+    }
+    if (nextBatch * batchSize >= totalCount) {
+      return false;
+    }
     return true;
   }
 
@@ -104,7 +110,7 @@ export const ScrollableList = <T,>({
           )
         }
         onEndReached={() => nextBatch()}
-      ></VirtualizedList>
+      />
     </SafeAreaView>
   );
 };

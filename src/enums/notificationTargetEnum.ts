@@ -1,4 +1,4 @@
 export enum NotificationTarget {
-    Launch = 'LAUNCH',
-    Event = 'EVENT',
+  Launch = 'LAUNCH',
+  Event = 'EVENT',
 }

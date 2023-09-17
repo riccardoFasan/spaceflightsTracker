@@ -1,20 +1,9 @@
 import { useEffect, useState } from 'react';
-import {
-  View,
-  Dimensions,
-  StyleSheet,
-  Image,
-  ActivityIndicator,
-  ScrollView,
-} from 'react-native';
+import { View, Dimensions, StyleSheet, Image, ActivityIndicator, ScrollView } from 'react-native';
 import { LaunchDetailed } from '../../models';
 import { getLaunch, showErrorMessage } from '../../services';
 import { Color, Spacing, flexBoxStyles } from '../../styles';
-import {
-  DetailSection,
-  LaunchStatusBadge,
-  NotificationButton,
-} from '../common';
+import { DetailSection, LaunchStatusBadge, NotificationButton } from '../common';
 import { DeatailHeader } from '../layout';
 
 interface Props {
@@ -84,7 +73,7 @@ export const LaunchPage = ({ navigation, route }: Props) => {
               {launch.launcher?.company && (
                 <DetailSection
                   title={launch.launcher.company.name}
-                  subtitle={`manufacturer`}
+                  subtitle={'manufacturer'}
                   text={launch.launcher.company.description}
                 />
               )}

@@ -1,5 +1,5 @@
-import { LaunchWindow, Pad, Mission, Launcher } from ".";
-import { LaunchStatus } from "../enums";
+import { LaunchWindow, Pad, Mission, Launcher } from '.';
+import { LaunchStatus } from '../enums';
 
 export interface LaunchDetailed {
   id: string;

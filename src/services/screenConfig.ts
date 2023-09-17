@@ -5,24 +5,24 @@ import {
   UpcomingsPage,
   NewsPage,
   SpaceEventsList,
-} from "../components";
-import { BlogsList } from "../components/features/blogs";
-import { ReportsList } from "../components/features/reports";
-import { ScreenConfig, RootScreenConfig } from "../models";
+} from '../components';
+import { BlogsList } from '../components/features/blogs';
+import { ReportsList } from '../components/features/reports';
+import { ScreenConfig, RootScreenConfig } from '../models';
 
 export const ROOT_SCREENS: RootScreenConfig[] = [
   {
-    name: "Upcomings",
+    name: 'Upcomings',
     component: UpcomingsPage,
     showNavigation: true,
   },
   {
-    name: "News",
+    name: 'News',
     component: NewsPage,
     showNavigation: true,
   },
   {
-    name: "Launch",
+    name: 'Launch',
     component: LaunchPage,
     showNavigation: false,
   },
@@ -30,33 +30,33 @@ export const ROOT_SCREENS: RootScreenConfig[] = [
 
 export const LAUNCH_SCREENS: ScreenConfig[] = [
   {
-    name: "Launches",
+    name: 'Launches',
     component: LaunchesList,
   },
   {
-    name: "events",
+    name: 'events',
     component: SpaceEventsList,
   },
 ];
 
 export const NEWS_SCREENS: ScreenConfig[] = [
   {
-    name: "Articles",
+    name: 'Articles',
     component: ArticlesList,
   },
   {
-    name: "Blogs",
+    name: 'Blogs',
     component: BlogsList,
   },
   {
-    name: "ISS reports",
+    name: 'ISS reports',
     component: ReportsList,
   },
 ];
 
 export function shouldShowNavigation(indexOrName: number | string): boolean {
   const screen: RootScreenConfig | undefined =
-    typeof indexOrName === "number"
+    typeof indexOrName === 'number'
       ? ROOT_SCREENS[indexOrName]
       : ROOT_SCREENS.find((screen) => screen.name === indexOrName);
   return !!screen?.showNavigation;

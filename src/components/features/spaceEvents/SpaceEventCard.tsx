@@ -13,7 +13,9 @@ interface Props {
 
 export const SpaceEventCard = ({ event }: Props) => {
   function openSpaceEvent(): void {
-    if (event.url) openURL(event.url);
+    if (event.url) {
+      openURL(event.url);
+    }
   }
 
   return (
@@ -25,11 +27,7 @@ export const SpaceEventCard = ({ event }: Props) => {
         imageRatio: 3.125,
         pageName: 'Article',
       }}
-      badge={
-        event.type !== SpaceEventType.Unknown && (
-          <SpaceEventBadge event={event} />
-        )
-      }
+      badge={event.type !== SpaceEventType.Unknown && <SpaceEventBadge event={event} />}
     >
       <Text style={styles.cardText}>On:&nbsp;{formatDateTime(event.date)}</Text>
       <Text
@@ -44,12 +42,7 @@ export const SpaceEventCard = ({ event }: Props) => {
       >
         {event.description}
       </Text>
-      {event.url && (
-        <ButtonPrimary
-          title="Read more"
-          onPress={openSpaceEvent}
-        ></ButtonPrimary>
-      )}
+      {event.url && <ButtonPrimary title="Read more" onPress={openSpaceEvent} />}
     </ListCard>
   );
 };

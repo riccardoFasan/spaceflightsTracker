@@ -1,4 +1,4 @@
-import { Location } from "./locationModel";
+import { Location } from './locationModel';
 
 export interface Pad {
   id: string;

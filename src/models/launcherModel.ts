@@ -1,4 +1,4 @@
-import { Company } from ".";
+import { Company } from '.';
 
 export interface Launcher {
   id: string;

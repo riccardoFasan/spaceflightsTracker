@@ -3,16 +3,15 @@ import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { BottomNavigationButton } from '.';
 import { Color, Spacing, flexBoxStyles } from '../../styles';
 
-export const BottomNavigationBar = ({
-  state,
-  navigation,
-}: BottomTabBarProps) => {
+export const BottomNavigationBar = ({ state, navigation }: BottomTabBarProps) => {
   function isActive(routeName: string): boolean {
     return state.routes[state.index].name === routeName;
   }
 
   function navigate(routeName: string): void {
-    if (isActive(routeName)) return;
+    if (isActive(routeName)) {
+      return;
+    }
     navigation.navigate(routeName);
   }
 

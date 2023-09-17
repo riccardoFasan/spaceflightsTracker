@@ -1,4 +1,4 @@
-import { MissionType, Orbit } from "../enums";
+import { MissionType, Orbit } from '../enums';
 
 export interface Mission {
   id: string;

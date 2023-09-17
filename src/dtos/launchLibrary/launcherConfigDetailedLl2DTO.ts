@@ -1,4 +1,4 @@
-import { AgencyCommonLl2DTO, ProgramLl2DTO } from ".";
+import { AgencyCommonLl2DTO, ProgramLl2DTO } from '.';
 
 export interface LauncherConfigDetailedLl2DTO {
   id: number;

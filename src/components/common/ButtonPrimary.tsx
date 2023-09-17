@@ -11,11 +11,7 @@ export const ButtonPrimary = ({ title, onPress }: Props) => {
   const [focus, toogleFocus] = useFocus(false);
 
   return (
-    <Pressable
-      onPress={onPress}
-      onPressIn={toogleFocus}
-      onPressOut={toogleFocus}
-    >
+    <Pressable onPress={onPress} onPressIn={toogleFocus} onPressOut={toogleFocus}>
       <Text style={[styles.button, focus && styles.buttonFocus]}>{title}</Text>
     </Pressable>
   );

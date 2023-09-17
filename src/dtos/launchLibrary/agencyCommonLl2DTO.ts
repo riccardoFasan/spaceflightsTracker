@@ -1,4 +1,4 @@
-import { AgencyTypeLl2 } from ".";
+import { AgencyTypeLl2 } from '.';
 
 export interface AgencyCommonLl2DTO {
   id: string;

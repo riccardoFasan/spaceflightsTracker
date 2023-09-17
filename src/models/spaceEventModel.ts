@@ -1,4 +1,4 @@
-import { SpaceEventType } from "../enums";
+import { SpaceEventType } from '../enums';
 
 export interface SpaceEvent {
   id: string;

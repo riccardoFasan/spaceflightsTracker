@@ -7,13 +7,13 @@ import notifee, {
   Trigger,
   TriggerNotification,
   TriggerType,
-} from "@notifee/react-native";
-import { NotificationTarget } from "../enums";
-import { ScheduledNotification } from "../models";
-import { Alert } from "react-native";
+} from '@notifee/react-native';
+import { NotificationTarget } from '../enums';
+import { ScheduledNotification } from '../models';
+import { Alert } from 'react-native';
 
-const ANDROID_CHANNEL_ID: string = "space-flights-tracker-channel";
-const ANDROID_CHANNEL_NAME: string = "Space Flights Tracker Channel";
+const ANDROID_CHANNEL_ID: string = 'space-flights-tracker-channel';
+const ANDROID_CHANNEL_NAME: string = 'Space Flights Tracker Channel';
 
 interface NotificationPayload {
   id: string;
@@ -23,15 +23,17 @@ interface NotificationPayload {
 
 export async function setUpNotifications(): Promise<void> {
   const settings: NotificationSettings = await notifee.requestPermission();
-  if (!isAuthorized(settings)) return;
+  if (!isAuthorized(settings)) {
+    return;
+  }
 
   if (settings.android.alarm !== AndroidNotificationSetting.ENABLED) {
     Alert.alert(
-      "Allow exact alarm permission",
-      "Allow exact alarm to ensure the proper functioning of the application",
+      'Allow exact alarm permission',
+      'Allow exact alarm to ensure the proper functioning of the application',
       [
         {
-          text: "OK",
+          text: 'OK',
           onPress: async () => await notifee.openAlarmPermissionSettings(),
         },
       ],
@@ -45,8 +47,7 @@ export async function setUpNotifications(): Promise<void> {
 }
 
 export async function getNotifications(): Promise<ScheduledNotification[]> {
-  const notifications: TriggerNotification[] =
-    await notifee.getTriggerNotifications();
+  const notifications: TriggerNotification[] = await notifee.getTriggerNotifications();
   return notifications.map((n) => ({
     id: n.notification.id!,
     targetId: (n.notification.data as any).payload.id,
@@ -59,13 +60,13 @@ export async function scheduleNotification(
   target: NotificationTarget,
 ): Promise<ScheduledNotification> {
   const notification: Notification = {
-    title: "Space Flights Tracker",
+    title: 'Space Flights Tracker',
     body: getNotificationBody(target, payload.name),
     data: { payload, target },
     android: {
       channelId: ANDROID_CHANNEL_ID,
       importance: AndroidImportance.HIGH,
-      pressAction: { id: "default" },
+      pressAction: { id: 'default' },
     },
   };
 
@@ -74,26 +75,18 @@ export async function scheduleNotification(
     timestamp: payload.fireDate.getTime(),
   };
 
-  const id: string = await notifee.createTriggerNotification(
-    notification,
-    trigger,
-  );
+  const id: string = await notifee.createTriggerNotification(notification, trigger);
 
   return { id, targetId: payload.id, target };
 }
 
-export async function cancelNotification(
-  notification: ScheduledNotification,
-): Promise<void> {
+export async function cancelNotification(notification: ScheduledNotification): Promise<void> {
   await notifee.cancelNotification(notification.id);
 }
 
 function isAuthorized(settings: NotificationSettings): boolean {
   const status: AuthorizationStatus = settings.authorizationStatus;
-  return (
-    status === AuthorizationStatus.AUTHORIZED ||
-    status === AuthorizationStatus.PROVISIONAL
-  );
+  return status === AuthorizationStatus.AUTHORIZED || status === AuthorizationStatus.PROVISIONAL;
 }
 
 function getNotificationBody(target: NotificationTarget, name: string): string {

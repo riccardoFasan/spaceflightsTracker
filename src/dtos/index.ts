@@ -1,2 +1,2 @@
-export * from "./spaceNews";
-export * from "./launchLibrary";
+export * from './spaceNews';
+export * from './launchLibrary';

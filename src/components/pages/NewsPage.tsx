@@ -3,21 +3,14 @@ import { NEWS_SCREENS } from '../../services';
 import { TopTabBar } from '../layout';
 
 const Tab = createMaterialTopTabNavigator();
-const Navigator = Tab.Navigator;
-const Screen = Tab.Screen;
+const { Navigator } = Tab;
+const { Screen } = Tab;
 
 export const NewsPage = () => {
   return (
-    <Navigator
-      initialRouteName="Articles"
-      tabBar={(props) => <TopTabBar {...props} />}
-    >
+    <Navigator initialRouteName="Articles" tabBar={(props) => <TopTabBar {...props} />}>
       {NEWS_SCREENS.map((screen) => (
-        <Screen
-          key={screen.name}
-          name={screen.name}
-          component={screen.component}
-        />
+        <Screen key={screen.name} name={screen.name} component={screen.component} />
       ))}
     </Navigator>
   );

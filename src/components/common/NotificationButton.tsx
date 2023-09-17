@@ -1,11 +1,5 @@
 import { StyleSheet, Text, Pressable } from 'react-native';
-import {
-  Color,
-  Spacing,
-  FontWeight,
-  typographyStyles,
-  flexBoxStyles,
-} from '../../styles';
+import { Color, Spacing, FontWeight, typographyStyles, flexBoxStyles } from '../../styles';
 import { useFocus } from '../../hooks';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useEffect, useState } from 'react';
@@ -23,8 +17,7 @@ export const NotificationButton = ({ launch }: Props) => {
   const [icon, setIcon] = useState<string>('bell-outline');
   const [text, setText] = useState<string>('notify me');
 
-  const [notification, setNotification] =
-    useState<ScheduledNotification | null>(null);
+  const [notification, setNotification] = useState<ScheduledNotification | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
   const { notifications, get, schedule, cancel } = useNotifications();
@@ -45,7 +38,9 @@ export const NotificationButton = ({ launch }: Props) => {
   }
 
   async function onPress(): Promise<void> {
-    if (loading) return;
+    if (loading) {
+      return;
+    }
     if (notification) {
       await cancelNotification();
       return;
@@ -54,22 +49,19 @@ export const NotificationButton = ({ launch }: Props) => {
   }
 
   async function scheduleNotification(): Promise<void> {
-    if (notification) return;
+    if (notification) {
+      return;
+    }
     setLoading(true);
     const startDate: Date = new Date(launch.window!.start!);
-    setNotification(
-      await schedule(
-        launch.id,
-        launch.name,
-        NotificationTarget.Launch,
-        startDate,
-      ),
-    );
+    setNotification(await schedule(launch.id, launch.name, NotificationTarget.Launch, startDate));
     setLoading(false);
   }
 
   async function cancelNotification(): Promise<void> {
-    if (!notification) return;
+    if (!notification) {
+      return;
+    }
     setLoading(true);
     await cancel(notification);
     setNotification(null);
@@ -81,11 +73,7 @@ export const NotificationButton = ({ launch }: Props) => {
       onPress={onPress}
       onPressIn={toogleFocus}
       onPressOut={toogleFocus}
-      style={[
-        styles.button,
-        notification && styles.buttonActive,
-        focus && styles.buttonFocus,
-      ]}
+      style={[styles.button, notification && styles.buttonActive, focus && styles.buttonFocus]}
     >
       <Icon style={styles.icon} name={icon} />
       <Text style={styles.text}>{text}</Text>

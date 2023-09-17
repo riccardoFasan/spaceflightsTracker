@@ -1,12 +1,6 @@
 import { Animated, StyleSheet, Text, View } from 'react-native';
 import { useEffect } from 'react';
-import {
-  Color,
-  FontSize,
-  FontWeight,
-  Spacing,
-  flexBoxStyles,
-} from '../../styles';
+import { Color, FontSize, FontWeight, Spacing, flexBoxStyles } from '../../styles';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useFocusAnimation } from '../../hooks';
 
@@ -17,14 +11,8 @@ interface Props {
   iconActive: string;
 }
 
-export const BottomNavigationButton = ({
-  focused,
-  name,
-  icon,
-  iconActive,
-}: Props) => {
-  const [[backgroundScale, backgroundOpacity], toogleAnimation] =
-    useFocusAnimation(0, 0);
+export const BottomNavigationButton = ({ focused, name, icon, iconActive }: Props) => {
+  const [[backgroundScale, backgroundOpacity], toogleAnimation] = useFocusAnimation(0, 0);
 
   useEffect(() => {
     toogleAnimation(focused);

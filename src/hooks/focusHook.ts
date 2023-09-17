@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 export function useFocus(value: boolean): [boolean, () => void] {
   const [focus, setFocus] = useState<boolean>(value);

@@ -1,4 +1,4 @@
-import { AgencyMiniLl2DTO } from ".";
+import { AgencyMiniLl2DTO } from '.';
 export interface MissionPatchLl2DTO {
   id: number;
   name: string;

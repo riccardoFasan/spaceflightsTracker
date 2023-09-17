@@ -11,10 +11,7 @@ import {
 
 interface ContextType {
   notifications: ScheduledNotification[];
-  get: (
-    targetId: string,
-    target: NotificationTarget,
-  ) => ScheduledNotification | null;
+  get: (targetId: string, target: NotificationTarget) => ScheduledNotification | null;
   schedule: (
     targetId: string,
     targetName: string,
@@ -31,19 +28,16 @@ const NotificationContext = createContext<ContextType>({
   cancel: async () => {},
 });
 
-const Provider = NotificationContext.Provider;
+export const useNotifications = () => useContext<ContextType>(NotificationContext);
 
-export const useNotifications = () =>
-  useContext<ContextType>(NotificationContext);
+const { Provider } = NotificationContext;
 
 interface Props {
   children: React.ReactNode;
 }
 
 export const NotificationProvider = ({ children }: Props) => {
-  const [notifications, setNotifications] = useState<ScheduledNotification[]>(
-    [],
-  );
+  const [notifications, setNotifications] = useState<ScheduledNotification[]>([]);
 
   useEffect(() => {
     loadNotifications();
@@ -54,15 +48,8 @@ export const NotificationProvider = ({ children }: Props) => {
     setNotifications(await getNotifications());
   }
 
-  function get(
-    targetId: string,
-    target: NotificationTarget,
-  ): ScheduledNotification | null {
-    return (
-      notifications.find(
-        (n) => n.targetId === targetId && n.target === target,
-      ) || null
-    );
+  function get(targetId: string, target: NotificationTarget): ScheduledNotification | null {
+    return notifications.find((n) => n.targetId === targetId && n.target === target) || null;
   }
 
   async function schedule(
@@ -88,14 +75,8 @@ export const NotificationProvider = ({ children }: Props) => {
 
   async function cancel(notification: ScheduledNotification): Promise<void> {
     await cancelNotification(notification);
-    setNotifications((notifications) =>
-      notifications.filter((n) => n.id !== notification.id),
-    );
+    setNotifications((notifications) => notifications.filter((n) => n.id !== notification.id));
   }
 
-  return (
-    <Provider value={{ notifications, get, schedule, cancel }}>
-      {children}
-    </Provider>
-  );
+  return <Provider value={{ notifications, get, schedule, cancel }}>{children}</Provider>;
 };

@@ -5,7 +5,7 @@ import {
   PadLl2DTO,
   RocketCommonLl2DTO,
   MissionLl2DTO,
-} from ".";
+} from '.';
 
 export interface LaunchCommonLl2DTO {
   id: number;

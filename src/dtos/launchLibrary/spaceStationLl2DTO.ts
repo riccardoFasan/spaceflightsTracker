@@ -3,7 +3,7 @@ import {
   AgencyMiniForSpaceStationLl2DTO,
   OrbitLl2DTO,
   ExpeditionForSpaceStationLl2DTO,
-} from ".";
+} from '.';
 
 export interface SpaceStationLl2DTO {
   id: number;

@@ -11,7 +11,7 @@ import {
   mapLaunchLl2ToLaunch,
   mapLaunchLl2ToDetailedLaunch,
   mapEventLl2ToEvent,
-} from ".";
+} from '.';
 import {
   ArticleSnDTO,
   BlogSnDTO,
@@ -19,7 +19,7 @@ import {
   LaunchCommonLl2DTO,
   PaginatedListLl2DTO,
   ReportSnDTO,
-} from "../dtos";
+} from '../dtos';
 import {
   Article,
   Blog,
@@ -30,15 +30,17 @@ import {
   FetchController,
   ApiController,
   SpaceEvent,
-} from "../models";
+} from '../models';
 
 export function getLaunchesBatch(
   batch: number,
   batchSize: number,
 ): ApiController<ListBatch<Launch>> {
   const { limit, offset } = getOffsetAndLimit(batch, batchSize);
-  const controller: FetchController<PaginatedListLl2DTO<LaunchCommonLl2DTO>> =
-    getLaunches(limit, offset);
+  const controller: FetchController<PaginatedListLl2DTO<LaunchCommonLl2DTO>> = getLaunches(
+    limit,
+    offset,
+  );
   return {
     cancel: controller.abort,
     fetch: async () => {
@@ -57,8 +59,10 @@ export function getEventsBatch(
   batchSize: number,
 ): ApiController<ListBatch<SpaceEvent>> {
   const { limit, offset } = getOffsetAndLimit(batch, batchSize);
-  const controller: FetchController<PaginatedListLl2DTO<SpaceEventLl2DTO>> =
-    getSpaceEvents(limit, offset);
+  const controller: FetchController<PaginatedListLl2DTO<SpaceEventLl2DTO>> = getSpaceEvents(
+    limit,
+    offset,
+  );
   return {
     cancel: controller.abort,
     fetch: async () => {
@@ -77,8 +81,7 @@ export function getArticlesBatch(
   batchSize: number,
 ): ApiController<ListBatch<Article>> {
   const { limit, offset } = getOffsetAndLimit(batch, batchSize);
-  const controller: FetchController<PaginatedListLl2DTO<ArticleSnDTO>> =
-    getArticles(limit, offset);
+  const controller: FetchController<PaginatedListLl2DTO<ArticleSnDTO>> = getArticles(limit, offset);
   return {
     cancel: controller.abort,
     fetch: async () => {
@@ -86,9 +89,7 @@ export function getArticlesBatch(
       return {
         totalCount: response.count,
         batch,
-        results: response.results.map((result) =>
-          mapArticleSnToArticle(result),
-        ),
+        results: response.results.map((result) => mapArticleSnToArticle(result)),
       };
     },
   };
@@ -99,8 +100,7 @@ export function getReportsBatch(
   batchSize: number,
 ): ApiController<ListBatch<Report>> {
   const { limit, offset } = getOffsetAndLimit(batch, batchSize);
-  const controller: FetchController<PaginatedListLl2DTO<ReportSnDTO>> =
-    getReports(limit, offset);
+  const controller: FetchController<PaginatedListLl2DTO<ReportSnDTO>> = getReports(limit, offset);
   return {
     cancel: controller.abort,
     fetch: async () => {
@@ -114,15 +114,9 @@ export function getReportsBatch(
   };
 }
 
-export function getBlogsBatch(
-  batch: number,
-  batchSize: number,
-): ApiController<ListBatch<Blog>> {
+export function getBlogsBatch(batch: number, batchSize: number): ApiController<ListBatch<Blog>> {
   const { limit, offset } = getOffsetAndLimit(batch, batchSize);
-  const controller: FetchController<PaginatedListLl2DTO<BlogSnDTO>> = getBlogs(
-    limit,
-    offset,
-  );
+  const controller: FetchController<PaginatedListLl2DTO<BlogSnDTO>> = getBlogs(limit, offset);
   return {
     cancel: controller.abort,
     fetch: async () => {
@@ -147,10 +141,7 @@ export function getLaunch(id: string): ApiController<LaunchDetailed> {
   };
 }
 
-function getOffsetAndLimit(
-  batch: number,
-  batchSize: number,
-): { limit: number; offset: number } {
+function getOffsetAndLimit(batch: number, batchSize: number): { limit: number; offset: number } {
   const offset: number = (batch - 1) * batchSize;
   const limit: number = batchSize;
   return { limit, offset };

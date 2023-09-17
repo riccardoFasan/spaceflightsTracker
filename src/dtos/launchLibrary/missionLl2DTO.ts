@@ -1,4 +1,4 @@
-import { MissionTypeLl2, OrbitLl2DTO } from ".";
+import { MissionTypeLl2, OrbitLl2DTO } from '.';
 
 export interface MissionLl2DTO {
   id: number;

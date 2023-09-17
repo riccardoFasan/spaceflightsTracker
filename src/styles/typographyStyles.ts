@@ -1,16 +1,16 @@
-import { StyleSheet } from "react-native";
-import { Color } from "./colorsStyles";
+import { StyleSheet } from 'react-native';
+import { Color } from './colorsStyles';
 
 export enum FontWeight {
-  Thin = "100",
-  ExtraLight = "200",
-  Light = "300",
-  Regular = "400",
-  Medium = "500",
-  SemiBold = "600",
-  Bold = "700",
-  ExtraBold = "800",
-  Black = "900",
+  Thin = '100',
+  ExtraLight = '200',
+  Light = '300',
+  Regular = '400',
+  Medium = '500',
+  SemiBold = '600',
+  Bold = '700',
+  ExtraBold = '800',
+  Black = '900',
 }
 
 export enum FontSize {
@@ -24,40 +24,40 @@ export enum FontSize {
 
 export const typographyStyles = StyleSheet.create({
   paragraph: {
-    fontFamily: "Roboto",
+    fontFamily: 'Roboto',
     color: Color.Gray,
     fontSize: FontSize.Medium,
     fontWeight: FontWeight.Regular,
     lineHeight: calculateLineHeight(FontSize.Medium),
   },
   label: {
-    fontFamily: "Roboto",
+    fontFamily: 'Roboto',
     color: Color.White,
     fontSize: FontSize.Large,
     fontWeight: FontWeight.Medium,
   },
   heading1: {
-    fontFamily: "Roboto",
+    fontFamily: 'Roboto',
     color: Color.White,
     fontSize: FontSize.ExtraExtraLarge,
     fontWeight: FontWeight.Black,
   },
   heading2: {
-    fontFamily: "Roboto",
+    fontFamily: 'Roboto',
     color: Color.White,
     fontSize: FontSize.ExtraLarge,
     fontWeight: FontWeight.ExtraBold,
     lineHeight: calculateLineHeight(FontSize.ExtraLarge),
   },
   heading3: {
-    fontFamily: "Roboto",
+    fontFamily: 'Roboto',
     color: Color.White,
     fontSize: FontSize.Large,
     fontWeight: FontWeight.Black,
     lineHeight: calculateLineHeight(FontSize.Large),
   },
   heading4: {
-    fontFamily: "Roboto",
+    fontFamily: 'Roboto',
     color: Color.Gray,
     fontSize: FontSize.ExtraLarge,
     fontWeight: FontWeight.SemiBold,

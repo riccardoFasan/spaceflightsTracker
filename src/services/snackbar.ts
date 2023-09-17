@@ -1,5 +1,5 @@
-import Snackbar from "react-native-snackbar";
-import { Color } from "../styles";
+import Snackbar from 'react-native-snackbar';
+import { Color } from '../styles';
 
 export function showErrorMessage(message: string): void {
   Snackbar.show({

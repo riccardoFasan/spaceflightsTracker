@@ -1,4 +1,4 @@
-import { NotificationTarget } from "../enums";
+import { NotificationTarget } from '../enums';
 
 export interface ScheduledNotification {
   id: string;

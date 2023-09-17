@@ -1,4 +1,4 @@
-import { LocationLl2DTO } from ".";
+import { LocationLl2DTO } from '.';
 
 export interface PadLl2DTO {
   id: number;

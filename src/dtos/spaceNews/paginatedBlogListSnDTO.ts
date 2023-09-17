@@ -1,3 +1,3 @@
-import { PaginatedListSnDTO, BlogSnDTO } from ".";
+import { PaginatedListSnDTO, BlogSnDTO } from '.';
 
 export type PaginatedBlogListSnDTO = PaginatedListSnDTO<BlogSnDTO>;

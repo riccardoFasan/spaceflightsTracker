@@ -21,7 +21,7 @@ const dimensions = Dimensions.get('window');
 export const ListCard = ({ content, children, badge }: Props) => {
   const imageHeight: number = useMemo(
     () => Math.round(dimensions.height / content.imageRatio),
-    [content.imageRatio]
+    [content.imageRatio],
   );
 
   return (

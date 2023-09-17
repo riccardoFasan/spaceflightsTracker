@@ -11,7 +11,9 @@ interface Props {
 
 export const NewsCard = ({ article }: Props) => {
   function openArticle(): void {
-    if (article.url) openURL(article.url);
+    if (article.url) {
+      openURL(article.url);
+    }
   }
 
   return (
@@ -37,9 +39,7 @@ export const NewsCard = ({ article }: Props) => {
       >
         {article.summary}
       </Text>
-      {article.url && (
-        <ButtonPrimary title="Read more" onPress={openArticle}></ButtonPrimary>
-      )}
+      {article.url && <ButtonPrimary title="Read more" onPress={openArticle} />}
     </ListCard>
   );
 };

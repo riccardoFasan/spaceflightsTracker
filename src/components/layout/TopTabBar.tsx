@@ -3,18 +3,15 @@ import { StyleSheet, Pressable, View } from 'react-native';
 import { Color, Spacing, flexBoxStyles } from '../../styles';
 import { TopTapBarButton } from '.';
 
-export const TopTabBar = ({
-  state,
-  descriptors,
-  navigation,
-  position,
-}: MaterialTopTabBarProps) => {
+export const TopTabBar = ({ state, descriptors, navigation, position }: MaterialTopTabBarProps) => {
   function isActive(routeName: string): boolean {
     return state.routes[state.index].name === routeName;
   }
 
   function navigate(routeName: string): void {
-    if (isActive(routeName)) return;
+    if (isActive(routeName)) {
+      return;
+    }
     navigation.navigate(routeName);
   }
 

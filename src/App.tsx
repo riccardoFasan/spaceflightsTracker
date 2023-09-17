@@ -6,8 +6,8 @@ import { ROOT_SCREENS, shouldShowNavigation } from './services';
 import { NotificationProvider } from './contexts';
 
 const Stack = createBottomTabNavigator();
-const Navigator = Stack.Navigator;
-const Screen = Stack.Screen;
+const { Navigator } = Stack;
+const { Screen } = Stack;
 
 export const App = () => {
   return (
@@ -16,14 +16,10 @@ export const App = () => {
         <Navigator
           screenOptions={{
             header: (props) =>
-              shouldShowNavigation(props.route.name) && (
-                <Header title={props.route.name} />
-              ),
+              shouldShowNavigation(props.route.name) && <Header title={props.route.name} />,
           }}
           tabBar={(props) =>
-            shouldShowNavigation(props.state.index) && (
-              <BottomNavigationBar {...props} />
-            )
+            shouldShowNavigation(props.state.index) && <BottomNavigationBar {...props} />
           }
           initialRouteName="Upcomings"
         >

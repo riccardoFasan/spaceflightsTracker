@@ -9,12 +9,7 @@ export const LaunchStatusBadge = ({ launch }: { launch: Launch }) => {
   const inlineBadge: boolean = useMemo(() => !!launch.image, [launch]);
 
   return launch.status === LaunchStatus.GoForLaunch && launch.window ? (
-    <View
-      style={[
-        styles.badge,
-        inlineBadge ? styles.overImageBadge : styles.inlineBadge,
-      ]}
-    >
+    <View style={[styles.badge, inlineBadge ? styles.overImageBadge : styles.inlineBadge]}>
       <Countdown date={launch.window.start} styles={styles.badgeText} />
     </View>
   ) : (
