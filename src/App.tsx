@@ -24,11 +24,18 @@ export const App = () => {
       <NavigationContainer>
         <TabNavigator
           screenOptions={{
-            header: ({ route }) =>
-              route.name !== 'Launch' && <Header title={route.name} />,
+            header: ({ layout, options, route, navigation }) => (
+              <Header
+                layout={layout}
+                options={options}
+                navigation={navigation}
+                route={route}
+              />
+            ),
           }}
           tabBar={({ state, descriptors, navigation, insets }) =>
-            state.key !== 'Launch' && (
+            state.index !== 2 &&
+            state.index !== 3 && (
               <BottomNavigationBar
                 state={state}
                 descriptors={descriptors}
@@ -60,9 +67,9 @@ export const App = () => {
 
           <ModalsGroup screenOptions={{ presentation: 'modal' }}>
             <ModalScreen
-              name='Search launches'
+              name='Search Launches'
               component={SearchLaunchesModal}
-              key='Search launches'
+              key='Search Launches'
             />
           </ModalsGroup>
         </TabNavigator>

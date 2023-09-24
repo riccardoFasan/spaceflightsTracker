@@ -11,4 +11,6 @@ export enum Color {
   LightAnthracite = '#353A43',
   Gray = '#C5C6C7',
   DarkGray = '#9C9D9F',
+
+  WhiteTransparent = 'rgba(255, 255, 255, 0.1)',
 }

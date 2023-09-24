@@ -7,3 +7,4 @@ export * from './CardBadge';
 export * from './IconButton';
 export * from './NotificationButton';
 export * from './SearchLaunchesButton';
+export * from './BackButton';

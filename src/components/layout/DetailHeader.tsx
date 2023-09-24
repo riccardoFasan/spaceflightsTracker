@@ -1,29 +1,19 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Color, Spacing, flexBoxStyles, typographyStyles } from '../../styles';
-import { StatusBar } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { IconButton } from '../common';
+
+import { BackButton } from '../common';
 
 interface Props {
   backLabel: string;
 }
 
 export const DeatailHeader = ({ backLabel }: Props) => {
-  const navigation = useNavigation();
-
-  function back(): void {
-    navigation.goBack();
-  }
-
   return (
-    <>
-      <StatusBar animated={true} backgroundColor={Color.Black} />
-      <View style={styles.container}>
-        <IconButton icon='arrow-left' onPress={back} />
-        <Text style={styles.title}>{backLabel}</Text>
-      </View>
-    </>
+    <View style={styles.container}>
+      <BackButton />
+      <Text style={styles.title}>{backLabel}</Text>
+    </View>
   );
 };
 
@@ -35,7 +25,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.Medium,
     borderBottomColor: Color.DarkAnthracite,
     borderBottomWidth: 1,
-    ...flexBoxStyles.rowStartCenter,
+    ...flexBoxStyles.rowStart,
   },
   title: {
     ...typographyStyles.label,

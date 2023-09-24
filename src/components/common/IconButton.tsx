@@ -1,7 +1,7 @@
 import React from 'react';
 import { Pressable, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { Color, Spacing } from '../../styles';
+import { Color, Spacing, flexBoxStyles } from '../../styles';
 import { useFocus } from '../../hooks';
 
 interface Props {
@@ -28,15 +28,15 @@ const styles = StyleSheet.create({
   button: {
     borderRadius: 50,
     padding: Spacing.Medium,
-    backgroundColor: Color.Black,
+    backgroundColor: 'transparent',
+    ...flexBoxStyles.rowCenter,
   },
   buttonActive: {
-    backgroundColor: Color.DarkAnthracite,
+    backgroundColor: Color.WhiteTransparent,
   },
   icon: {
     textAlign: 'center',
     fontSize: 28,
     color: Color.White,
-    marginRight: Spacing.Small,
   },
 });

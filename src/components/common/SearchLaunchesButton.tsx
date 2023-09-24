@@ -6,8 +6,8 @@ export const SearchLaunchesButton = () => {
   const navigation = useNavigation<any>();
 
   function openModal(): void {
-    navigation.navigate('Search launches');
+    navigation.navigate('Search Launches');
   }
 
-  return <IconButton icon='search' onPress={openModal} />;
+  return <IconButton icon='magnify' onPress={openModal} />;
 };

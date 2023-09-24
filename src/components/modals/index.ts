@@ -1,1 +1,1 @@
-export * from './SearchLaunchesModal';
+export * from './searchLaunches';
