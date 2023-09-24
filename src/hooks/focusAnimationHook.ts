@@ -29,6 +29,8 @@ function generateAnimation(
     useNativeDriver: true,
   };
   return Animated.parallel(
-    animatedValues.map((animatedValue) => Animated.timing(animatedValue, config)),
+    animatedValues.map((animatedValue) =>
+      Animated.timing(animatedValue, config),
+    ),
   );
 }

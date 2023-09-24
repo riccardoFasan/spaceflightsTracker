@@ -9,7 +9,12 @@ interface Props {
 
 export const CardBadge = ({ text, inline }: Props) => {
   return (
-    <View style={[styles.badge, inline ? styles.overImageBadge : styles.inlineBadge]}>
+    <View
+      style={[
+        styles.badge,
+        inline ? styles.overImageBadge : styles.inlineBadge,
+      ]}
+    >
       <Text style={styles.badgeText}>{text}</Text>
     </View>
   );

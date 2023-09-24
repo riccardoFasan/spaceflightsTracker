@@ -26,7 +26,8 @@ const NotificationContext = createContext<ContextType>({
   cancel: async () => {},
 });
 
-export const useNotifications = () => useContext<ContextType>(NotificationContext);
+export const useNotifications = () =>
+  useContext<ContextType>(NotificationContext);
 
 const { Provider } = NotificationContext;
 
@@ -35,7 +36,9 @@ interface Props {
 }
 
 export const NotificationProvider = ({ children }: Props) => {
-  const [notifications, setNotifications] = useState<ScheduledNotification[]>([]);
+  const [notifications, setNotifications] = useState<ScheduledNotification[]>(
+    [],
+  );
 
   useEffect(() => {
     loadNotifications();
@@ -73,8 +76,14 @@ export const NotificationProvider = ({ children }: Props) => {
 
   async function cancel(notification: ScheduledNotification): Promise<void> {
     await cancelNotification(notification);
-    setNotifications((notifications) => notifications.filter((n) => n.id !== notification.id));
+    setNotifications((notifications) =>
+      notifications.filter((n) => n.id !== notification.id),
+    );
   }
 
-  return <Provider value={{ notifications, get, schedule, cancel }}>{children}</Provider>;
+  return (
+    <Provider value={{ notifications, get, schedule, cancel }}>
+      {children}
+    </Provider>
+  );
 };

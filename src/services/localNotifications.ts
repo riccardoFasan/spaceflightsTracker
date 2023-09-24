@@ -40,7 +40,8 @@ export async function setUpNotifications(): Promise<void> {
 }
 
 export async function getNotifications(): Promise<ScheduledNotification[]> {
-  const notifications: TriggerNotification[] = await notifee.getTriggerNotifications();
+  const notifications: TriggerNotification[] =
+    await notifee.getTriggerNotifications();
   return notifications.map((n) => ({
     id: n.notification.id!,
     targetId: (n.notification.data as any).payload.id,
@@ -69,16 +70,24 @@ export async function scheduleNotification(
     timestamp: fireDate.getTime(),
   };
 
-  const notificationId: string = await notifee.createTriggerNotification(notification, trigger);
+  const notificationId: string = await notifee.createTriggerNotification(
+    notification,
+    trigger,
+  );
 
   return { id: notificationId, targetId: id };
 }
 
-export async function cancelNotification(notification: ScheduledNotification): Promise<void> {
+export async function cancelNotification(
+  notification: ScheduledNotification,
+): Promise<void> {
   await notifee.cancelNotification(notification.id);
 }
 
 function isAuthorized(settings: NotificationSettings): boolean {
   const status: AuthorizationStatus = settings.authorizationStatus;
-  return status === AuthorizationStatus.AUTHORIZED || status === AuthorizationStatus.PROVISIONAL;
+  return (
+    status === AuthorizationStatus.AUTHORIZED ||
+    status === AuthorizationStatus.PROVISIONAL
+  );
 }

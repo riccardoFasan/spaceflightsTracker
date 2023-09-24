@@ -1,5 +1,10 @@
 import axios, { AxiosResponse } from 'axios';
-import { ArticleSnDTO, BlogSnDTO, PaginatedListSnDTO, ReportSnDTO } from '../dtos';
+import {
+  ArticleSnDTO,
+  BlogSnDTO,
+  PaginatedListSnDTO,
+  ReportSnDTO,
+} from '../dtos';
 import { FetchController } from '../models';
 
 const ENDPOINT: string = 'https://api.spaceflightnewsapi.net/v4';
@@ -32,12 +37,11 @@ function getNews(
 ): FetchController<PaginatedListSnDTO<ArticleSnDTO | ReportSnDTO | BlogSnDTO>> {
   const abortController: AbortController = new AbortController();
   const params = { limit, offset };
-  const response: Promise<AxiosResponse<PaginatedListSnDTO<BlogSnDTO>>> = axios.get<
-    PaginatedListSnDTO<BlogSnDTO>
-  >(`${ENDPOINT}/${path}/`, {
-    params,
-    signal: abortController.signal,
-  });
+  const response: Promise<AxiosResponse<PaginatedListSnDTO<BlogSnDTO>>> =
+    axios.get<PaginatedListSnDTO<BlogSnDTO>>(`${ENDPOINT}/${path}/`, {
+      params,
+      signal: abortController.signal,
+    });
   return {
     abort: () => abortController.abort(),
     fetch: async () => (await response).data,

@@ -1,6 +1,12 @@
 import React from 'react';
 import { Animated, StyleSheet, Text, View } from 'react-native';
-import { Color, FontWeight, Spacing, typographyStyles, flexBoxStyles } from '../../styles';
+import {
+  Color,
+  FontWeight,
+  Spacing,
+  typographyStyles,
+  flexBoxStyles,
+} from '../../styles';
 import { useEffect } from 'react';
 import { useFocusAnimation } from '../../hooks';
 
@@ -10,7 +16,8 @@ interface Props {
 }
 
 export const TopTapBarButton = ({ name, active }: Props) => {
-  const [[backgroundScale, backgroundOpacity], toogleAnimation] = useFocusAnimation(0, 0);
+  const [[backgroundScale, backgroundOpacity], toogleAnimation] =
+    useFocusAnimation(0, 0);
 
   useEffect(() => {
     toogleAnimation(active);

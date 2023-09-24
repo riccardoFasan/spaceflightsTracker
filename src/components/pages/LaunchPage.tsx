@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { View, Dimensions, StyleSheet, Image, ActivityIndicator, ScrollView } from 'react-native';
+import {
+  View,
+  Dimensions,
+  StyleSheet,
+  Image,
+  ActivityIndicator,
+  ScrollView,
+} from 'react-native';
 import { LaunchDetailed } from '../../models';
 import { getLaunch, showErrorMessage } from '../../services';
 import { Color, Spacing, flexBoxStyles } from '../../styles';

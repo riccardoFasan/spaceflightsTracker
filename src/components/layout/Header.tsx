@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Color, Spacing, typographyStyles } from '../../styles';
 import { StatusBar } from 'react-native';
@@ -6,17 +6,20 @@ import { flexBoxStyles } from '../../styles';
 
 interface Props {
   title: string;
-  hasChildren: boolean;
-  action?: React.FC<any>;
 }
 
-export const Header = ({ title, hasChildren, action }: Props) => {
+export const Header = ({ title }: Props) => {
+  const hasChildren: boolean = useMemo<boolean>(
+    () => title === 'News',
+    [title],
+  );
+
   return (
     <>
       <StatusBar animated={true} backgroundColor={Color.Black} />
       <View style={[styles.container, !hasChildren && styles.hasChildren]}>
         <Text style={styles.title}>{title}</Text>
-        {action()}
+        {/* {action && action(null)} */}
       </View>
     </>
   );

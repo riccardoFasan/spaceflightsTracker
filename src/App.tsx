@@ -2,14 +2,14 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { BottomNavigationBar, Header } from './components';
 import {
-  shouldShowNavigation,
-  getRouteAction,
-  TAB_SCREENS,
-  hasChildren,
-  MODAL_SCREENS,
-} from './services';
+  BottomNavigationBar,
+  Header,
+  LaunchPage,
+  LaunchesPage,
+  NewsPage,
+  SearchLaunchesModal,
+} from './components';
 import { NotificationProvider } from './contexts';
 
 const TabStack = createBottomTabNavigator();
@@ -25,16 +25,10 @@ export const App = () => {
         <TabNavigator
           screenOptions={{
             header: ({ route }) =>
-              shouldShowNavigation(route.name) && (
-                <Header
-                  title={route.name}
-                  hasChildren={hasChildren(route.name)}
-                  action={getRouteAction(route.name)}
-                />
-              ),
+              route.name !== 'Launch' && <Header title={route.name} />,
           }}
           tabBar={({ state, descriptors, navigation, insets }) =>
-            shouldShowNavigation(state.index) && (
+            state.key !== 'Launch' && (
               <BottomNavigationBar
                 state={state}
                 descriptors={descriptors}
@@ -45,22 +39,31 @@ export const App = () => {
           }
           initialRouteName='Launches'
         >
-          {TAB_SCREENS.map((screen) => (
-            <TabScreen
-              options={{ title: screen.name }}
-              name={screen.name}
-              component={screen.component}
-              key={screen.name}
-            />
-          ))}
+          <TabScreen
+            options={{ title: 'Launches' }}
+            name='Launches'
+            component={LaunchesPage}
+            key='Launches'
+          />
+          <TabScreen
+            options={{ title: 'News' }}
+            name='News'
+            component={NewsPage}
+            key='News'
+          />
+          <TabScreen
+            options={{ title: 'Launch' }}
+            name='Launch'
+            component={LaunchPage}
+            key='Launch'
+          />
+
           <ModalsGroup screenOptions={{ presentation: 'modal' }}>
-            {MODAL_SCREENS.map((screen) => (
-              <ModalScreen
-                name={screen.name}
-                component={screen.component}
-                key={screen.name}
-              />
-            ))}
+            <ModalScreen
+              name='Search launches'
+              component={SearchLaunchesModal}
+              key='Search launches'
+            />
           </ModalsGroup>
         </TabNavigator>
       </NavigationContainer>
