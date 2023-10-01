@@ -65,7 +65,11 @@ export const App = () => {
             key='Launch'
           />
 
-          <ModalsGroup screenOptions={{ presentation: 'modal' }}>
+          <ModalsGroup
+            screenOptions={{
+              presentation: 'modal',
+            }}
+          >
             <ModalScreen
               name='Search Launches'
               component={SearchLaunchesModal}

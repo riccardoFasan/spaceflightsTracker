@@ -8,3 +8,4 @@ export * from './IconButton';
 export * from './NotificationButton';
 export * from './SearchLaunchesButton';
 export * from './BackButton';
+export * from './OptionPill';

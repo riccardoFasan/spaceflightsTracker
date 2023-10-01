@@ -6,6 +6,11 @@ export const flexBoxStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  columnEnd: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
   rowAround: {
     display: 'flex',
     flexDirection: 'row',
