@@ -6,12 +6,12 @@ import {
   FontWeight,
   typographyStyles,
   flexBoxStyles,
-} from '../../styles';
-import { useFocus } from '../../hooks';
+} from '../../../styles';
+import { useFocus } from '../../../hooks';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useEffect, useState } from 'react';
-import { Launch, ScheduledNotification } from '../../models';
-import { useNotifications } from '../../contexts';
+import { Launch, ScheduledNotification } from '../../../models';
+import { useNotifications } from '../../../contexts';
 
 interface Props {
   launch: Launch;

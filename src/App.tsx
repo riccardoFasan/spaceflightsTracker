@@ -8,7 +8,7 @@ import {
   LaunchPage,
   LaunchesPage,
   NewsPage,
-  SearchLaunchesModal,
+  SearchLaunchesPage,
 } from './components';
 import { NotificationProvider } from './contexts';
 
@@ -72,7 +72,7 @@ export const App = () => {
           >
             <ModalScreen
               name='Search Launches'
-              component={SearchLaunchesModal}
+              component={SearchLaunchesPage}
               key='Search Launches'
             />
           </ModalsGroup>

@@ -1,7 +1,8 @@
 import React from 'react';
-import { Article } from '../../../models';
-import { getArticlesBatch } from '../../../services';
-import { NewsCard, ScrollableList } from '../../common';
+import { Article } from '../../../../models';
+import { getArticlesBatch } from '../../../../services';
+import { ScrollableList } from '../../../common';
+import { NewsCard } from '../NewsCard';
 
 const MAX_BATCHES: number = 10;
 const BATCH_SIZE: number = 15;

@@ -1,9 +1,9 @@
 import React, { StyleSheet, Text } from 'react-native';
-import { formatDateTime } from '../../utilities';
-import { Article, Blog, Report } from '../../models';
-import { openURL } from '../../services';
-import { ButtonPrimary, ListCard } from '.';
-import { Spacing, typographyStyles, FontWeight } from '../../styles';
+import { formatDateTime } from '../../../utilities';
+import { Article, Blog, Report } from '../../../models';
+import { openURL } from '../../../services';
+import { PrimaryButton, ListCard } from '../../common';
+import { Spacing, typographyStyles, FontWeight } from '../../../styles';
 
 interface Props {
   article: Article | Report | Blog;
@@ -38,7 +38,7 @@ export const NewsCard = ({ article }: Props) => {
       >
         {article.summary}
       </Text>
-      {article.url && <ButtonPrimary title='Read more' onPress={openArticle} />}
+      {article.url && <PrimaryButton title='Read more' onPress={openArticle} />}
     </ListCard>
   );
 };

@@ -1,14 +1,14 @@
 import React from 'react';
 import { StyleSheet, Text, Pressable } from 'react-native';
-import { Color, Spacing, typographyStyles, FontWeight } from '../../styles';
-import { useFocus } from '../../hooks';
+import { Color, Spacing, typographyStyles, FontWeight } from '../../../styles';
+import { useFocus } from '../../../hooks';
 
 interface Props {
   title: string;
   onPress: () => void;
 }
 
-export const ButtonPrimary = ({ title, onPress }: Props) => {
+export const PrimaryButton = ({ title, onPress }: Props) => {
   const [focus, toogleFocus] = useFocus(false);
 
   return (

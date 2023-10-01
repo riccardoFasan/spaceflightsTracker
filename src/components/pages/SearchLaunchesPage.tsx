@@ -7,10 +7,17 @@ import {
   Spacing,
   flexBoxStyles,
 } from '../../styles';
-import { BackButton, OptionPill } from '../common';
+import { BackButton } from '../common';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {
+  LauncherSelectModal,
+  AgencySelectModal,
+  LaunchStatusSelectModal,
+  StartWindowDateModal,
+  PadSelectModal,
+} from '../features/launches/modals';
 
-export const SearchLaunchesModal = () => {
+export const SearchLaunchesPage = () => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -29,11 +36,11 @@ export const SearchLaunchesModal = () => {
       </View>
       <View>
         <ScrollView horizontal={true} contentContainerStyle={styles.pills}>
-          <OptionPill onPress={() => {}} label='launcher' />
-          <OptionPill onPress={() => {}} label='agency' />
-          <OptionPill onPress={() => {}} label='status' />
-          <OptionPill onPress={() => {}} label='window start' />
-          <OptionPill onPress={() => {}} label='pad' />
+          <LauncherSelectModal />
+          <AgencySelectModal />
+          <LaunchStatusSelectModal />
+          <StartWindowDateModal />
+          <PadSelectModal />
         </ScrollView>
         <View style={styles.results} />
       </View>
