@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
   },
   modal: {
     width: '100%',
+    maxHeight: '75%',
     backgroundColor: Color.DarkAnthracite,
     borderTopEndRadius: Spacing.ExtraLarge,
     borderTopStartRadius: Spacing.ExtraLarge,

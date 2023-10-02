@@ -5,11 +5,10 @@ import {
   View,
   Dimensions,
   VirtualizedList,
-  SafeAreaView,
 } from 'react-native';
 import { uniqueBy } from '../../utilities';
 import { showErrorMessage } from '../../services';
-import { Color, Spacing, flexBoxStyles } from '../../styles';
+import { Color, flexBoxStyles } from '../../styles';
 import { ListBatch } from '../../models/';
 import { ApiController } from '../../models/apiControllerModel';
 
@@ -87,32 +86,30 @@ export const ScrollableList = <T,>({
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <VirtualizedList
-        initialNumToRender={2}
-        getItemCount={(_) => items.length}
-        getItem={(data, i) => data[i]}
-        data={items}
-        renderItem={({ item }: { item: T }) => getCard(item) as any}
-        onRefresh={() => refresh()}
-        refreshing={refreshing}
-        style={styles.list}
-        ListFooterComponent={() =>
-          loading &&
-          !refreshing && (
-            <View
-              style={[
-                styles.spinnerContainer,
-                items.length === 0 && styles.spinnerContainerCentered,
-              ]}
-            >
-              <ActivityIndicator size='large' color={Color.LightBlue} />
-            </View>
-          )
-        }
-        onEndReached={() => loadNextBatch()}
-      />
-    </SafeAreaView>
+    <VirtualizedList
+      initialNumToRender={2}
+      getItemCount={(_) => items.length}
+      getItem={(data, i) => data[i]}
+      data={items}
+      renderItem={({ item }: { item: T }) => getCard(item) as any}
+      onRefresh={() => refresh()}
+      refreshing={refreshing}
+      style={styles.list}
+      ListFooterComponent={() =>
+        loading &&
+        !refreshing && (
+          <View
+            style={[
+              styles.spinnerContainer,
+              items.length === 0 && styles.spinnerContainerCentered,
+            ]}
+          >
+            <ActivityIndicator size='large' color={Color.LightBlue} />
+          </View>
+        )
+      }
+      onEndReached={() => loadNextBatch()}
+    />
   );
 };
 
@@ -122,14 +119,8 @@ const bottomBarHeight = 100;
 const topBarHeight = 150;
 
 const styles = StyleSheet.create({
-  container: {
-    height: '100%',
-    backgroundColor: Color.Black,
-  },
   list: {
     position: 'relative',
-    paddingHorizontal: Spacing.ExtraLarge,
-    paddingVertical: Spacing.Large,
   },
   spinnerContainer: {
     ...flexBoxStyles.columnCenter,

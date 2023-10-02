@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, ReactNode } from 'react';
 import { BottomModal } from './BottomModal';
-import { Text } from 'react-native';
 import { OptionPill } from '../OptionPill';
 
 interface Props {
   title: string;
+  children: ReactNode;
 }
 
-export const FieldModal = ({ title }: Props) => {
+export const FieldModal = ({ title, children }: Props) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   function open(): void {
@@ -22,7 +22,7 @@ export const FieldModal = ({ title }: Props) => {
     <>
       <OptionPill onPress={open} label={title} />
       <BottomModal isOpen={isOpen} close={close} title={title}>
-        <Text>{title} content</Text>
+        {children}
       </BottomModal>
     </>
   );
