@@ -64,6 +64,6 @@ const styles = StyleSheet.create({
     color: Color.Gray,
   },
   content: {
-    paddingVertical: Spacing.ExtraLarge,
+    paddingBottom: Spacing.ExtraExtraLarge,
   },
 });

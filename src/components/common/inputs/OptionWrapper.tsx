@@ -41,8 +41,8 @@ const styles = StyleSheet.create({
   },
   label: {
     color: Color.White,
-    fontSize: FontSize.Large,
-    fontWeight: FontWeight.Medium,
+    fontSize: FontSize.Medium,
+    fontWeight: FontWeight.Regular,
     maxWidth: '90%',
   },
 });
