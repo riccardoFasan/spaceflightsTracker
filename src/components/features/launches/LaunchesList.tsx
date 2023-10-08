@@ -14,7 +14,7 @@ export const LaunchesList = () => {
         idKey='id'
         batchSize={BATCH_SIZE}
         maxBatches={MAX_BATCHES}
-        getCard={(item: Launch) => <LaunchCard launch={item} />}
+        getItemComponent={(item: Launch) => <LaunchCard launch={item} />}
         getBatch={getLaunchesBatch}
       />
     </ListPage>

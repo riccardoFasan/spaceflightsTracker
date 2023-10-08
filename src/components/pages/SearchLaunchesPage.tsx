@@ -10,7 +10,6 @@ import {
 import { BackButton } from '../common';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {
-  LauncherSelectModal,
   AgencySelectModal,
   LaunchStatusSelectModal,
   StartWindowDateModal,
@@ -36,7 +35,6 @@ export const SearchLaunchesPage = () => {
       </View>
       <View>
         <ScrollView horizontal={true} contentContainerStyle={styles.pills}>
-          <LauncherSelectModal />
           <AgencySelectModal />
           <LaunchStatusSelectModal />
           <StartWindowDateModal />

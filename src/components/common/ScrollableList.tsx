@@ -15,9 +15,9 @@ import { ApiController } from '../../models/apiControllerModel';
 interface Props<T> {
   idKey: keyof T;
   batchSize: number;
-  maxBatches: number;
   getBatch: (batch: number, batchSize: number) => ApiController<ListBatch<T>>;
-  getCard: (item: T) => ReactNode;
+  getItemComponent: (item: T) => ReactNode;
+  maxBatches?: number;
 }
 
 export const ScrollableList = <T,>({
@@ -25,7 +25,7 @@ export const ScrollableList = <T,>({
   batchSize,
   maxBatches,
   getBatch,
-  getCard,
+  getItemComponent,
 }: Props<T>) => {
   const [items, setItems] = useState<T[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -76,7 +76,7 @@ export const ScrollableList = <T,>({
       return false;
     }
     const nextBatch: number = currentBatch + 1;
-    if (nextBatch >= maxBatches) {
+    if (maxBatches && nextBatch >= maxBatches) {
       return false;
     }
     if (nextBatch * batchSize >= totalCount) {
@@ -91,7 +91,7 @@ export const ScrollableList = <T,>({
       getItemCount={(_) => items.length}
       getItem={(data, i) => data[i]}
       data={items}
-      renderItem={({ item }: { item: T }) => getCard(item) as any}
+      renderItem={({ item }: { item: T }) => getItemComponent(item) as any}
       onRefresh={() => refresh()}
       refreshing={refreshing}
       style={styles.list}

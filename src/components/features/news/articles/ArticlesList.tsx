@@ -14,7 +14,7 @@ export const ArticlesList = () => {
         idKey='id'
         batchSize={BATCH_SIZE}
         maxBatches={MAX_BATCHES}
-        getCard={(item: Article) => <NewsCard article={item} />}
+        getItemComponent={(item: Article) => <NewsCard article={item} />}
         getBatch={getArticlesBatch}
       />
     </ListPage>

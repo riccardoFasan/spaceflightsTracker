@@ -4,7 +4,6 @@ export * from './agencyMiniForSpaceStationLl2DTO';
 export * from './agencyCommonLl2DTO';
 export * from './agencyTypeLl2Enum';
 export * from './expeditionForSpaceStationLl2DTO';
-export * from './launcherConfigDetailedLl2DTO';
 export * from './launcherStatusLl2DTO';
 export * from './launchCommonLl2DTO';
 export * from './launchStatusLl2DTO';

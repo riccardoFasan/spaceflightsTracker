@@ -16,6 +16,6 @@ const styles = StyleSheet.create({
     height: '100%',
     backgroundColor: Color.Black,
     paddingHorizontal: Spacing.ExtraLarge,
-    paddingVertical: Spacing.Large,
+    paddingTop: Spacing.Large,
   },
 });

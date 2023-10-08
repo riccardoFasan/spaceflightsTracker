@@ -1,18 +1,13 @@
 import {
   AgencyCommonLl2DTO,
-  ArticleSnDTO,
-  BlogSnDTO,
   LaunchCommonLl2DTO,
-  LauncherConfigDetailedLl2DTO,
+  LaunchStatusLl2DTO,
   LocationLl2DTO,
   MissionLl2DTO,
   PadLl2DTO,
-  ReportSnDTO,
-  RocketCommonLl2DTO,
-} from '../dtos';
-import { LaunchStatus, MissionType, Orbit } from '../enums';
+} from '../../dtos';
+import { LaunchStatus, MissionType, Orbit } from '../../enums';
 import {
-  Article,
   LaunchWindow,
   Location,
   Pad,
@@ -21,16 +16,15 @@ import {
   Mission,
   Launcher,
   Company,
-  Report,
-  Blog,
-} from '../models';
+  LaunchStatusDetailed,
+} from '../../models';
 
 export function mapLaunchLl2ToLaunch(launchLl2: LaunchCommonLl2DTO): Launch {
   return {
     id: launchLl2.id.toString(),
     name: launchLl2.name,
     image: launchLl2.image,
-    status: mapLaunchStatusLl2ToStutis(launchLl2.status.id),
+    status: mapLaunchStatusLl2ToStatus(launchLl2.status),
     window: mapLaunchWindow(launchLl2.window_start, launchLl2.window_end),
     pad: mapPadLl2ToPad(launchLl2.pad),
   };
@@ -43,46 +37,30 @@ export function mapLaunchLl2ToDetailedLaunch(
     id: launchLl2.id.toString(),
     name: launchLl2.name,
     image: launchLl2.image,
-    status: mapLaunchStatusLl2ToStutis(launchLl2.status.id),
+    status: mapLaunchStatusLl2ToStatus(launchLl2.status),
     mission: launchLl2.mission && mapMissionLl2ToMission(launchLl2.mission),
-    launcher: mapRocketDetailedLl2ToLauncherDetailed(launchLl2.rocket),
+    launcher: mapRocketConfigToLauncher(
+      launchLl2.rocket.id,
+      launchLl2.rocket.configuration,
+    ),
     window: mapLaunchWindow(launchLl2.window_start, launchLl2.window_end),
     pad: mapPadLl2ToPad(launchLl2.pad),
   };
 }
 
-export function mapArticleSnToArticle(articleSn: ArticleSnDTO): Article {
-  return mapNewsSnToNews(articleSn);
-}
-
-export function mapReportSnToReport(reportSn: ReportSnDTO): Report {
-  return mapNewsSnToNews(reportSn);
-}
-
-export function mapBlogSnToBlog(blogSn: BlogSnDTO): Blog {
-  return mapNewsSnToNews(blogSn);
-}
-
-function mapNewsSnToNews(
-  newsSn: ArticleSnDTO | ReportSnDTO | BlogSnDTO,
-): Article | Report | Blog {
+export function mapAgencyLl2ToCompany(agencyLl2: AgencyCommonLl2DTO): Company {
   return {
-    id: newsSn.id.toString(),
-    title: newsSn.title,
-    url: newsSn.url,
-    image: newsSn.image_url,
-    summary: newsSn.summary,
-    publishedAt: newsSn.published_at,
+    id: agencyLl2.id.toString(),
+    name: agencyLl2.name,
+    description: agencyLl2.description || '',
+    webSite: agencyLl2.info_url,
   };
 }
 
-function mapPadLl2ToPad(pad: PadLl2DTO): Pad | undefined {
-  if (!pad.name || !pad.location.timezone_name) {
-    return;
-  }
+export function mapPadLl2ToPad(pad: PadLl2DTO): Pad {
   return {
     id: pad.id.toString(),
-    name: pad.name,
+    name: pad.name || 'Unnamed pad',
     location: mapLocationLl2ToLocation(pad.location),
   };
 }
@@ -112,8 +90,18 @@ function mapLocationLl2ToLocation(
   };
 }
 
-function mapLaunchStatusLl2ToStutis(id: number): LaunchStatus {
-  if (id === 1) {
+export function mapLaunchStatusLl2ToStatusDetailed(
+  status: LaunchStatusLl2DTO,
+): LaunchStatusDetailed {
+  return {
+    id: status.id.toString(),
+    name: status.name,
+    description: status.description,
+  };
+}
+
+function mapLaunchStatusLl2ToStatus(status: LaunchStatusLl2DTO): LaunchStatus {
+  if (status.id === 1) {
     return LaunchStatus.GoForLaunch;
   }
   return LaunchStatus.ToBeDetermined;
@@ -244,34 +232,20 @@ function mapOrbit(id: number): Orbit {
   return Orbit.Unknown;
 }
 
-function mapRocketDetailedLl2ToLauncherDetailed(
-  rocketLl2: RocketCommonLl2DTO,
-): Launcher | undefined {
-  const config: LauncherConfigDetailedLl2DTO =
-    rocketLl2.configuration as LauncherConfigDetailedLl2DTO;
-  if (!config.description) {
-    return;
-  }
+function mapRocketConfigToLauncher(
+  id: number,
+  configuration: object & {
+    name: string;
+    full_name?: string;
+    variant?: string;
+    description?: string;
+  },
+): Launcher {
   return {
-    id: rocketLl2.id.toString(),
-    name: rocketLl2.configuration.name,
-    fullName: config.full_name,
-    variant: config.variant,
-    description: config.description,
-    company: mapAgencyLl2ToCompany(config.manufacturer),
-  };
-}
-
-function mapAgencyLl2ToCompany(
-  agencyLl2: AgencyCommonLl2DTO,
-): Company | undefined {
-  if (!agencyLl2.description) {
-    return;
-  }
-  return {
-    id: agencyLl2.id.toString(),
-    name: agencyLl2.name,
-    description: agencyLl2.description,
-    webSite: agencyLl2.info_url,
+    id: id.toString(),
+    name: configuration.name,
+    fullName: configuration.full_name,
+    variant: configuration.variant,
+    description: configuration.description || '',
   };
 }

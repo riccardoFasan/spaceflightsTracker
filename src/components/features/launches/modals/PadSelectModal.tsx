@@ -1,12 +1,10 @@
 import React from 'react';
 import { FieldModal } from '../../../common/modals';
-import { ScrollableList } from '../../../common';
-import { Launch } from '../../../../models';
-import { getLaunchesBatch } from '../../../../services';
-import { Text } from 'react-native';
+import { OptionRadio, ScrollableList } from '../../../common';
+import { Pad } from '../../../../models';
+import { getPadsBatch } from '../../../../services';
 
-const MAX_BATCHES: number = 5;
-const BATCH_SIZE: number = 15;
+const BATCH_SIZE: number = 20;
 
 export const PadSelectModal = () => {
   return (
@@ -14,9 +12,10 @@ export const PadSelectModal = () => {
       <ScrollableList
         idKey='id'
         batchSize={BATCH_SIZE}
-        maxBatches={MAX_BATCHES}
-        getCard={(item: Launch) => <Text>{item.name}</Text>}
-        getBatch={getLaunchesBatch}
+        getItemComponent={(item: Pad) => (
+          <OptionRadio label={item.name} checked={false} onChange={() => {}} />
+        )}
+        getBatch={getPadsBatch}
       />
     </FieldModal>
   );

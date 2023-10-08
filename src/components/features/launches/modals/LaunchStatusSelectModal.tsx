@@ -1,12 +1,10 @@
 import React from 'react';
 import { FieldModal } from '../../../common/modals';
-import { ScrollableList } from '../../../common';
-import { Launch } from '../../../../models';
-import { getLaunchesBatch } from '../../../../services';
-import { Text } from 'react-native';
+import { OptionCheckbox, ScrollableList } from '../../../common';
+import { getLaunchStatusesBatch } from '../../../../services';
+import { LaunchStatusDetailed } from '../../../../models';
 
-const MAX_BATCHES: number = 5;
-const BATCH_SIZE: number = 15;
+const BATCH_SIZE: number = 20;
 
 export const LaunchStatusSelectModal = () => {
   return (
@@ -14,9 +12,14 @@ export const LaunchStatusSelectModal = () => {
       <ScrollableList
         idKey='id'
         batchSize={BATCH_SIZE}
-        maxBatches={MAX_BATCHES}
-        getCard={(item: Launch) => <Text>{item.name}</Text>}
-        getBatch={getLaunchesBatch}
+        getItemComponent={(item: LaunchStatusDetailed) => (
+          <OptionCheckbox
+            label={item.name}
+            checked={false}
+            onChange={() => {}}
+          />
+        )}
+        getBatch={getLaunchStatusesBatch}
       />
     </FieldModal>
   );

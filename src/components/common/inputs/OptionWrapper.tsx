@@ -36,6 +36,7 @@ export const OptionWrapper = ({
 const styles = StyleSheet.create({
   input: {
     paddingVertical: Spacing.Large,
+    paddingHorizontal: Spacing.ExtraLarge,
     ...flexBoxStyles.rowBetween,
   },
   label: {
