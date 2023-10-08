@@ -52,7 +52,9 @@ const styles = StyleSheet.create({
     borderTopStartRadius: Spacing.ExtraLarge,
   },
   header: {
-    padding: Spacing.ExtraLarge,
+    paddingVertical: Spacing.ExtraLarge,
+    paddingLeft: Spacing.ExtraLarge,
+    paddingRight: Spacing.Large,
     borderBottomWidth: 1,
     borderColor: Color.LightAnthracite,
     ...flexBoxStyles.rowBetween,

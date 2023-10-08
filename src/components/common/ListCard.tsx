@@ -25,33 +25,38 @@ export const ListCard = ({ content, children, badge }: Props) => {
   );
 
   return (
-    <View key={content.id} style={styles.card}>
-      {content.image && (
-        <Image
-          accessibilityLabel={content.title}
-          alt={content.title}
-          style={[styles.cardImage, { height }]}
-          resizeMode={'cover'}
-          source={{ uri: content.image }}
-          progressiveRenderingEnabled={true}
-        />
-      )}
-      {badge}
-      <View style={styles.cardBody}>
-        <Text style={styles.cardTitle}>{content.title}</Text>
-        {children}
+    <View key={content.id} style={styles.wrapper}>
+      <View style={styles.card}>
+        {content.image && (
+          <Image
+            accessibilityLabel={content.title}
+            alt={content.title}
+            style={[styles.cardImage, { height }]}
+            resizeMode={'cover'}
+            source={{ uri: content.image }}
+            progressiveRenderingEnabled={true}
+          />
+        )}
+        {badge}
+        <View style={styles.cardBody}>
+          <Text style={styles.cardTitle}>{content.title}</Text>
+          {children}
+        </View>
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  wrapper: {
+    width: '100%',
+    paddingHorizontal: Spacing.ExtraLarge,
+  },
   card: {
     position: 'relative',
     borderRadius: Spacing.Large,
     borderWidth: 1,
-    width: '100%',
-    marginBottom: Spacing.ExtraLarge,
+    marginTop: Spacing.ExtraLarge,
     borderColor: Color.Anthracite,
     backgroundColor: Color.DarkAnthracite,
   },

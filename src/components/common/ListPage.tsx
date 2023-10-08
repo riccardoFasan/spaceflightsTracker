@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import { StyleSheet } from 'react-native';
-import { Color, Spacing } from '../../styles';
+import { Color } from '../../styles';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 interface Props {
@@ -15,7 +15,5 @@ const styles = StyleSheet.create({
   container: {
     height: '100%',
     backgroundColor: Color.Black,
-    paddingHorizontal: Spacing.ExtraLarge,
-    paddingTop: Spacing.Large,
   },
 });

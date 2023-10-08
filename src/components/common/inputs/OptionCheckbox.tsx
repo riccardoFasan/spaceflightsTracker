@@ -5,14 +5,15 @@ import { OptionWrapper } from './OptionWrapper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 interface Props {
+  id: string;
   label: string;
   checked: boolean;
   onChange: (checked: boolean) => void;
 }
 
-export const OptionCheckbox = ({ label, checked, onChange }: Props) => {
+export const OptionCheckbox = ({ id, label, checked, onChange }: Props) => {
   return (
-    <OptionWrapper label={label} checked={checked} onChange={onChange}>
+    <OptionWrapper key={id} label={label} checked={checked} onChange={onChange}>
       <View style={[styles.checkbox, checked && styles.checkboxChecked]}>
         {checked && <Icon style={styles.icon} name='check-bold' />}
       </View>

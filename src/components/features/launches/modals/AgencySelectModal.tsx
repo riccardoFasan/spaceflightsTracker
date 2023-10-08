@@ -13,7 +13,12 @@ export const AgencySelectModal = () => {
         idKey='id'
         batchSize={BATCH_SIZE}
         getItemComponent={(item: Company) => (
-          <OptionRadio label={item.name} checked={false} onChange={() => {}} />
+          <OptionRadio
+            id={item.id}
+            label={item.name}
+            checked={false}
+            onChange={() => {}}
+          />
         )}
         getBatch={getCompaniesBatch}
       />

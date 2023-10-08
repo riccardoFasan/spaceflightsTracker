@@ -14,6 +14,7 @@ export const LaunchStatusSelectModal = () => {
         batchSize={BATCH_SIZE}
         getItemComponent={(item: LaunchStatusDetailed) => (
           <OptionCheckbox
+            id={item.id}
             label={item.name}
             checked={false}
             onChange={() => {}}

@@ -4,14 +4,15 @@ import { StyleSheet, View } from 'react-native';
 import { OptionWrapper } from './OptionWrapper';
 
 interface Props {
+  id: string;
   label: string;
   checked: boolean;
   onChange: (checked: boolean) => void;
 }
 
-export const OptionRadio = ({ label, checked, onChange }: Props) => {
+export const OptionRadio = ({ id, label, checked, onChange }: Props) => {
   return (
-    <OptionWrapper label={label} checked={checked} onChange={onChange}>
+    <OptionWrapper key={id} label={label} checked={checked} onChange={onChange}>
       <View style={[styles.radio, checked && styles.radioChecked]}>
         <View
           style={[styles.radioInner, checked && styles.radioInnerChecked]}

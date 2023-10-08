@@ -44,5 +44,6 @@ const styles = StyleSheet.create({
     fontSize: FontSize.Medium,
     fontWeight: FontWeight.Regular,
     maxWidth: '90%',
+    lineHeight: Spacing.ExtraLarge,
   },
 });
