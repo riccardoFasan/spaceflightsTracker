@@ -1,11 +1,22 @@
 import React from 'react';
 import { FieldModal } from '../../../common/modals';
-import { Text } from 'react-native';
+import { DatePickerInput } from '../../../common';
+import { View } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { flexBoxStyles } from '../../../../styles';
 
 export const StartWindowDateModal = () => {
   return (
     <FieldModal title='start window'>
-      <Text>Start window content</Text>
+      <View style={styles.pickerWrapper}>
+        <DatePickerInput />
+      </View>
     </FieldModal>
   );
 };
+
+const styles = StyleSheet.create({
+  pickerWrapper: {
+    ...flexBoxStyles.rowCenter,
+  },
+});

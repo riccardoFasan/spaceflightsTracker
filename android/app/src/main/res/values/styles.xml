@@ -7,4 +7,8 @@
         <item name="android:navigationBarColor">#181A1E</item>
     </style>
 
+    <style name="DatePickerTheme" parent="DatePickerBaseTheme">
+        <item name="android:colorControlNormal">#0681C7</item>
+    </style>
+
 </resources>
