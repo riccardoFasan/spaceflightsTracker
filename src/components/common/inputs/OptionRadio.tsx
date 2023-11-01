@@ -12,7 +12,7 @@ interface Props {
 
 export const OptionRadio = ({ id, label, checked, onChange }: Props) => {
   return (
-    <OptionWrapper key={id} label={label} checked={checked} onChange={onChange}>
+    <OptionWrapper key={id} label={label} onChange={onChange}>
       <View style={[styles.radio, checked && styles.radioChecked]}>
         <View
           style={[styles.radioInner, checked && styles.radioInnerChecked]}
@@ -26,18 +26,20 @@ const styles = StyleSheet.create({
   radio: {
     height: 24,
     width: 24,
-    borderRadius: 50,
+    borderRadius: 12,
     borderWidth: 2,
     borderColor: Color.DarkGray,
     ...flexBoxStyles.columnCenter,
   },
+  radioChecked: {
+    borderColor: Color.LightBlue,
+  },
   radioInner: {
     height: 12,
     width: 12,
-    borderRadius: 50,
-  },
-  radioChecked: {
-    borderColor: Color.LightBlue,
+    borderRadius: 6,
+    // It ignores the border radius if the background color is not set. IDK why.
+    backgroundColor: 'transparent',
   },
   radioInnerChecked: {
     backgroundColor: Color.LightBlue,

@@ -11,26 +11,16 @@ import { useFocus } from '../../../hooks';
 
 interface Props {
   label: string;
-  checked: boolean;
   onChange: () => void;
   children: ReactNode;
 }
 
-export const OptionWrapper = ({
-  label,
-  checked,
-  onChange,
-  children,
-}: Props) => {
+export const OptionWrapper = ({ label, onChange, children }: Props) => {
   const [focus, toogleFocus] = useFocus(false);
-
-  function toggle(): void {
-    onChange(!checked);
-  }
 
   return (
     <Pressable
-      onPress={toggle}
+      onPress={onChange}
       onPressIn={toogleFocus}
       onPressOut={toogleFocus}
       style={[styles.input, focus && styles.inputFocus]}

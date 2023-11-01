@@ -13,7 +13,7 @@ interface Props {
 
 export const OptionCheckbox = ({ id, label, checked, onChange }: Props) => {
   return (
-    <OptionWrapper key={id} label={label} checked={checked} onChange={onChange}>
+    <OptionWrapper key={id} label={label} onChange={onChange}>
       <View style={[styles.checkbox, checked && styles.checkboxChecked]}>
         {checked && <Icon style={styles.icon} name='check-bold' />}
       </View>
