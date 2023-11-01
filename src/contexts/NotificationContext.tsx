@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, {
+  ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import { ScheduledNotification } from '../models';
 import {
   cancelNotification,
@@ -32,7 +38,7 @@ export const useNotifications = () =>
 const { Provider } = NotificationContext;
 
 interface Props {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 export const NotificationProvider = ({ children }: Props) => {

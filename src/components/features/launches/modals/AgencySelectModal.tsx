@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FieldModal } from '../../../common/modals';
 import { OptionRadio, ScrollableList } from '../../../common';
 import { Company } from '../../../../models';
@@ -6,7 +6,22 @@ import { getCompaniesBatch } from '../../../../services';
 
 const BATCH_SIZE: number = 20;
 
-export const AgencySelectModal = () => {
+interface Props {
+  onChange: (company: Company) => void;
+}
+
+export const AgencySelectModal = ({ onChange }: Props) => {
+  const [selected, setSelected] = useState<Company>();
+
+  function select(item: Company): void {
+    setSelected(item);
+    onChange(item);
+  }
+
+  function isChecked(item: Company): boolean {
+    return selected?.id === item.id;
+  }
+
   return (
     <FieldModal title='agency'>
       <ScrollableList
@@ -16,8 +31,8 @@ export const AgencySelectModal = () => {
           <OptionRadio
             id={item.id}
             label={item.name}
-            checked={false}
-            onChange={() => {}}
+            checked={isChecked(item)}
+            onChange={() => select(item)}
           />
         )}
         getBatch={getCompaniesBatch}

@@ -8,7 +8,7 @@ interface Props {
   id: string;
   label: string;
   checked: boolean;
-  onChange: (checked: boolean) => void;
+  onChange: () => void;
 }
 
 export const OptionCheckbox = ({ id, label, checked, onChange }: Props) => {

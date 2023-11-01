@@ -5,11 +5,15 @@ import { View } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { flexBoxStyles } from '../../../../styles';
 
-export const StartWindowDateModal = () => {
+interface Props {
+  onChange: (company: Date) => void;
+}
+
+export const StartWindowDateModal = ({ onChange }: Props) => {
   return (
     <FieldModal title='start window'>
       <View style={styles.pickerWrapper}>
-        <DatePickerInput />
+        <DatePickerInput onChange={onChange} />
       </View>
     </FieldModal>
   );

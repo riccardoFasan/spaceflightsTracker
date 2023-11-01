@@ -7,7 +7,7 @@ interface Props {
   id: string;
   label: string;
   checked: boolean;
-  onChange: (checked: boolean) => void;
+  onChange: () => void;
 }
 
 export const OptionRadio = ({ id, label, checked, onChange }: Props) => {
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   radio: {
     height: 24,
     width: 24,
-    borderRadius: 12,
+    borderRadius: 50,
     borderWidth: 2,
     borderColor: Color.DarkGray,
     ...flexBoxStyles.columnCenter,
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   radioInner: {
     height: 12,
     width: 12,
-    borderRadius: 6,
+    borderRadius: 50,
   },
   radioChecked: {
     borderColor: Color.LightBlue,

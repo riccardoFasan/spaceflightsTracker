@@ -35,10 +35,10 @@ export const SearchLaunchesPage = () => {
       </View>
       <View>
         <ScrollView horizontal={true} contentContainerStyle={styles.pills}>
-          <AgencySelectModal />
-          <LaunchStatusSelectModal />
-          <StartWindowDateModal />
-          <PadSelectModal />
+          <AgencySelectModal onChange={(agency) => {}} />
+          <LaunchStatusSelectModal onChange={(statuses) => {}} />
+          <StartWindowDateModal onChange={(startWindow) => {}} />
+          <PadSelectModal onChange={(pad) => {}} />
         </ScrollView>
         <View style={styles.results} />
       </View>
