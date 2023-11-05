@@ -58,7 +58,7 @@ export const ScrollableList = <T,>({
 
     loadBatch();
 
-    return () => controller.cancel();
+    return () => controller?.cancel();
   }, [currentBatch, getBatch, batchSize, idKey]);
 
   function loadNextBatch(): void {

@@ -1,4 +1,5 @@
 export * from './ScrollableList';
+export * from './SearchableList';
 export * from './ListCard';
 export * from './DetailSection';
 export * from './CardBadge';

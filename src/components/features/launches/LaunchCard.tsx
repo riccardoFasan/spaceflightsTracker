@@ -13,9 +13,10 @@ import {
 
 interface Props {
   launch: Launch;
+  minimal?: boolean;
 }
 
-export const LaunchCard = ({ launch }: Props) => {
+export const LaunchCard = ({ launch, minimal }: Props) => {
   const navigation = useNavigation<any>();
 
   function navigateToDetailPage(): void {
@@ -29,11 +30,11 @@ export const LaunchCard = ({ launch }: Props) => {
           id: launch.id,
           title: launch.name,
           image: launch.image,
-          imageRatio: 2.75,
+          imageRatio: minimal ? 4 : 2.75,
           pageName: 'Launch',
         }}
       >
-        <View style={styles.cardContent}>
+        <View style={!minimal && styles.cardContent}>
           {launch.window && (
             <Text style={styles.cardText}>
               On:&nbsp;
@@ -44,7 +45,9 @@ export const LaunchCard = ({ launch }: Props) => {
             <Text style={styles.cardTextSmall}>{launch.pad.location.name}</Text>
           )}
         </View>
-        {launch.window?.start && <NotificationButton launch={launch} />}
+        {!minimal && launch.window?.start && (
+          <NotificationButton launch={launch} />
+        )}
       </ListCard>
     </TouchableHighlight>
   );

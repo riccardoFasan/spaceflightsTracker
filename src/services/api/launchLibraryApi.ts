@@ -5,41 +5,40 @@ import {
   PadLl2DTO,
   PaginatedListLl2DTO,
 } from '../../dtos';
-import { FetchController } from '../../models';
+import { FetchController, SearchCriteria } from '../../models';
 import { getFetchController } from '../fetch';
 
 const BASE_URL: string = 'https://lldev.thespacedevs.com/2.2.0';
 
 export function getLaunches(
-  limit: number,
-  offset: number,
+  searchCriteria: SearchCriteria,
 ): FetchController<PaginatedListLl2DTO<LaunchCommonLl2DTO>> {
-  const params = { limit, offset, window_start__gte: new Date().toISOString() };
+  const params = {
+    ...searchCriteria.pagination,
+    ...searchCriteria.filters,
+  };
   return getFetchController(`${BASE_URL}/launch/upcoming/`, params);
 }
 
 export function getLaunchStatuses(
-  limit: number,
-  offset: number,
+  searchCriteria: SearchCriteria,
 ): FetchController<PaginatedListLl2DTO<LaunchStatusLl2DTO>> {
-  return getFetchController(`${BASE_URL}/config/launchstatus/`, {
-    limit,
-    offset,
-  });
+  const params = { ...searchCriteria.pagination, ...searchCriteria.filters };
+  return getFetchController(`${BASE_URL}/config/launchstatus/`, params);
 }
 
 export function getAgencies(
-  limit: number,
-  offset: number,
+  searchCriteria: SearchCriteria,
 ): FetchController<PaginatedListLl2DTO<AgencyCommonLl2DTO>> {
-  return getFetchController(`${BASE_URL}/agencies/`, { limit, offset });
+  const params = { ...searchCriteria.pagination, ...searchCriteria.filters };
+  return getFetchController(`${BASE_URL}/agencies/`, params);
 }
 
 export function getPads(
-  limit: number,
-  offset: number,
+  searchCriteria: SearchCriteria,
 ): FetchController<PaginatedListLl2DTO<PadLl2DTO>> {
-  return getFetchController(`${BASE_URL}/pad/`, { limit, offset });
+  const params = { ...searchCriteria.pagination, ...searchCriteria.filters };
+  return getFetchController(`${BASE_URL}/pad/`, params);
 }
 
 export function getDetailedLaunch(

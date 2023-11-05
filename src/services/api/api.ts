@@ -25,6 +25,7 @@ import {
   Pad,
   Company,
   LaunchStatusDetailed,
+  SearchCriteria,
 } from '../../models';
 import {
   getAgencies,
@@ -45,48 +46,56 @@ import {
 export function getLaunchesBatch(
   batch: number,
   batchSize: number,
+  filters?: object,
 ): ApiController<ListBatch<Launch>> {
   return getBatch<Launch, LaunchCommonLl2DTO>(
     getLaunches,
     mapLaunchLl2ToLaunch,
     batch,
     batchSize,
+    filters,
   );
 }
 
 export function getLaunchStatusesBatch(
   batch: number,
   batchSize: number,
+  filters?: object,
 ): ApiController<ListBatch<LaunchStatusDetailed>> {
   return getBatch<LaunchStatusDetailed, LaunchStatusLl2DTO>(
     getLaunchStatuses,
     mapLaunchStatusLl2ToStatusDetailed,
     batch,
     batchSize,
+    filters,
   );
 }
 
 export function getArticlesBatch(
   batch: number,
   batchSize: number,
+  filters?: object,
 ): ApiController<ListBatch<Article>> {
   return getBatch<Article, ArticleSnDTO>(
     getArticles,
     mapArticleSnToArticle,
     batch,
     batchSize,
+    filters,
   );
 }
 
 export function getReportsBatch(
   batch: number,
   batchSize: number,
+  filters?: object,
 ): ApiController<ListBatch<Report>> {
   return getBatch<Report, ReportSnDTO>(
     getReports,
     mapReportSnToReport,
     batch,
     batchSize,
+    filters,
   );
 }
 
@@ -99,20 +108,29 @@ export function getBlogsBatch(
 export function getCompaniesBatch(
   batch: number,
   batchSize: number,
+  filters?: object,
 ): ApiController<ListBatch<Company>> {
   return getBatch<Company, AgencyCommonLl2DTO>(
     getAgencies,
     mapAgencyLl2ToCompany,
     batch,
     batchSize,
+    filters,
   );
 }
 
 export function getPadsBatch(
   batch: number,
   batchSize: number,
+  filters?: object,
 ): ApiController<ListBatch<Pad>> {
-  return getBatch<Pad, PadLl2DTO>(getPads, mapPadLl2ToPad, batch, batchSize);
+  return getBatch<Pad, PadLl2DTO>(
+    getPads,
+    mapPadLl2ToPad,
+    batch,
+    batchSize,
+    filters,
+  );
 }
 
 export function getLaunch(id: string): ApiController<LaunchDetailed> {
@@ -128,15 +146,18 @@ export function getLaunch(id: string): ApiController<LaunchDetailed> {
 
 function getBatch<T, U>(
   get: (
-    limit: number,
-    offset: number,
+    searchCriteria: SearchCriteria,
   ) => FetchController<PaginatedListLl2DTO<U>>,
   map: (dto: U) => T,
   batch: number,
   batchSize: number,
+  filters?: object,
 ): ApiController<ListBatch<T>> {
   const { limit, offset } = getOffsetAndLimit(batch, batchSize);
-  const controller = get(limit, offset);
+  const controller = get({
+    pagination: { limit, offset },
+    filters: filters || {},
+  });
   return {
     cancel: controller.abort,
     fetch: async () => {

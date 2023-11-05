@@ -14,3 +14,4 @@ export * from './fetchControllerModel';
 export * from './apiControllerModel';
 export * from './scheduledNotificationModel';
 export * from './launchStatusDetailedModel';
+export * from './searchCriteriaModel';

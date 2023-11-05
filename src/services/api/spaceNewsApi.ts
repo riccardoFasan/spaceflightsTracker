@@ -4,28 +4,28 @@ import {
   PaginatedListSnDTO,
   ReportSnDTO,
 } from '../../dtos';
-import { FetchController } from '../../models';
+import { FetchController, SearchCriteria } from '../../models';
 import { getFetchController } from '../fetch';
 
 const BASE_URL: string = 'https://api.spaceflightnewsapi.net/v4';
 
 export function getArticles(
-  limit: number,
-  offset: number,
+  searchCriteria: SearchCriteria,
 ): FetchController<PaginatedListSnDTO<ArticleSnDTO>> {
-  return getFetchController(`${BASE_URL}/articles/`, { limit, offset });
+  const params = { ...searchCriteria.pagination, ...searchCriteria.filters };
+  return getFetchController(`${BASE_URL}/articles/`, params);
 }
 
 export function getReports(
-  limit: number,
-  offset: number,
+  searchCriteria: SearchCriteria,
 ): FetchController<PaginatedListSnDTO<ReportSnDTO>> {
-  return getFetchController(`${BASE_URL}/reports/`, { limit, offset });
+  const params = { ...searchCriteria.pagination, ...searchCriteria.filters };
+  return getFetchController(`${BASE_URL}/reports/`, params);
 }
 
 export function getBlogs(
-  limit: number,
-  offset: number,
+  searchCriteria: SearchCriteria,
 ): FetchController<PaginatedListSnDTO<BlogSnDTO>> {
-  return getFetchController(`${BASE_URL}/blogs/`, { limit, offset });
+  const params = { ...searchCriteria.pagination, ...searchCriteria.filters };
+  return getFetchController(`${BASE_URL}/blogs/`, params);
 }
