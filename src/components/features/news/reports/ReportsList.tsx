@@ -16,6 +16,7 @@ export const ReportsList = () => {
         maxBatches={MAX_BATCHES}
         getItemComponent={(item: Article) => <NewsCard article={item} />}
         getBatch={getReportsBatch}
+        refreshable={true}
       />
     </ListPage>
   );

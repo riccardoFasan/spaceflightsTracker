@@ -16,6 +16,7 @@ export const LaunchesList = () => {
         maxBatches={MAX_BATCHES}
         getItemComponent={(item: Launch) => <LaunchCard launch={item} />}
         getBatch={getLaunchesBatch}
+        refreshable={true}
       />
     </ListPage>
   );

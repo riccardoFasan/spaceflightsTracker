@@ -18,6 +18,7 @@ interface Props<T> {
   getBatch: (batch: number, batchSize: number) => ApiController<ListBatch<T>>;
   getItemComponent: (item: T) => ReactNode;
   maxBatches?: number;
+  refreshable?: boolean;
 }
 
 export const ScrollableList = <T,>({
@@ -26,6 +27,7 @@ export const ScrollableList = <T,>({
   maxBatches,
   getBatch,
   getItemComponent,
+  refreshable,
 }: Props<T>) => {
   const [items, setItems] = useState<T[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -85,7 +87,10 @@ export const ScrollableList = <T,>({
     return true;
   }
 
-  return (
+  // Really?? I cannot use the same component for both refreshable and non-refreshable lists?
+  // Thanks, React Native!
+
+  return refreshable ? (
     <VirtualizedList
       initialNumToRender={2}
       getItemCount={(_) => items.length}
@@ -94,6 +99,29 @@ export const ScrollableList = <T,>({
       renderItem={({ item }: { item: T }) => getItemComponent(item) as any}
       onRefresh={() => refresh()}
       refreshing={refreshing}
+      style={styles.list}
+      ListFooterComponent={() =>
+        loading &&
+        !refreshing && (
+          <View
+            style={[
+              styles.spinnerContainer,
+              items.length === 0 && styles.spinnerContainerCentered,
+            ]}
+          >
+            <ActivityIndicator size='large' color={Color.LightBlue} />
+          </View>
+        )
+      }
+      onEndReached={() => loadNextBatch()}
+    />
+  ) : (
+    <VirtualizedList
+      initialNumToRender={2}
+      getItemCount={(_) => items.length}
+      getItem={(data, i) => data[i]}
+      data={items}
+      renderItem={({ item }: { item: T }) => getItemComponent(item) as any}
       style={styles.list}
       ListFooterComponent={() =>
         loading &&
